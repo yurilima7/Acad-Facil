@@ -1,49 +1,39 @@
+import 'package:acad_facil/MVC/Views/widgets/estilos_texto.dart';
 import 'package:flutter/material.dart';
 
 class CardInformacoes extends StatelessWidget {
-  const CardInformacoes({super.key});
+  final String titulo;
+  const CardInformacoes({super.key, required this.titulo});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Card(
+    return Card(
 
-        color: Theme.of(context).colorScheme.secondary,
-        elevation: 5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      color: Theme.of(context).colorScheme.secondary,
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
 
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          
-          children:  [
-            const ListTile(
-              title: Text(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20.0, bottom: 20.0, left: 3.0, right: 3.0,),
+        
+        child: ListTile(
+          title: Row(
+            children: const [
+              Text(
                 'Curso:',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 30,
                 ),
               ),
-            ),
+            ],
+          ),
 
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              
-              child: Row(
-                children: const [
-                  Text(
-                    'Ciência da Computação',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16,
-                      ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+          subtitle: Row(
+            children: [
+              EstilosTexto.textNormalInter(titulo),
+            ],
+          ),
         ),
       ),
     );

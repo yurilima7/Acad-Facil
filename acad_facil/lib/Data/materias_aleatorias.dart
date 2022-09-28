@@ -84,4 +84,109 @@ final materiasAleatorias = [
     },
     media: 8.67,
   ),
+  Materia(
+    id: 'm6',
+    nome: 'Metodologia Científica',
+    sala: '02',
+    periodo: 2,
+    notas: {
+      'n1': 9,
+      'n2': 9,
+      'n3': 8,
+    },
+    horario:{
+      'QUI': '08:40 - 10:35',
+    },
+    media: 8.67,
+  ),
+  Materia(
+    id: 'm6',
+    nome: 'Metodologia Científica',
+    sala: '02',
+    periodo: 2,
+    notas: {
+      'n1': 9,
+      'n2': 9,
+      'n3': 8,
+    },
+    horario:{
+      'QUI': '08:40 - 10:35',
+    },
+    media: 8.67,
+  ),
+  Materia(
+    id: 'm6',
+    nome: 'Metodologia Científica',
+    sala: '02',
+    periodo: 2,
+    notas: {
+      'n1': 9,
+      'n2': 9,
+      'n3': 8,
+    },
+    horario:{
+      'QUI': '08:40 - 10:35',
+    },
+    media: 8.67,
+  ),
+  Materia(
+    id: 'm6',
+    nome: 'Metodologia Científica',
+    sala: '02',
+    periodo: 2,
+    notas: {
+      'n1': 9,
+      'n2': 9,
+      'n3': 8,
+    },
+    horario:{
+      'QUI': '08:40 - 10:35',
+    },
+    media: 8.67,
+  ),
+  Materia(
+    id: 'm6',
+    nome: 'Metodologia Científica',
+    sala: '02',
+    periodo: 2,
+    notas: {
+      'n1': 9,
+      'n2': 9,
+      'n3': 8,
+    },
+    horario:{
+      'QUI': '08:40 - 10:35',
+    },
+    media: 8.67,
+  ),
+  Materia(
+    id: 'm6',
+    nome: 'Metodologia Científica',
+    sala: '02',
+    periodo: 2,
+    notas: {
+      'n1': 9,
+      'n2': 9,
+      'n3': 8,
+    },
+    horario:{
+      'QUI': '08:40 - 10:35',
+    },
+    media: 8.67,
+  ),
+  Materia(
+    id: 'm6',
+    nome: 'Metodologia Científica',
+    sala: '02',
+    periodo: 2,
+    notas: {
+      'n1': 9,
+      'n2': 9,
+      'n3': 8,
+    },
+    horario:{
+      'QUI': '08:40 - 10:35',
+    },
+    media: 8.67,
+  ),
 ];
