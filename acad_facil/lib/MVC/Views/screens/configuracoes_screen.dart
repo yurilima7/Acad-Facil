@@ -5,12 +5,6 @@ class ConfiguracoesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Configurações'),
-      ),
-      
-      body: Column(),
-    );
+    return Column();
   }
 }

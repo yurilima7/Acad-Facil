@@ -13,13 +13,7 @@ class HomeScreen extends StatelessWidget {
  
     final List<Materia> materias = MateriaControler().listaMaterias(context);
 
-    final PreferredSizeWidget appBar = AppBar(
-      title: const Text('Laura'),
-    );
-
-    return Scaffold(
-      appBar: appBar,
-      body: Padding(
+    return Padding(
         padding: const EdgeInsets.all(20.0),
 
         child: Column(
@@ -28,8 +22,6 @@ class HomeScreen extends StatelessWidget {
               flex: 2,
               child: CardInformacoes(titulo: 'Ciência da Computação'),
             ),
-
-            const Spacer(),
 
             Flexible(
               
@@ -54,7 +46,7 @@ class HomeScreen extends StatelessWidget {
             
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 4 / 2, //  define o tamanho
+                  childAspectRatio: 3 / 2, //  define o tamanho
                   crossAxisSpacing: 10, // define o espaçamento em linha
                   mainAxisSpacing: 10,
                 ),
@@ -65,7 +57,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }

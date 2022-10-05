@@ -13,28 +13,31 @@ class CardInformacoes extends StatelessWidget {
       elevation: 5,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
 
-      child: Padding(
-        padding: const EdgeInsets.only(top: 20.0, bottom: 20.0, left: 3.0, right: 3.0,),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         
-        child: ListTile(
-          title: Row(
-            children: const [
-              Text(
-                'Curso:',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
+        children: [
+          ListTile(
+            title: Row(
+              children: const [
+                Text(
+                  'Curso:',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
 
-          subtitle: Row(
-            children: [
-              EstilosTexto.textNormalInter(titulo),
-            ],
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+
+            child: EstilosTexto.textNormalInter(titulo),
           ),
-        ),
+        ],
       ),
     );
   }

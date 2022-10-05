@@ -1,4 +1,8 @@
 import 'package:acad_facil/MVC/Models/materia_funcoes.dart';
+import 'package:acad_facil/MVC/Views/screens/configuracoes_screen.dart';
+import 'package:acad_facil/MVC/Views/screens/horarios_screen.dart';
+import 'package:acad_facil/MVC/Views/screens/notas_screen.dart';
+import 'package:acad_facil/MVC/Views/screens/tabs_screen.dart';
 import 'package:acad_facil/Utils/app_routes.dart';
 import 'package:acad_facil/MVC/Views/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +32,11 @@ class AcadFacil extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         
         routes: { 
+          AppRoutes.tabs:(context) => const TabsScreen(),
           AppRoutes.materias:(context) => const HomeScreen(),
+          AppRoutes.configuracoes:(context) => const ConfiguracoesScreen(),
+          AppRoutes.horarios:(context) => const HorariosScreen(),
+          AppRoutes.notas:(context) => const NotasScreen(),
         },
       ),
     );

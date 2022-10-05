@@ -19,7 +19,8 @@ class CardMateria extends StatelessWidget {
 
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-
+        crossAxisAlignment: CrossAxisAlignment.start,
+        
         children: [
           ListTile(
             title: Row(       
@@ -33,18 +34,18 @@ class CardMateria extends StatelessWidget {
                 ),
               ],
             ),
-            
-            subtitle: Row(
-              children: [
-                Text(
-                  'Sala: ${materia.sala}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Inter',
-                    fontSize: 10,
-                  ),
-                ),
-              ],
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+
+            child: Text(
+              'Sala: ${materia.sala}',
+              style: const TextStyle(
+                color: Colors.white,
+                fontFamily: 'Inter',
+                fontSize: 10,
+              ),
             ),
           ),
         ],
