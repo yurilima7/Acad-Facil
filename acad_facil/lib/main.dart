@@ -1,4 +1,5 @@
 import 'package:acad_facil/MVC/Models/materia_funcoes.dart';
+import 'package:acad_facil/MVC/Models/usuario_funcoes.dart';
 import 'package:acad_facil/MVC/Views/screens/configuracoes_screen.dart';
 import 'package:acad_facil/MVC/Views/screens/horarios_screen.dart';
 import 'package:acad_facil/MVC/Views/screens/notas_screen.dart';
@@ -17,8 +18,17 @@ class AcadFacil extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => MateriaFuncoes(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => MateriaFuncoes(),
+        ),
+
+        ChangeNotifierProvider(
+          create: (_) => UsuarioFuncoes(),
+        )
+      ],
+      
       child: MaterialApp(
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch().copyWith(

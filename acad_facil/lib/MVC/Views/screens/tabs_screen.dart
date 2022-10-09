@@ -1,3 +1,4 @@
+import 'package:acad_facil/MVC/Controllers/usuario_controller.dart';
 import 'package:acad_facil/MVC/Views/screens/configuracoes_screen.dart';
 import 'package:acad_facil/MVC/Views/screens/home_screen.dart';
 import 'package:acad_facil/MVC/Views/screens/horarios_screen.dart';
@@ -21,7 +22,7 @@ class _TabsScreenState extends State<TabsScreen> {
     super.initState();
 
     _telas = [
-      {'Titulo': 'Laura', 'Tela': const HomeScreen()},
+      {'Titulo': '', 'Tela': const HomeScreen()},
       {'Titulo': 'Horário', 'Tela': const HorariosScreen()},
       {'Titulo': 'Notas', 'Tela': const NotasScreen()},
       {'Titulo': 'Configurações', 'Tela': const ConfiguracoesScreen()},
@@ -36,6 +37,14 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    if (_telaSelecionada == 0) {
+      _telas[0].update(
+        'Titulo',
+        (value) => UsuarioController().usuario(context).nome,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(title: Text(_telas[_telaSelecionada]['Titulo'] as String),),
 
@@ -43,50 +52,51 @@ class _TabsScreenState extends State<TabsScreen> {
 
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selecionaTela,
-        unselectedItemColor: Colors.white, // quando não selecionado
-        selectedItemColor: Theme.of(context).colorScheme.tertiary, // selecionado
-        currentIndex: _telaSelecionada, // selecionado atualmente
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         elevation: 5,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        type: BottomNavigationBarType.fixed,
 
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/home.svg',
-              height: MediaQuery.of(context).size.height * 0.034,
-              //allowDrawingOutsideViewBox: true,
+              height: 32,
+              color: _telaSelecionada == 0 ? Theme.of(context).colorScheme.tertiary : Colors.white,
             ),
             label: "Home",
-            backgroundColor: Theme.of(context).colorScheme.primary,
+            // backgroundColor: Theme.of(context).colorScheme.primary,
           ),
 
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/horario.svg',
-              height: MediaQuery.of(context).size.height * 0.034,
-              //allowDrawingOutsideViewBox: true,
+              height: 32,
+              color: _telaSelecionada == 1 ? Theme.of(context).colorScheme.tertiary : Colors.white,
             ),
             label: "Horário",
-            backgroundColor: Theme.of(context).colorScheme.primary,
+            // backgroundColor: Theme.of(context).colorScheme.primary,
           ),
 
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/notas.svg',
-              height: MediaQuery.of(context).size.height * 0.034,
-              //allowDrawingOutsideViewBox: true,
+              height: 32,
+              color: _telaSelecionada == 2 ? Theme.of(context).colorScheme.tertiary : Colors.white,
             ),
             label: 'Notas',
-            backgroundColor: Theme.of(context).colorScheme.primary,
+            // backgroundColor: Theme.of(context).colorScheme.primary,
           ),
 
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/configuracao.svg',
-              height: MediaQuery.of(context).size.height * 0.034,
-              //allowDrawingOutsideViewBox: true,
+              height: 32,
+              color: _telaSelecionada == 3 ? Theme.of(context).colorScheme.tertiary : Colors.white,
             ),
             label: 'Configurações',
-            backgroundColor: Theme.of(context).colorScheme.primary,
+            // backgroundColor: Theme.of(context).colorScheme.primary,
           ),
         ],
       ),

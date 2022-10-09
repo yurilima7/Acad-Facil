@@ -30,6 +30,12 @@ class CardInformacoes extends StatelessWidget {
                 ),
               ],
             ),
+            
+            trailing: const Icon(
+              Icons.school,
+              color: Colors.white,
+              size: 90,
+            ),
           ),
 
           Padding(

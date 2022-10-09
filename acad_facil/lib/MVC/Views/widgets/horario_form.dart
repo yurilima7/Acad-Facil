@@ -26,7 +26,6 @@ class HorarioForm extends StatelessWidget {
 
             children: [
               EstilosTexto.textNormalBebas('SEG'),
-              EstilosTexto.textNormalBebas('4'),
             ],
           ),
         ),

@@ -1,5 +1,7 @@
 import 'package:acad_facil/MVC/Controllers/materia_controller.dart';
+import 'package:acad_facil/MVC/Controllers/usuario_controller.dart';
 import 'package:acad_facil/MVC/Models/materia.dart';
+import 'package:acad_facil/MVC/Models/usuario.dart';
 import 'package:acad_facil/MVC/Views/widgets/card_informacao.dart';
 import 'package:acad_facil/MVC/Views/widgets/card_materia.dart';
 import 'package:acad_facil/MVC/Views/widgets/estilos_texto.dart';
@@ -12,50 +14,68 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
  
     final List<Materia> materias = MateriaControler().listaMaterias(context);
-
+    final Usuario usuario = UsuarioController().usuario(context);
+    
     return Padding(
         padding: const EdgeInsets.all(20.0),
+    
+        child: SingleChildScrollView(       
+          physics: const BouncingScrollPhysics(),
 
-        child: Column(
-          children: [
-            const Flexible(
-              flex: 2,
-              child: CardInformacoes(titulo: 'Ciência da Computação'),
-            ),
-
-            Flexible(
-              
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
+          child: Wrap(
+            runSpacing: MediaQuery.of(context).size.height * 0.06,
             
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                
-                  children: [
-                    EstilosTexto.textoTitulo('Disciplinas'),
-                
-                    const Icon(Icons.filter_list, color: Colors.white,),
-                  ],
-                ),
-              ),
-            ),
-
-            Flexible(
-              flex: 7,
-              child: GridView.builder(
-            
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 3 / 2, //  define o tamanho
-                  crossAxisSpacing: 10, // define o espaçamento em linha
-                  mainAxisSpacing: 10,
-                ),
+            children: [
+              CardInformacoes(titulo: usuario.curso),             
               
-                itemCount: materias.length,
-                itemBuilder: (context, i) => CardMateria(materia: materias[i]),
+              Column(
+                
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      
+                      children: [
+                        EstilosTexto.textoTitulo('Disciplinas'),
+                        TextButton(
+                          onPressed: () {},
+                          child: materias.isNotEmpty
+                            ? EstilosTexto.textNormalInter('Ver todas')
+                            : EstilosTexto.textNormalInter(
+                                'Adicionar',
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 380,
+                    child: materias.isNotEmpty ? GridView.builder(
+                    
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 3 / 2,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 10,
+                      ),
+                    
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: 6,
+                      itemBuilder: (context, i) => CardMateria(materia: materias[i]),
+                    )
+                    : 
+                    Center(
+                      child: EstilosTexto.textNormalInter(
+                          'Sem disciplinas no momento!'),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
   }

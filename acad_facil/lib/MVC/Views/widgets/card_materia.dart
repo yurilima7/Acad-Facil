@@ -18,28 +18,20 @@ class CardMateria extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
 
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         
         children: [
           ListTile(
-            title: Row(       
-              children: [
-                Text(
-                  materia.nome,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                  ),
-                ),
-              ],
+            title: Text(
+              materia.nome,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+              ),
             ),
-          ),
 
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-
-            child: Text(
+            subtitle: Text(
               'Sala: ${materia.sala}',
               style: const TextStyle(
                 color: Colors.white,
