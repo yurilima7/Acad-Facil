@@ -3,6 +3,7 @@ import 'package:acad_facil/MVC/Views/screens/configuracoes_screen.dart';
 import 'package:acad_facil/MVC/Views/screens/home_screen.dart';
 import 'package:acad_facil/MVC/Views/screens/horarios_screen.dart';
 import 'package:acad_facil/MVC/Views/screens/notas_screen.dart';
+import 'package:acad_facil/MVC/styles/estilos_texto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -41,12 +42,18 @@ class _TabsScreenState extends State<TabsScreen> {
     if (_telaSelecionada == 0) {
       _telas[0].update(
         'Titulo',
-        (value) => UsuarioController().usuario(context).nome,
+        (value) => UsuarioController().usuario.nome,
       );
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text(_telas[_telaSelecionada]['Titulo'] as String),),
+      appBar: AppBar(
+        title: Text(
+          _telas[_telaSelecionada]['Titulo'] as String,
+          style: context.estilosTexto.tituloAppBar,
+        ),
+        elevation: 0,
+      ),
 
       body: _telas[_telaSelecionada]['Tela'] as Widget,
 
@@ -54,7 +61,7 @@ class _TabsScreenState extends State<TabsScreen> {
         onTap: _selecionaTela,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        elevation: 5,
+        elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.primary,
         type: BottomNavigationBarType.fixed,
 

@@ -1,4 +1,4 @@
-import 'package:acad_facil/MVC/Views/widgets/estilos_texto.dart';
+import 'package:acad_facil/MVC/styles/estilos_texto.dart';
 import 'package:flutter/material.dart';
 
 class CardInformacoes extends StatelessWidget {
@@ -20,13 +20,10 @@ class CardInformacoes extends StatelessWidget {
         children: [
           ListTile(
             title: Row(
-              children: const [
+              children: [
                 Text(
                   'Curso:',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                  ),
+                  style: context.estilosTexto.tituloDestacado,
                 ),
               ],
             ),
@@ -41,7 +38,10 @@ class CardInformacoes extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
 
-            child: EstilosTexto.textNormalInter(titulo),
+            child: Text(
+              titulo,
+              style: context.estilosTexto.tituloSecundario,
+            ),
           ),
         ],
       ),

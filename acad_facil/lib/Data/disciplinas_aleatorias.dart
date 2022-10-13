@@ -1,8 +1,8 @@
-import 'package:acad_facil/MVC/Models/materia.dart';
+import 'package:acad_facil/MVC/Models/disciplinas.dart';
 
-final materiasAleatorias = [
+final disciplinasAleatorias = [
 
-  Materia(
+  Disciplinas(
     id: 'm1',
     nome: 'Circuítos Elétricos',
     sala: '01',
@@ -15,7 +15,7 @@ final materiasAleatorias = [
     },
     media: 9,
   ),
-  Materia(
+  Disciplinas(
     id: 'm2',
     nome: 'Cálculo II',
     sala: '02',
@@ -29,7 +29,7 @@ final materiasAleatorias = [
     },
     media: 0,
   ),
-  Materia(
+  Disciplinas(
     id: 'm3',
     nome: 'Estrutura de Dados I',
     sala: '02',
@@ -43,7 +43,7 @@ final materiasAleatorias = [
     },
     media: 7.5,
   ),
-  Materia(
+  Disciplinas(
     id: 'm4',
     nome: 'Inglês Instrumental',
     sala: '02',
@@ -56,7 +56,7 @@ final materiasAleatorias = [
     },
     media: 9,
   ),
-  Materia(
+  Disciplinas(
     id: 'm5',
     nome: 'Matemática Discreta',
     sala: '02',
@@ -69,7 +69,7 @@ final materiasAleatorias = [
     },
     media: 9,
   ),
-  Materia(
+  Disciplinas(
     id: 'm6',
     nome: 'Metodologia Científica',
     sala: '02',

@@ -1,5 +1,5 @@
-import 'package:acad_facil/MVC/Models/materia_funcoes.dart';
-import 'package:acad_facil/MVC/Models/usuario_funcoes.dart';
+import 'package:acad_facil/MVC/Controllers/materia_controller.dart';
+import 'package:acad_facil/MVC/Controllers/usuario_controller.dart';
 import 'package:acad_facil/MVC/Views/screens/configuracoes_screen.dart';
 import 'package:acad_facil/MVC/Views/screens/horarios_screen.dart';
 import 'package:acad_facil/MVC/Views/screens/notas_screen.dart';
@@ -21,11 +21,11 @@ class AcadFacil extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => MateriaFuncoes(),
+          create: (_) => MateriaControler(),
         ),
 
         ChangeNotifierProvider(
-          create: (_) => UsuarioFuncoes(),
+          create: (_) => UsuarioController(),
         )
       ],
       

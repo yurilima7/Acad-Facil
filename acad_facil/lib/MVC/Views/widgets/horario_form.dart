@@ -1,4 +1,3 @@
-import 'package:acad_facil/MVC/Views/widgets/estilos_texto.dart';
 import 'package:flutter/material.dart';
 
 class HorarioForm extends StatelessWidget {
@@ -24,8 +23,14 @@ class HorarioForm extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
 
-            children: [
-              EstilosTexto.textNormalBebas('SEG'),
+            children: const [
+              Text(
+                'SEG',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
             ],
           ),
         ),

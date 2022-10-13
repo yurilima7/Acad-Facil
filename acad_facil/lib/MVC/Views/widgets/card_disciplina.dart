@@ -1,12 +1,13 @@
-import 'package:acad_facil/MVC/Models/materia.dart';
+import 'package:acad_facil/MVC/Models/disciplinas.dart';
+import 'package:acad_facil/MVC/styles/estilos_texto.dart';
 import 'package:flutter/material.dart';
 
-class CardMateria extends StatelessWidget {
-  final Materia materia;
+class CardDisciplina extends StatelessWidget {
+  final Disciplinas disciplina;
 
-  const CardMateria({
+  const CardDisciplina({
     Key? key,
-    required this.materia,
+    required this.disciplina,
   }) : super(key: key);
 
   @override
@@ -24,20 +25,13 @@ class CardMateria extends StatelessWidget {
         children: [
           ListTile(
             title: Text(
-              materia.nome,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-              ),
+              disciplina.nome,
+              style: context.estilosTexto.tituloPrincipalCard,
             ),
 
             subtitle: Text(
-              'Sala: ${materia.sala}',
-              style: const TextStyle(
-                color: Colors.white,
-                fontFamily: 'Inter',
-                fontSize: 10,
-              ),
+              'Sala: ${disciplina.sala}',
+              style: context.estilosTexto.subTituloSecundario,
             ),
           ),
         ],

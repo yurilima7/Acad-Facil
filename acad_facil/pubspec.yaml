@@ -83,10 +83,13 @@ flutter:
     - family: Bebas Neue
       fonts:
         - asset: assets/fonts/BebasNeue-Regular.ttf
+          weight: 400
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter-Regular.ttf
+          weight: 400
         - asset: assets/fonts/Inter-SemiBold.ttf
+          weight: 600
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

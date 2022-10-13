@@ -1,4 +1,4 @@
-class Materia {
+class Disciplinas {
   String id;
   String nome;
   String sala;
@@ -7,7 +7,7 @@ class Materia {
   Map<String, String> horario;
   double media;
 
-  Materia({
+  Disciplinas({
     required this.id,
     required this.nome,
     required this.sala,

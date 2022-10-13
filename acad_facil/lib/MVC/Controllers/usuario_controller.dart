@@ -1,12 +1,10 @@
+import 'package:acad_facil/Data/usuario_aleatorio.dart';
 import 'package:acad_facil/MVC/Models/usuario.dart';
-import 'package:acad_facil/MVC/Models/usuario_funcoes.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class UsuarioController {
+class UsuarioController with ChangeNotifier {
+
+  final Usuario _usuario = usuarioAleatorio;
+  Usuario get usuario => _usuario;
   
-  Usuario usuario(BuildContext context){
-    final provider = Provider.of<UsuarioFuncoes>(context);
-    return provider.usuario;
-  }
 }
