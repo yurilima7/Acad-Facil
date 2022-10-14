@@ -1,4 +1,4 @@
-import 'package:acad_facil/MVC/styles/estilos_texto.dart';
+import 'package:acad_facil/MVC/Styles/estilos_texto.dart';
 import 'package:flutter/material.dart';
 
 class CardInformacoes extends StatelessWidget {

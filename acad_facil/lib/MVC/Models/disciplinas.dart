@@ -1,4 +1,6 @@
-class Disciplinas {
+import 'package:flutter/widgets.dart';
+
+class Disciplinas with ChangeNotifier{
   String id;
   String nome;
   String sala;

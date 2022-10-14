@@ -1,17 +1,18 @@
 import 'package:acad_facil/MVC/Models/disciplinas.dart';
-import 'package:acad_facil/MVC/styles/estilos_texto.dart';
+import 'package:acad_facil/MVC/Styles/estilos_texto.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CardDisciplina extends StatelessWidget {
-  final Disciplinas disciplina;
 
   const CardDisciplina({
     Key? key,
-    required this.disciplina,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final disciplina = Provider.of<Disciplinas>(context, listen: false);
+
     return Card(
 
       color: Theme.of(context).colorScheme.secondary,

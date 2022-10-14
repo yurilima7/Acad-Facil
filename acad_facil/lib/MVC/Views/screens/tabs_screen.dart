@@ -3,7 +3,7 @@ import 'package:acad_facil/MVC/Views/screens/configuracoes_screen.dart';
 import 'package:acad_facil/MVC/Views/screens/home_screen.dart';
 import 'package:acad_facil/MVC/Views/screens/horarios_screen.dart';
 import 'package:acad_facil/MVC/Views/screens/notas_screen.dart';
-import 'package:acad_facil/MVC/styles/estilos_texto.dart';
+import 'package:acad_facil/MVC/Styles/estilos_texto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

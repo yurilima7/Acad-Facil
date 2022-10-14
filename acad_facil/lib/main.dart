@@ -1,4 +1,4 @@
-import 'package:acad_facil/MVC/Controllers/materia_controller.dart';
+import 'package:acad_facil/MVC/Controllers/disciplinas_controller.dart';
 import 'package:acad_facil/MVC/Controllers/usuario_controller.dart';
 import 'package:acad_facil/MVC/Views/screens/configuracoes_screen.dart';
 import 'package:acad_facil/MVC/Views/screens/horarios_screen.dart';
@@ -21,12 +21,12 @@ class AcadFacil extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => MateriaControler(),
+          create: (_) => DisciplinasControler(),
         ),
 
         ChangeNotifierProvider(
           create: (_) => UsuarioController(),
-        )
+        ),
       ],
       
       child: MaterialApp(

@@ -1,22 +1,43 @@
-import 'package:acad_facil/MVC/Controllers/materia_controller.dart';
+import 'package:acad_facil/MVC/Controllers/disciplinas_controller.dart';
 import 'package:acad_facil/MVC/Controllers/usuario_controller.dart';
-import 'package:acad_facil/MVC/Models/disciplinas.dart';
-import 'package:acad_facil/MVC/Models/usuario.dart';
 import 'package:acad_facil/MVC/Views/widgets/card_informacao.dart';
-import 'package:acad_facil/MVC/Views/widgets/card_disciplina.dart';
-import 'package:acad_facil/MVC/styles/estilos_texto.dart';
+import 'package:acad_facil/MVC/Views/widgets/disciplinas_grid.dart';
+import 'package:acad_facil/MVC/Styles/estilos_texto.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool _carregando = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp){
+      Provider.of<DisciplinasControler>(context, listen: false)
+        .lerDisciplinas().then((value) {
+          setState(() {
+            _carregando = false;
+          });
+        });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
  
-    final List<Disciplinas> disciplinas = MateriaControler().disciplinas;
-    final Usuario usuario = UsuarioController().usuario;
+    final providerDisciplinas = Provider.of<DisciplinasControler>(context);
+    final providerUsuario = Provider.of<UsuarioController>(context).usuario;
     
-    return SingleChildScrollView(       
+    return SingleChildScrollView(   
+    
       physics: const BouncingScrollPhysics(),
 
       child: Padding(
@@ -26,7 +47,7 @@ class HomeScreen extends StatelessWidget {
           runSpacing: MediaQuery.of(context).size.height * 0.06,
           
           children: [
-            CardInformacoes(titulo: usuario.curso),             
+            CardInformacoes(titulo: providerUsuario.curso),             
             
             Column(
               
@@ -43,45 +64,28 @@ class HomeScreen extends StatelessWidget {
                         style: context.estilosTexto.tituloPrincipal,
                       ),
 
-                      TextButton(
-                        onPressed: () {},
-                        child: disciplinas.isNotEmpty
-                          ? Text(
-                              'Ver todas',
-                              style: context.estilosTexto.tituloSecundario,
-                            )
-                          : Text(
-                              'Adicionar',
-                              style: context.estilosTexto.tituloSecundario,
-                            ),
+                      Visibility(
+                        visible: !_carregando, 
+                        child: TextButton(
+                          onPressed: () {},
+                          child: providerDisciplinas.quantidadeDisciplinas != 0
+                            ? Text(
+                                'Ver todas',
+                                style: context.estilosTexto.tituloSecundario,
+                              )
+                            : Text(
+                                'Adicionar',
+                                style: context.estilosTexto.tituloSecundario,
+                              ),
+                        ),
                       ),
                     ],
                   ),
                 ),
 
-                SizedBox(
-                  height: 380,
-                  child: disciplinas.isNotEmpty ? GridView.builder(
-                  
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 3 / 2,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 10,
-                    ),
-                  
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 6,
-                    itemBuilder: (context, i) => CardDisciplina(disciplina: disciplinas[i]),
-                  )
-                  : 
-                  Center(
-                    child: Text(
-                      'Sem disciplinas no momento!',
-                      style: context.estilosTexto.tituloSecundario,
-                    ),
-                  ),
-                ),
+                _carregando 
+                  ? const CircularProgressIndicator(color: Colors.white,)
+                  : const DisciplinasGrid(),
               ],
             ),
           ],
