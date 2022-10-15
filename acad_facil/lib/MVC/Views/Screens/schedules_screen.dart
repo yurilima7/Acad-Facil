@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HorariosScreen extends StatelessWidget {
-  const HorariosScreen({super.key});
+class SchedulesScreen extends StatelessWidget {
+  const SchedulesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

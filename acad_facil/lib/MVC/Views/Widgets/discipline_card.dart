@@ -1,17 +1,17 @@
-import 'package:acad_facil/MVC/Models/disciplinas.dart';
-import 'package:acad_facil/MVC/Styles/estilos_texto.dart';
+import 'package:acad_facil/MVC/Models/disciplines.dart';
+import 'package:acad_facil/MVC/Styles/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CardDisciplina extends StatelessWidget {
+class DisciplineCard extends StatelessWidget {
 
-  const CardDisciplina({
+  const DisciplineCard({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final disciplina = Provider.of<Disciplinas>(context, listen: false);
+    final discipline = Provider.of<Disciplines>(context, listen: false);
 
     return Card(
 
@@ -26,13 +26,13 @@ class CardDisciplina extends StatelessWidget {
         children: [
           ListTile(
             title: Text(
-              disciplina.nome,
-              style: context.estilosTexto.tituloPrincipalCard,
+              discipline.name,
+              style: context.textStyles.mainCardTitle,
             ),
 
             subtitle: Text(
-              'Sala: ${disciplina.sala}',
-              style: context.estilosTexto.subTituloSecundario,
+              'Sala: ${discipline.classroom}',
+              style: context.textStyles.secundarySubTitle,
             ),
           ),
         ],

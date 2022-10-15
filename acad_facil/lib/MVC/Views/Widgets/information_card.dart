@@ -1,9 +1,9 @@
-import 'package:acad_facil/MVC/Styles/estilos_texto.dart';
+import 'package:acad_facil/MVC/Styles/text_styles.dart';
 import 'package:flutter/material.dart';
 
-class CardInformacoes extends StatelessWidget {
-  final String titulo;
-  const CardInformacoes({super.key, required this.titulo});
+class InformationCard extends StatelessWidget {
+  final String title;
+  const InformationCard({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CardInformacoes extends StatelessWidget {
               children: [
                 Text(
                   'Curso:',
-                  style: context.estilosTexto.tituloDestacado,
+                  style: context.textStyles.bigTitle,
                 ),
               ],
             ),
@@ -39,8 +39,8 @@ class CardInformacoes extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
 
             child: Text(
-              titulo,
-              style: context.estilosTexto.tituloSecundario,
+              title,
+              style: context.textStyles.secundaryTitle,
             ),
           ),
         ],

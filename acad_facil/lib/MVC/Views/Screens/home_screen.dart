@@ -1,8 +1,8 @@
-import 'package:acad_facil/MVC/Controllers/disciplinas_controller.dart';
-import 'package:acad_facil/MVC/Controllers/usuario_controller.dart';
-import 'package:acad_facil/MVC/Views/widgets/card_informacao.dart';
-import 'package:acad_facil/MVC/Views/widgets/disciplinas_grid.dart';
-import 'package:acad_facil/MVC/Styles/estilos_texto.dart';
+import 'package:acad_facil/MVC/Controllers/disciplines_controller.dart';
+import 'package:acad_facil/MVC/Controllers/user_controller.dart';
+import 'package:acad_facil/MVC/Views/Widgets/information_card.dart';
+import 'package:acad_facil/MVC/Views/Widgets/grid_disciplines.dart';
+import 'package:acad_facil/MVC/Styles/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,17 +14,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool _carregando = true;
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp){
-      Provider.of<DisciplinasControler>(context, listen: false)
-        .lerDisciplinas().then((value) {
+      Provider.of<DisciplinesControler>(context, listen: false)
+        .loadDisciplines().then((value) {
           setState(() {
-            _carregando = false;
+            _isLoading = false;
           });
         });
     });
@@ -33,8 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
  
-    final providerDisciplinas = Provider.of<DisciplinasControler>(context);
-    final providerUsuario = Provider.of<UsuarioController>(context).usuario;
+    final providerDiscipline = Provider.of<DisciplinesControler>(context);
+    final providerUser = Provider.of<UserController>(context).user;
     
     return SingleChildScrollView(   
     
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           runSpacing: MediaQuery.of(context).size.height * 0.06,
           
           children: [
-            CardInformacoes(titulo: providerUsuario.curso),             
+            InformationCard(title: providerUser.course),             
             
             Column(
               
@@ -61,21 +61,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Text(
                         'Disciplinas',
-                        style: context.estilosTexto.tituloPrincipal,
+                        style: context.textStyles.mainTitle,
                       ),
 
                       Visibility(
-                        visible: !_carregando, 
+                        visible: !_isLoading, 
                         child: TextButton(
                           onPressed: () {},
-                          child: providerDisciplinas.quantidadeDisciplinas != 0
+                          child: providerDiscipline.disciplinesCount != 0
                             ? Text(
                                 'Ver todas',
-                                style: context.estilosTexto.tituloSecundario,
+                                style: context.textStyles.secundaryTitle,
                               )
                             : Text(
                                 'Adicionar',
-                                style: context.estilosTexto.tituloSecundario,
+                                style: context.textStyles.secundaryTitle,
                               ),
                         ),
                       ),
@@ -83,9 +83,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
 
-                _carregando 
+                _isLoading 
                   ? const CircularProgressIndicator(color: Colors.white,)
-                  : const DisciplinasGrid(),
+                  : const GridDisciplines(),
               ],
             ),
           ],

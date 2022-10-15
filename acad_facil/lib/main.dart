@@ -1,11 +1,11 @@
-import 'package:acad_facil/MVC/Controllers/disciplinas_controller.dart';
-import 'package:acad_facil/MVC/Controllers/usuario_controller.dart';
-import 'package:acad_facil/MVC/Views/screens/configuracoes_screen.dart';
-import 'package:acad_facil/MVC/Views/screens/horarios_screen.dart';
-import 'package:acad_facil/MVC/Views/screens/notas_screen.dart';
-import 'package:acad_facil/MVC/Views/screens/tabs_screen.dart';
+import 'package:acad_facil/MVC/Controllers/disciplines_controller.dart';
+import 'package:acad_facil/MVC/Controllers/user_controller.dart';
+import 'package:acad_facil/MVC/Views/Screens/settings_screen.dart';
+import 'package:acad_facil/MVC/Views/Screens/schedules_screen.dart';
+import 'package:acad_facil/MVC/Views/Screens/grades_screen.dart';
+import 'package:acad_facil/MVC/Views/Screens/tabs_screen.dart';
 import 'package:acad_facil/Utils/app_routes.dart';
-import 'package:acad_facil/MVC/Views/screens/home_screen.dart';
+import 'package:acad_facil/MVC/Views/Screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,11 +21,11 @@ class AcadFacil extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => DisciplinasControler(),
+          create: (_) => DisciplinesControler(),
         ),
 
         ChangeNotifierProvider(
-          create: (_) => UsuarioController(),
+          create: (_) => UserController(),
         ),
       ],
       
@@ -43,10 +43,10 @@ class AcadFacil extends StatelessWidget {
         
         routes: { 
           AppRoutes.tabs:(context) => const TabsScreen(),
-          AppRoutes.materias:(context) => const HomeScreen(),
-          AppRoutes.configuracoes:(context) => const ConfiguracoesScreen(),
-          AppRoutes.horarios:(context) => const HorariosScreen(),
-          AppRoutes.notas:(context) => const NotasScreen(),
+          AppRoutes.home:(context) => const HomeScreen(),
+          AppRoutes.settings:(context) => const SettingsScreen(),
+          AppRoutes.schedules:(context) => const SchedulesScreen(),
+          AppRoutes.grades:(context) => const GradesScreen(),
         },
       ),
     );

@@ -1,7 +1,7 @@
 class AppRoutes {
-  static const materias = '/home';
-  static const notas = '/notas';
-  static const configuracoes = '/configuracoes';
-  static const horarios = '/horarios';
+  static const home = '/home';
+  static const grades = '/notas';
+  static const settings = '/configuracoes';
+  static const schedules = '/horarios';
   static const tabs = '/';
 }
