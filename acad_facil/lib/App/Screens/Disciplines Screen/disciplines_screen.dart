@@ -7,22 +7,33 @@ class DisciplinesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Disciplinas'),
-        elevation: 0,
-        automaticallyImplyLeading: false,
-      ),
-
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-
-        child: Padding(
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Disciplinas'),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+        ),
+    
+        body: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Wrap(
-            children: const [
-              Search(),
-              GridDisciplines(presentsAll: true)
+          child: Column(
+            children:  [
+              Column(
+                children: const [
+                  Search(),      
+                ],
+              ),
+    
+              SizedBox(height: MediaQuery.of(context).size.height * 0.06,),
+    
+              const Expanded(
+                child: SingleChildScrollView(
+                  child: GridDisciplines(presentsAll: true),
+                ),
+              ),
             ],
           ),
         ),

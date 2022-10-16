@@ -1,3 +1,4 @@
+import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:flutter/material.dart';
 
 class TextStyles {
@@ -32,42 +33,42 @@ class TextStyles {
 
   // personalizado
   TextStyle get mainTitle => primaryRegular.copyWith(
-    color: Colors.white,
+    color: ColorsStyles.white,
     fontSize: 16,
   );
 
   TextStyle get bigTitle => primaryRegular.copyWith(
-    color: Colors.white,
+    color: ColorsStyles.white,
     fontSize: 30,
   );
 
   TextStyle get grade => primaryRegular.copyWith(
-    color: const Color(0xFF04B2D9),
+    color: ColorsStyles.terciary,
     fontSize: 30,
   );
 
   TextStyle get appBarTitle => primaryRegular.copyWith(
-    color: Colors.white,
+    color: ColorsStyles.white,
     fontSize: 20,
   );
 
   TextStyle get mainCardTitle => primaryRegular.copyWith(
-    color: Colors.white,
+    color: ColorsStyles.white,
     fontSize: 12,
   );
 
   TextStyle get secundaryTitle => secondaryRegular.copyWith(
-    color: Colors.white,
+    color: ColorsStyles.white,
     fontSize: 16,
   );
 
   TextStyle get secundarySubTitle => secondaryRegular.copyWith(
-    color: Colors.white,
+    color: ColorsStyles.white,
     fontSize: 10,
   );
 
   TextStyle get secundaryOptions => secondarySemiBold.copyWith(
-    color: Colors.white,
+    color: ColorsStyles.white,
     fontSize: 15,
   );
 }

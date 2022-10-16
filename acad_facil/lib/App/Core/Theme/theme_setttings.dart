@@ -1,3 +1,4 @@
+import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:flutter/material.dart';
 
 class ThemeSettings {
@@ -5,9 +6,9 @@ class ThemeSettings {
 
   static final theme = ThemeData(
     colorScheme: ColorScheme.fromSwatch().copyWith(
-      primary: const Color(0xFF021F59),
-      secondary: const Color(0xFF024873),
-      tertiary: const Color(0xFF04B2D9),      
+      primary: ColorsStyles.primary,
+      secondary: ColorsStyles.secundary,
+      tertiary: ColorsStyles.terciary,      
     ),
     scaffoldBackgroundColor: const Color(0xFF021F59),
     fontFamily: 'Bebas Neue',

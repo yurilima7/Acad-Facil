@@ -13,13 +13,11 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return TextFormField( 
       // coloração do texto digitado
-      style: const TextStyle(
-            color: Colors.white),
+      style: const TextStyle(color: Colors.white),
 
       decoration: InputDecoration(
-
-        floatingLabelBehavior:
-            FloatingLabelBehavior.never, // desativa a subida da label
+        // desativa a subida da label
+        floatingLabelBehavior: FloatingLabelBehavior.never, 
        
         border: OutlineInputBorder(
           // definindo o tamanho das bordas
@@ -38,11 +36,19 @@ class _SearchState extends State<Search> {
           ), // define a cor da borda quando não selecionado o input
 
           borderRadius: BorderRadius.circular(
-            30.0,
+            20.0,
           ), // define as bordas, para manter o padrão
         ),
-            
+
+        focusedBorder:OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.white),
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+
+        prefixIcon: const Icon(Icons.search, color: Colors.white,),
+         
       ),
+      
     );
   }
 }
