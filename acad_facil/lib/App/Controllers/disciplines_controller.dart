@@ -1,5 +1,5 @@
-import 'package:acad_facil/Data/dummy_disciplines.dart';
-import 'package:acad_facil/MVC/Models/disciplines.dart';
+import 'package:acad_facil/App/Core/Data/dummy_disciplines.dart';
+import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
 
 class DisciplinesControler with ChangeNotifier {

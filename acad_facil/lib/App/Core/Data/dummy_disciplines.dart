@@ -1,4 +1,4 @@
-import 'package:acad_facil/MVC/Models/disciplines.dart';
+import 'package:acad_facil/App/Models/disciplines.dart';
 
 final dummyDisciplines = [
 

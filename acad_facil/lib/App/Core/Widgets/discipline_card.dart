@@ -1,5 +1,5 @@
-import 'package:acad_facil/MVC/Models/disciplines.dart';
-import 'package:acad_facil/MVC/Styles/text_styles.dart';
+import 'package:acad_facil/App/Models/disciplines.dart';
+import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

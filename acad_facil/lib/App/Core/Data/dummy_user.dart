@@ -1,4 +1,4 @@
-import 'package:acad_facil/MVC/Models/user.dart';
+import 'package:acad_facil/App/Models/user.dart';
 
 final dummyUser = User(
   id: 'u1',

@@ -1,11 +1,12 @@
-import 'package:acad_facil/MVC/Controllers/user_controller.dart';
-import 'package:acad_facil/MVC/Views/Screens/settings_screen.dart';
-import 'package:acad_facil/MVC/Views/Screens/home_screen.dart';
-import 'package:acad_facil/MVC/Views/Screens/schedules_screen.dart';
-import 'package:acad_facil/MVC/Views/Screens/grades_screen.dart';
-import 'package:acad_facil/MVC/Styles/text_styles.dart';
+import 'package:acad_facil/App/Controllers/user_controller.dart';
+import 'package:acad_facil/App/Screens/Settings%20Screen/settings_screen.dart';
+import 'package:acad_facil/App/Screens/Home%20Screen/home_screen.dart';
+import 'package:acad_facil/App/Screens/Schedules%20Screen/schedules_screen.dart';
+import 'package:acad_facil/App/Screens/Grades%20Screen/grades_screen.dart';
+import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -38,11 +39,12 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final providerUser = Provider.of<UserController>(context).user;
 
     if (_selectedScreen == 0) {
       _screen[0].update(
         'Titulo',
-        (value) => UserController().user.name,
+        (value) => providerUser.name,
       );
     }
 
