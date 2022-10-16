@@ -24,7 +24,7 @@ class _SearchState extends State<Search> {
           borderRadius: BorderRadius.circular(20.0),
         ),
 
-        labelText: 'Pesquise', // texto a ser exibido na label
+        labelText: 'Pesquise uma Disciplina', // texto a ser exibido na label
 
         labelStyle: const TextStyle(
           color: Colors.white,

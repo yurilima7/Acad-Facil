@@ -5,4 +5,5 @@ class AppRoutes {
   static const schedules = '/horarios';
   static const tabs = '/';
   static const disciplines = '/disciplines';
+  static const details = '/details';
 }

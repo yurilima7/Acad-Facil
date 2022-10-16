@@ -1,5 +1,6 @@
+import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Widgets/grid_disciplines.dart';
-import 'package:acad_facil/App/Screens/Disciplines%20Screen/search.dart';
+import 'package:acad_facil/App/Screens/Disciplines%20Screen/Widgets/search.dart';
 import 'package:flutter/material.dart';
 
 class DisciplinesScreen extends StatelessWidget {
@@ -36,6 +37,12 @@ class DisciplinesScreen extends StatelessWidget {
               ),
             ],
           ),
+        ),
+
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: ColorsStyles.secundary,
+          child: const Icon(Icons.add),
         ),
       ),
     );
