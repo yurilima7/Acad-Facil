@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class GridDisciplines extends StatelessWidget {
+  final bool presentsAll;
 
   const GridDisciplines({ 
-    Key? key,
+    Key? key, 
+    required this.presentsAll,
   }) : super(key: key);
 
   @override
@@ -28,7 +30,7 @@ class GridDisciplines extends StatelessWidget {
         ),
       
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: 6,
+        itemCount: presentsAll ? providerDisciplines.disciplinesCount : 6,
               itemBuilder: (context, i) => ChangeNotifierProvider.value(
                 value: disciplines[i],
                 child: const DisciplineCard(),

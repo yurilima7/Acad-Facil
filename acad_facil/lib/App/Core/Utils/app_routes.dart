@@ -4,4 +4,5 @@ class AppRoutes {
   static const settings = '/configuracoes';
   static const schedules = '/horarios';
   static const tabs = '/';
+  static const disciplines = '/disciplines';
 }

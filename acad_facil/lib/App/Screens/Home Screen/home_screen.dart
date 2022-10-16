@@ -1,8 +1,11 @@
 import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
 import 'package:acad_facil/App/Controllers/user_controller.dart';
+import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+
 import 'package:acad_facil/App/Core/Widgets/information_card.dart';
 import 'package:acad_facil/App/Core/Widgets/grid_disciplines.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
+import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         });
     });
+  }
+
+  void nextScreen(){
+    Navigator.of(context).pushNamed(AppRoutes.disciplines);
   }
 
   @override
@@ -66,18 +73,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       Visibility(
                         visible: !_isLoading, 
-                        child: TextButton(
-                          onPressed: () {},
-                          child: providerDiscipline.disciplinesCount != 0
-                            ? Text(
-                                'Ver todas',
-                                style: context.textStyles.secundaryTitle,
+              
+                        child: providerDiscipline.disciplinesCount != 0
+                            ? TextButtonApp(
+                                title: 'Ver todas',
+                                action: nextScreen,
                               )
-                            : Text(
-                                'Adicionar',
-                                style: context.textStyles.secundaryTitle,
+                            : TextButtonApp(
+                                title: 'Adicionar',
+                                action: nextScreen,
                               ),
-                        ),
                       ),
                     ],
                   ),
@@ -85,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 _isLoading 
                   ? const CircularProgressIndicator(color: Colors.white,)
-                  : const GridDisciplines(),
+                  : const GridDisciplines(presentsAll: false),
               ],
             ),
           ],
