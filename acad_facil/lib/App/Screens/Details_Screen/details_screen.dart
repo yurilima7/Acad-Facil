@@ -1,7 +1,9 @@
 import 'package:acad_facil/App/Core/Widgets/floating_button.dart';
 import 'package:acad_facil/App/Core/Widgets/information_card.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
-import 'package:acad_facil/App/Screens/Details%20Screen/Widgets/grid_grades.dart';
+import 'package:acad_facil/App/Screens/Details_Screen/Widgets/grid_grades.dart';
+import 'package:acad_facil/App/Screens/Details_Screen/Widgets/local_avarage.dart';
+import 'package:acad_facil/App/Screens/Details_Screen/Widgets/schedule_form.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -38,6 +40,8 @@ class DetailsScreen extends StatelessWidget {
               ),
 
               GridGrades(disciplines: disciplines),
+
+              LocalAvarage(avarage: disciplines.avarage,),
             ],
           ),
         ),

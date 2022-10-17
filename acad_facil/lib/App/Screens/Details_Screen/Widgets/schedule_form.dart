@@ -8,8 +8,8 @@ class ScheduleForm extends StatelessWidget {
     return Row(
       children: [
         Container(
-          height: 70,
-          width: 35,
+          height: 100,
+          width: 50,
           
           decoration: BoxDecoration(
             border: Border.all(
@@ -26,6 +26,13 @@ class ScheduleForm extends StatelessWidget {
             children: const [
               Text(
                 'SEG',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
+              Text(
+                'T1',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,

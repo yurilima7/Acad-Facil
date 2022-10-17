@@ -1,6 +1,6 @@
 import 'package:acad_facil/App/Core/Widgets/floating_button.dart';
-import 'package:acad_facil/App/Screens/Disciplines%20Screen/Widgets/grid_disciplines.dart';
-import 'package:acad_facil/App/Screens/Disciplines%20Screen/Widgets/search.dart';
+import 'package:acad_facil/App/Screens/Disciplines_Screen/Widgets/grid_disciplines.dart';
+import 'package:acad_facil/App/Screens/Disciplines_Screen/Widgets/search.dart';
 import 'package:flutter/material.dart';
 
 class DisciplinesScreen extends StatelessWidget {

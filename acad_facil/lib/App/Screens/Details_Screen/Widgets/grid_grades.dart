@@ -1,6 +1,6 @@
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
-import 'package:acad_facil/App/Screens/Details%20Screen/Widgets/grades_form.dart';
+import 'package:acad_facil/App/Screens/Details_Screen/Widgets/grades_form.dart';
 import 'package:flutter/material.dart';
 
 class GridGrades extends StatelessWidget {
@@ -16,7 +16,7 @@ class GridGrades extends StatelessWidget {
     final disciplinesCount = disciplines.grades.length;
 
     return SizedBox(
-      height: 380,
+      height: 180,
       child: disciplinesCount > 0 ? GridView.builder(
       
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

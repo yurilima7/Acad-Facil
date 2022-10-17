@@ -57,6 +57,11 @@ class TextStyles {
     fontSize: 12,
   );
 
+  TextStyle get chartTitle => primaryRegular.copyWith(
+    color: ColorsStyles.terciary,
+    fontSize: 20,
+  );
+
   TextStyle get secundaryTitle => secondaryRegular.copyWith(
     color: ColorsStyles.white,
     fontSize: 16,

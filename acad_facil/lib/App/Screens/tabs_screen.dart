@@ -1,8 +1,8 @@
 import 'package:acad_facil/App/Controllers/user_controller.dart';
-import 'package:acad_facil/App/Screens/Settings%20Screen/settings_screen.dart';
-import 'package:acad_facil/App/Screens/Home%20Screen/home_screen.dart';
-import 'package:acad_facil/App/Screens/Schedules%20Screen/schedules_screen.dart';
-import 'package:acad_facil/App/Screens/Grades%20Screen/grades_screen.dart';
+import 'package:acad_facil/App/Screens/Settings_Screen/settings_screen.dart';
+import 'package:acad_facil/App/Screens/Home_Screen/home_screen.dart';
+import 'package:acad_facil/App/Screens/Schedules_Screen/schedules_screen.dart';
+import 'package:acad_facil/App/Screens/Grades_Screen/grades_screen.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
