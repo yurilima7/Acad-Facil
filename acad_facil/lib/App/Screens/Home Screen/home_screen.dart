@@ -3,7 +3,7 @@ import 'package:acad_facil/App/Controllers/user_controller.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/information_card.dart';
-import 'package:acad_facil/App/Core/Widgets/grid_disciplines.dart';
+import 'package:acad_facil/App/Screens/Home%20Screen/Widgets/grid_disciplines.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
           runSpacing: MediaQuery.of(context).size.height * 0.06,
           
           children: [
-            InformationCard(title: providerUser.course),             
+            InformationCard(title: 'Curso' ,subTitle: providerUser.course),             
             
             Column(
               

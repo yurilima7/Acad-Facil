@@ -1,10 +1,11 @@
-import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
-import 'package:acad_facil/App/Core/Widgets/grid_disciplines.dart';
+import 'package:acad_facil/App/Core/Widgets/floating_button.dart';
+import 'package:acad_facil/App/Screens/Disciplines%20Screen/Widgets/grid_disciplines.dart';
 import 'package:acad_facil/App/Screens/Disciplines%20Screen/Widgets/search.dart';
 import 'package:flutter/material.dart';
 
 class DisciplinesScreen extends StatelessWidget {
   const DisciplinesScreen({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,23 +28,15 @@ class DisciplinesScreen extends StatelessWidget {
                   Search(),      
                 ],
               ),
-    
+          
               SizedBox(height: MediaQuery.of(context).size.height * 0.06,),
-    
-              const Expanded(
-                child: SingleChildScrollView(
-                  child: GridDisciplines(presentsAll: true),
-                ),
-              ),
+          
+              const GridDisciplines()
             ],
           ),
         ),
 
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: ColorsStyles.secundary,
-          child: const Icon(Icons.add),
-        ),
+        floatingActionButton: const FloatingButton(),
       ),
     );
   }

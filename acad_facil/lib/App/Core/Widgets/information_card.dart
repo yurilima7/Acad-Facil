@@ -4,10 +4,21 @@ import 'package:flutter/material.dart';
 
 class InformationCard extends StatelessWidget {
   final String title;
-  const InformationCard({super.key, required this.title});
+  final String subTitle;
+  final bool isCourse;
+
+  const InformationCard({
+    super.key,
+    required this.title,
+    required this.subTitle,
+    this.isCourse = true,
+  });
 
   @override
   Widget build(BuildContext context) {
+
+    Image image = Image.asset('assets/icons/book.png');
+
     return SizedBox(
       height: 150,
       child: Card(
@@ -25,24 +36,26 @@ class InformationCard extends StatelessWidget {
               title: Row(
                 children: [
                   Text(
-                    'Curso:',
+                    title,
                     style: context.textStyles.bigTitle,
                   ),
                 ],
               ),
               
-              trailing: Icon(
-                Icons.school,
-                color: ColorsStyles.white,
-                size: 90,
-              ),
+              trailing: isCourse 
+                ? Icon(
+                    Icons.school,
+                    color: ColorsStyles.white,
+                    size: 90,
+                )
+                : image,
             ),
     
             Padding(
               padding: const EdgeInsets.all(16.0),
     
               child: Text(
-                title,
+                subTitle,
                 style: context.textStyles.secundaryTitle,
               ),
             ),
