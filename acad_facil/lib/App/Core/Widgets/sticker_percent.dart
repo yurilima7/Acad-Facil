@@ -36,7 +36,8 @@ class StickerPercent extends StatelessWidget {
           child: CircularProgressIndicator(
             value: avarage / 10.0,
             color: ColorsStyles.terciary,
-            strokeWidth: 8,  
+            strokeWidth: 8,
+            backgroundColor: ColorsStyles.white,
           ),
         ),
       ],
