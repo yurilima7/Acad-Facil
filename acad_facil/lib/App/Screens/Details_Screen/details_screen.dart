@@ -1,3 +1,4 @@
+import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Widgets/floating_button.dart';
 import 'package:acad_facil/App/Core/Widgets/information_card.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
@@ -39,8 +40,25 @@ class DetailsScreen extends StatelessWidget {
                 isCourse: false,
               ),
 
-              GridGrades(disciplines: disciplines),
-              GridSchedule(schedules: disciplines.schedule),
+              Wrap(
+                alignment: WrapAlignment.start,
+                runSpacing: 9,
+
+                children: [
+                  Text('Notas', style: context.textStyles.mainTitle,),
+                  GridGrades(disciplines: disciplines),
+                ],
+              ),
+              
+              Wrap(
+                alignment: WrapAlignment.start,
+                runSpacing: 9,
+
+                children: [
+                  Text('Aulas', style: context.textStyles.mainTitle,),
+                  GridSchedule(schedules: disciplines.schedule),
+                ],
+              ),
 
               LocalAvarage(avarage: disciplines.avarage,),
             ],

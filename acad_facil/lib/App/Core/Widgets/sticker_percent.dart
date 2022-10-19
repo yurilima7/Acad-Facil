@@ -14,8 +14,8 @@ class StickerPercent extends StatelessWidget {
 
       children: [
         Container(
-          width: 60,
-          height: 60,
+          width: 50,
+          height: 50,
 
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
@@ -30,8 +30,8 @@ class StickerPercent extends StatelessWidget {
         ),
 
         SizedBox(
-          width: 60,
-          height: 60,
+          width: 50,
+          height: 50,
 
           child: CircularProgressIndicator(
             value: avarage / 10.0,

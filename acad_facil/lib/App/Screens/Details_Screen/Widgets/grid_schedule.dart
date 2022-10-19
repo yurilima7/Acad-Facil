@@ -13,30 +13,35 @@ class GridSchedule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180,
-      child: schedules.isNotEmpty ? GridView.builder(
+      
+      child: schedules.isNotEmpty 
+      ? GridView.builder(
 
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 5,
+          crossAxisCount: 3,
+          childAspectRatio: 1.2,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 10,
         ),
 
         physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
 
         itemCount: schedules.length,
-          itemBuilder: (context, i) => Row(
-            children: [
-              ScheduleForm(
-                day: schedules.keys.elementAt(i),
-                hour: schedules.values.elementAt(i),
-              ),
-            ],
+          itemBuilder: (context, i) => ScheduleForm(
+            day: schedules.keys.elementAt(i),
+            hour: schedules.values.elementAt(i),
           ),
       )
       :
-      Center(
-        child: Text(
-          'Sem aulas no momento!',
-          style: context.textStyles.secundaryTitle,
+      SizedBox(
+        height: 200,
+        
+        child: Center(
+          child: Text(
+            'Sem aulas no momento!',
+            style: context.textStyles.secundaryTitle,
+          ),
         ),
       ),
     );

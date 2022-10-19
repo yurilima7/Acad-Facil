@@ -9,23 +9,25 @@ class LocalAvarage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    return Container(
-      height: 100,
-      padding: const EdgeInsets.all(20.0),
+    return Card(
+      color: ColorsStyles.secundary,
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
 
-      decoration: BoxDecoration(
-        color: ColorsStyles.secundary,
-        borderRadius: BorderRadius.circular(20),
-      ),
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: 5.0,
+          right: 5.0,
+          bottom: 20.0,
+          top: 20.0,
+        ),
 
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        
-        children: [
-          Text('Média', style: context.textStyles.bigTitle),
-          StickerPercent(avarage: avarage,),
-        ],
+        child: Center(
+          child: ListTile(
+            title: Text('Média', style: context.textStyles.bigTitle),
+            trailing: StickerPercent(avarage: avarage,),
+          ),
+        ),
       ),
     );
   }

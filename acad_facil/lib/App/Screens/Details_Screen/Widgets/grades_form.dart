@@ -1,4 +1,3 @@
-import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -14,26 +13,20 @@ class GradesForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text('Nota $i', style: TextStyles.i.mainTitle,),
+    return Card(
+      color: Theme.of(context).colorScheme.secondary,
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
 
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              color: ColorsStyles.secundary,
-              borderRadius: BorderRadius.circular(20),
-            ),
-        
-            child: Center(
-              child: Text(
-                '$grade',
-                style: context.textStyles.grade,
-              ),
-            ),
+      child: Center(
+        child: ListTile(
+          title: Text(
+            '$grade',
+            style: TextStyles.i.grade,
+            textAlign: TextAlign.center,
           ),
         ),
-      ],
+      ),
     );
   }
 }

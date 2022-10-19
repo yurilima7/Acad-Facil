@@ -1,3 +1,4 @@
+import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -13,31 +14,19 @@ class ScheduleForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 40,
+    return Card(
+      color: ColorsStyles.secundary,
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
 
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 2,
-          color: Colors.white,
-        ),
-
-        borderRadius: BorderRadius.circular(20.0)
-      ),
-
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-
-        children: [
-          Text(
+      child: Center(
+        child: ListTile(
+          title: Text(
             day,
-            style: context.textStyles.mainTitle,
+            style: TextStyles.i.grade,
+            textAlign: TextAlign.center,
           ),
-          // Text(
-          //   hour,
-          //   style: context.textStyles.mainTitle,
-          // ),
-        ],
+        ),
       ),
     );
   }

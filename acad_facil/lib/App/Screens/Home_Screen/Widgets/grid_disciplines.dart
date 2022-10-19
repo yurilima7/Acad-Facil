@@ -19,7 +19,7 @@ class GridDisciplines extends StatelessWidget {
     final List<Disciplines> disciplines = providerDisciplines.disciplines;
 
     return disciplines.isNotEmpty ? SizedBox(
-      height: 380,
+      
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -29,6 +29,8 @@ class GridDisciplines extends StatelessWidget {
         ),
       
         physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        
         itemCount: presentsAll ? providerDisciplines.disciplinesCount : 6,
               itemBuilder: (context, i) => ChangeNotifierProvider.value(
                 value: disciplines[i],
@@ -37,10 +39,14 @@ class GridDisciplines extends StatelessWidget {
       ),
     )
     : 
-    Center(
-      child: Text(
-        'Sem disciplinas no momento!',
-        style: context.textStyles.secundaryTitle,
+    SizedBox(
+      height: 200,
+      
+      child: Center(
+        child: Text(
+          'Sem disciplinas no momento!',
+          style: context.textStyles.secundaryTitle,
+        ),
       ),
     );
   }

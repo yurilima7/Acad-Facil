@@ -16,17 +16,18 @@ class GridGrades extends StatelessWidget {
     final disciplinesCount = disciplines.grades.length;
 
     return SizedBox(
-      height: 180,
+      
       child: disciplinesCount > 0 ? GridView.builder(
       
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
-          childAspectRatio: 3 / 2,
+          childAspectRatio: 1.2,
           crossAxisSpacing: 20,
           mainAxisSpacing: 10,
         ),
       
         physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
 
         itemCount: disciplinesCount <= 5? disciplinesCount : 5,
           itemBuilder: (context, i) => GradesForm(
@@ -35,10 +36,13 @@ class GridGrades extends StatelessWidget {
           ),
       )
       :
-      Center(
-        child: Text(
-          'Sem notas no momento!',
-          style: context.textStyles.secundaryTitle,
+      SizedBox(
+        height: 200,
+        child: Center(
+          child: Text(
+            'Sem notas no momento!',
+            style: context.textStyles.secundaryTitle,
+          ),
         ),
       ),
     );
