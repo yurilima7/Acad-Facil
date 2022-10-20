@@ -1,5 +1,4 @@
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
-import 'package:acad_facil/App/Core/Widgets/floating_button.dart';
 import 'package:acad_facil/App/Core/Widgets/information_card.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/grid_grades.dart';
@@ -22,6 +21,10 @@ class DetailsScreen extends StatelessWidget {
         title: Text(disciplines.name),
         elevation: 0,
         automaticallyImplyLeading: false,
+
+        actions: [
+          IconButton(onPressed: (){}, icon: const Icon(Icons.add),),
+        ],
       ),
 
       body: Padding(
@@ -77,8 +80,6 @@ class DetailsScreen extends StatelessWidget {
           ],
         ),
       ),
-
-      floatingActionButton: const FloatingButton(),
     );
   }
 }
