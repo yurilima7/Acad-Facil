@@ -3,12 +3,19 @@ import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Widgets/sticker_percent.dart';
 import 'package:flutter/material.dart';
 
-class LocalAvarage extends StatelessWidget {
+class CardAvarage extends StatelessWidget {
   final double avarage;
-  const LocalAvarage({Key? key, required this.avarage}) : super(key: key);
+  final String disciplina;
+    
+  const CardAvarage({
+    Key? key, 
+    required this.avarage, 
+    required this.disciplina,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    
     return Card(
       color: ColorsStyles.secundary,
       elevation: 5,
@@ -24,7 +31,7 @@ class LocalAvarage extends StatelessWidget {
 
         child: Center(
           child: ListTile(
-            title: Text('Média', style: context.textStyles.bigTitle),
+            title: Text(disciplina, style: context.textStyles.mainTitle),
             trailing: StickerPercent(avarage: avarage,),
           ),
         ),

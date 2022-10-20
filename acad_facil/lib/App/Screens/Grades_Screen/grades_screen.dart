@@ -1,27 +1,33 @@
+import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
+import 'package:acad_facil/App/Screens/Grades_Screen/Widgets/card_avarage.dart';
+import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class GradesScreen extends StatelessWidget {
   const GradesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final providerDisciplines = Provider.of<DisciplinesControler>(context);
+    final List<Disciplines> disciplines = providerDisciplines.disciplines;
+    
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
 
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Médias'),
-          elevation: 0,
-          automaticallyImplyLeading: false,
-        ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20,),
 
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-
+        child: SingleChildScrollView(
           child: Column(
-            children: [
-              Expanded(),
-            ],
+            children: List.generate(
+              disciplines.length,
+              
+              (i) => CardAvarage(
+                avarage: disciplines.elementAt(i).avarage,
+                disciplina: disciplines.elementAt(i).name,
+              ),
+            ),
           ),
         ),
       ),
