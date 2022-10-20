@@ -24,45 +24,57 @@ class DetailsScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
 
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
+      body: Padding(
+        padding: const EdgeInsets.only(
+          left: 20.0,
+          right: 20.0,
+          top: 20.0,
+          bottom: 10,
+        ),
 
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-
-          child: Wrap(
-            runSpacing: MediaQuery.of(context).size.height * 0.06,
-
-            children: [
-              InformationCard(
-                title: "Sala ${disciplines.classroom}",
-                subTitle: "Periodo: ${disciplines.period}°",
-                isCourse: false,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+            
+                child: Wrap(
+                  runSpacing: MediaQuery.of(context).size.height * 0.06,
+            
+                  children: [
+                    InformationCard(
+                      title: "Sala ${disciplines.classroom}",
+                      subTitle: "Periodo: ${disciplines.period}°",
+                      isCourse: false,
+                    ),
+            
+                    Wrap(
+                      alignment: WrapAlignment.start,
+                      runSpacing: 9,
+            
+                      children: [
+                        Text('Notas', style: context.textStyles.mainTitle,),
+                        GridGrades(disciplines: disciplines),
+                      ],
+                    ),
+                    
+                    Wrap(
+                      alignment: WrapAlignment.start,
+                      runSpacing: 9,
+            
+                      children: [
+                        Text('Aulas', style: context.textStyles.mainTitle,),
+                        GridSchedule(schedules: disciplines.schedule),
+                      ],
+                    ),
+                               
+                  ],
+                ),
               ),
-
-              Wrap(
-                alignment: WrapAlignment.start,
-                runSpacing: 9,
-
-                children: [
-                  Text('Notas', style: context.textStyles.mainTitle,),
-                  GridGrades(disciplines: disciplines),
-                ],
-              ),
-              
-              Wrap(
-                alignment: WrapAlignment.start,
-                runSpacing: 9,
-
-                children: [
-                  Text('Aulas', style: context.textStyles.mainTitle,),
-                  GridSchedule(schedules: disciplines.schedule),
-                ],
-              ),
-
-              LocalAvarage(avarage: disciplines.avarage,),
-            ],
-          ),
+            ),
+            
+            LocalAvarage(avarage: disciplines.avarage,),
+          ],
         ),
       ),
 
