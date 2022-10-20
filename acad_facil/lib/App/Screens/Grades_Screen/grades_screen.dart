@@ -5,6 +5,26 @@ class GradesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column();
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Médias'),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+        ),
+
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+
+          child: Column(
+            children: [
+              Expanded(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
