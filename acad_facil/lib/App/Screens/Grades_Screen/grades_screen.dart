@@ -23,9 +23,12 @@ class GradesScreen extends StatelessWidget {
             children: List.generate(
               disciplines.length,
               
-              (i) => CardAvarage(
-                avarage: disciplines.elementAt(i).avarage,
-                disciplina: disciplines.elementAt(i).name,
+              (i) => ChangeNotifierProvider.value(
+                value: disciplines[i],
+                child: CardAvarage(
+                  avarage: disciplines.elementAt(i).avarage,
+                  disciplina: disciplines.elementAt(i).name,
+                ),
               ),
             ),
           ),

@@ -19,14 +19,15 @@ class InformationCard extends StatelessWidget {
 
     Image image = Image.asset('assets/icons/book.png');
 
-    return SizedBox(
-      height: 150,
-      child: Card(
+    return Card(
     
-        color: Theme.of(context).colorScheme.secondary,
-        elevation: 5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      color: Theme.of(context).colorScheme.secondary,
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
     
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -6,4 +6,5 @@ class AppRoutes {
   static const tabs = '/';
   static const disciplines = '/disciplines';
   static const details = '/details';
+  static const scheduleDetails = '/scheduleDetails';
 }
