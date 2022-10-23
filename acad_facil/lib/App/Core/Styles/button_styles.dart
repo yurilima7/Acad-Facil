@@ -13,6 +13,7 @@ class ButtonStyles {
   ButtonStyle get circleButton => ElevatedButton.styleFrom(
     backgroundColor: const Color(0xFF024873),
     shape: const CircleBorder(),
+    padding: const EdgeInsets.all(10),
   );
 }
 

@@ -5,6 +5,7 @@ import 'package:acad_facil/App/Screens/Details_Screen/details_screen.dart';
 import 'package:acad_facil/App/Screens/Disciplines_Screen/disciplines_screen.dart';
 import 'package:acad_facil/App/Screens/Grades_Screen/grades_screen.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/home_screen.dart';
+import 'package:acad_facil/App/Screens/Login_Screen/login.dart';
 import 'package:acad_facil/App/Screens/Schedule_Details/schedule_details_screen.dart';
 import 'package:acad_facil/App/Screens/Schedules_Screen/schedules_screen.dart';
 import 'package:acad_facil/App/Screens/Settings_Screen/settings_screen.dart';
@@ -34,6 +35,7 @@ class AcadFacil extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         
         routes: { 
+          AppRoutes.loginScreen:(context) => const Login(),
           AppRoutes.tabs:(context) => const TabsScreen(),
           AppRoutes.home:(context) => const HomeScreen(),
           AppRoutes.settings:(context) => const SettingsScreen(),

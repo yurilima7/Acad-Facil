@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "120480731808",
+    "project_id": "acad-simples",
+    "storage_bucket": "acad-simples.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120480731808:android:c3c8da267929eda3fdafc5",
+        "android_client_info": {
+          "package_name": "com.example.acad_facil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120480731808-e1sn67o8mrm2ij5b7iu0ru11v8gq75ri.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm0yDBcpzSw294Ql54eeui-bKoK5hWk5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120480731808-e1sn67o8mrm2ij5b7iu0ru11v8gq75ri.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
