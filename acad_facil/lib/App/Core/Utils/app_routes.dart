@@ -8,4 +8,5 @@ class AppRoutes {
   static const details = '/details';
   static const scheduleDetails = '/scheduleDetails';
   static const loginScreen = '/';
+  static const registerScreen = '/register';
 }

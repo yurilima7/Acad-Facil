@@ -16,4 +16,17 @@ class Messages {
       ),
     );
   }
+
+  static void showSuccess(BuildContext context, String text){
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: ColorsStyles.sucess,
+        content: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: context.textStyles.mainTitle,
+        ),
+      ),
+    );
+  }
 }

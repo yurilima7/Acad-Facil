@@ -6,64 +6,66 @@ import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:validatorless/validatorless.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class Register extends StatefulWidget {
+  const Register({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   final formKey = GlobalKey<FormState>();
   final emailEC = TextEditingController();
   final passwordEC = TextEditingController();
+  final userNameEC = TextEditingController();
   bool lookPassword = false;
 
   @override
   void dispose() {
     emailEC.dispose();
     passwordEC.dispose();
+    userNameEC.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height; 
 
     void nextScreen(){
-      Navigator.of(context).pushNamed(
-        AppRoutes.registerScreen,
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        AppRoutes.loginScreen,
+        (Route<dynamic> route) => false,
       );
     }
-
+    
     void verifySuccess() async {
-      var success = await Auth.signInEmail(
+      var success = await Auth.registerUser(
         AuthModel(
           context: context,
+          userName: userNameEC.text.trim(),
           email: emailEC.text.trim(),
           password: passwordEC.text.trim(),
         ),
       );
 
-      if(success) {
-        
-      }
+      if (success) nextScreen();
     }
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-
+      
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Entre com',
+            'Crie sua conta',
             style: context.textStyles.authTitle,
           ),
     
           elevation: 0,
+          automaticallyImplyLeading: false,
         ),
     
         body: Align(
@@ -77,7 +79,37 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.only(left: 45.0, right: 45.0,),
               
                 child: Column(
-                  children: [                
+                  
+                  children: [                 
+                    TextFormField(    
+                      controller: userNameEC,
+                      cursorColor: ColorsStyles.white,
+                      style: context.textStyles.mainTitle,
+          
+                      decoration: InputDecoration(
+                        label: Text(
+                          'Nome de usuário',
+                          style: context.textStyles.mainTitle,
+                        ),
+          
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorsStyles.white,
+                          ),
+                        ),
+                        
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorsStyles.white,
+                          ),
+                        ),
+                      ),
+          
+                      validator: Validatorless.multiple([
+                        Validatorless.required('Obrigatório!'),
+                      ]),
+                    ),
+              
                     TextFormField(    
                       controller: emailEC,
                       cursorColor: ColorsStyles.white,
@@ -107,7 +139,7 @@ class _LoginState extends State<Login> {
                         Validatorless.email('E-Mail inválido!'),
                       ]),
                     ),
-                  
+                    
                     TextFormField(    
                       controller: passwordEC,
                       cursorColor: ColorsStyles.white,
@@ -157,39 +189,31 @@ class _LoginState extends State<Login> {
                         ),
                       ]),
                     ),
-                  
+                    
                     SizedBox(height: height * .05,),
-                  
+                    
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: SvgPicture.asset(
-                            'assets/images/google.svg',
-                            height: 35,
-                          ),
-                        ),
-                    
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      
+                      children: [ 
                         TextButtonApp(
-                          title: 'Cadastre-se',
+                          title: 'Faça login',
                           action: () => nextScreen(),
                         ),
                       ],
                     ),
           
                     SizedBox(height: height * .02,),
-                    
+                      
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    
+                      
                       children: [
                         Text(
-                          'Login',
+                          'Cadastrar',
                           style: context.textStyles.authTitle,
                         ),
-                    
+                      
                         ElevatedButton(
                           onPressed: () {
                             final valid =
@@ -205,7 +229,7 @@ class _LoginState extends State<Login> {
                         ),
                       ],
                     ),
-                  ],
+                  ]
                 ),
               ),
             ),

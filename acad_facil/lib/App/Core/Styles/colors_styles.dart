@@ -6,4 +6,5 @@ class ColorsStyles {
   static Color terciary = const Color(0xFF04B2D9);
   static Color white = Colors.white;
   static Color errors = Colors.redAccent;
+  static Color sucess = Colors.greenAccent;
 }

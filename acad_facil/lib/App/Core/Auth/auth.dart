@@ -4,14 +4,18 @@ import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Auth {
-  static Future<void> signInEmail(AuthModel model) async {
+  
+  static Future<bool> signInEmail(AuthModel model) async {
     String returnMessenger = "Falha na autenticação!";
+    bool result = false;
 
     try {
       await Constants.auth.signInWithEmailAndPassword(
         email: model.email,
         password: model.password,
       );
+
+      result = true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         returnMessenger = "Este e-mail não está cadastrado!";
@@ -22,10 +26,13 @@ class Auth {
     } catch (e) {
       Messages.showError(model.context, returnMessenger);
     }
+
+    return result;
   }
 
-  static Future<void> registerUser(AuthModel model) async {
+  static Future<bool> registerUser(AuthModel model) async {
     String returnMessenger = "Falha na autenticação!";
+    bool result = false;
 
     try {
       UserCredential userCredential =
@@ -39,6 +46,8 @@ class Auth {
       await Constants.userRefence.add({
         'Name': model.userName,
       });
+
+      result = true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         returnMessenger = "Senha não aceita, crie uma mais forte!";
@@ -50,6 +59,8 @@ class Auth {
     } catch (e) {
       Messages.showError(model.context, returnMessenger);
     }
+
+    return result;
   }
 
   static Future<void> signInGoogle(AuthModel model) async {}
