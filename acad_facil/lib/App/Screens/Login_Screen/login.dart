@@ -3,6 +3,7 @@ import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,9 @@ class _LoginState extends State<Login> {
       );
 
       if(success) {
-        homeScreen();
+        if (!mounted) return;
+        Messages.showSuccess(context, 'Login realizado com sucesso!');
+        Future.delayed(const Duration(seconds: 3), homeScreen);
       }
     }
 
@@ -88,7 +91,7 @@ class _LoginState extends State<Login> {
                     TextFormField(    
                       controller: emailEC,
                       cursorColor: ColorsStyles.white,
-                      style: context.textStyles.mainTitle,
+                      style: context.textStyles.secundaryTitle,
           
                       decoration: InputDecoration(
                         label: Text(
@@ -118,7 +121,7 @@ class _LoginState extends State<Login> {
                     TextFormField(    
                       controller: passwordEC,
                       cursorColor: ColorsStyles.white,
-                      style: context.textStyles.mainTitle,
+                      style: context.textStyles.secundaryTitle,
                       obscureText: !lookPassword ? true : false,
                     
                       decoration: InputDecoration(

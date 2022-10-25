@@ -5,6 +5,7 @@ import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,11 @@ class _RegisterState extends State<Register> {
         ),
       );
 
-      if (success) nextScreen();
+      if (success) {
+        if (!mounted) return;
+        Messages.showSuccess(context, 'Registro realizado com sucesso!');
+        Future.delayed(const Duration(seconds: 3), nextScreen);    
+      }
     }
 
     return GestureDetector(
@@ -106,7 +111,7 @@ class _RegisterState extends State<Register> {
                     TextFormField(
                       controller: userNameEC,
                       cursorColor: ColorsStyles.white,
-                      style: context.textStyles.mainTitle,
+                      style: context.textStyles.secundaryTitle,
                       
                       decoration: InputDecoration(
 
@@ -136,7 +141,7 @@ class _RegisterState extends State<Register> {
                     TextFormField(
                       controller: emailEC,
                       cursorColor: ColorsStyles.white,
-                      style: context.textStyles.mainTitle,
+                      style: context.textStyles.secundaryTitle,
 
                       decoration: InputDecoration(
                         label: Text(
@@ -166,7 +171,7 @@ class _RegisterState extends State<Register> {
                     TextFormField(
                       controller: passwordEC,
                       cursorColor: ColorsStyles.white,
-                      style: context.textStyles.mainTitle,
+                      style: context.textStyles.secundaryTitle,
                       obscureText: !lookPassword ? true : false,
 
                       decoration: InputDecoration(

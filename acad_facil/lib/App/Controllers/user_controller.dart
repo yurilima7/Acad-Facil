@@ -21,7 +21,7 @@ class UserController with ChangeNotifier implements UserProvider {
       await Constants.idUserCollection.get().then((doc) {
         _user = User(
           id: doc.id,
-          name: doc.data()!['Name'],
+          name: doc.data()!['name'],
           course: doc.data()!['course'],
           period: doc.data()!['period'],
         );

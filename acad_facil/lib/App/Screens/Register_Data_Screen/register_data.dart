@@ -3,6 +3,7 @@ import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,9 +33,11 @@ class _RegisterDataState extends State<RegisterData> {
     double height = MediaQuery.of(context).size.height;
     var providerUser = Provider.of<UserController>(context, listen: false);
 
-    void nextScreen() {
+    void nextScreen() {  
+      
+
       Navigator.of(context).pushNamedAndRemoveUntil(
-        AppRoutes.home,
+        AppRoutes.tabs,
         (Route<dynamic> route) => false,
       );
     }
@@ -49,7 +52,9 @@ class _RegisterDataState extends State<RegisterData> {
         ),
       );
 
-      nextScreen();
+      if (!mounted) return;
+      Messages.showSuccess(context, 'Dados inseridos com sucesso!');
+      Future.delayed(const Duration(seconds: 3), nextScreen);     
     }
 
     return GestureDetector(
@@ -81,7 +86,7 @@ class _RegisterDataState extends State<RegisterData> {
                     TextFormField(    
                       controller: courseEC,
                       cursorColor: ColorsStyles.white,
-                      style: context.textStyles.mainTitle,
+                      style: context.textStyles.secundaryTitle,
           
                       decoration: InputDecoration(
                         label: Text(
@@ -108,7 +113,7 @@ class _RegisterDataState extends State<RegisterData> {
                     TextFormField(    
                       controller: periodEC,
                       cursorColor: ColorsStyles.white,
-                      style: context.textStyles.mainTitle,
+                      style: context.textStyles.secundaryTitle,
                       keyboardType: TextInputType.number,
                     
                       decoration: InputDecoration(

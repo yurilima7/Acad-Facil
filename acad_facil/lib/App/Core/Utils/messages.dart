@@ -8,6 +8,7 @@ class Messages {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: ColorsStyles.errors,
+        duration: const Duration(seconds: 2),
         content: Text(
           text,
           textAlign: TextAlign.center,
@@ -21,6 +22,7 @@ class Messages {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: ColorsStyles.sucess,
+        duration: const Duration(seconds: 2),
         content: Text(
           text,
           textAlign: TextAlign.center,
