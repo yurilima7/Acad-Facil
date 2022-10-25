@@ -1,78 +1,71 @@
-import 'package:acad_facil/App/Core/Auth/auth.dart';
+import 'package:acad_facil/App/Controllers/user_controller.dart';
 import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
-import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
-import 'package:acad_facil/App/Models/auth_model.dart';
+import 'package:acad_facil/App/Models/user.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class RegisterData extends StatefulWidget {
+  const RegisterData({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<RegisterData> createState() => _RegisterDataState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterDataState extends State<RegisterData> {
+  final courseEC = TextEditingController();
+  final periodEC = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  final emailEC = TextEditingController();
-  final passwordEC = TextEditingController();
-  bool lookPassword = false;
 
   @override
   void dispose() {
-    emailEC.dispose();
-    passwordEC.dispose();
+    courseEC.dispose();
+    periodEC.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    var providerUser = Provider.of<UserController>(context, listen: false);
 
-    void registerScreen(){
-      Navigator.of(context).pushNamed(
-        AppRoutes.registerScreen,
-      );
-    }
-
-    void homeScreen(){
+    void nextScreen() {
       Navigator.of(context).pushNamedAndRemoveUntil(
-        AppRoutes.tabs,
+        AppRoutes.home,
         (Route<dynamic> route) => false,
       );
     }
 
     void verifySuccess() async {
-      var success = await Auth.signInEmail(
-        AuthModel(
-          context: context,
-          email: emailEC.text.trim(),
-          password: passwordEC.text.trim(),
+      await providerUser.addData(
+        User(
+          id: '',
+          name: '',
+          course: courseEC.text.trim(),
+          period: int.tryParse(periodEC.text)!,
         ),
       );
 
-      if(success) {
-        homeScreen();
-      }
+      nextScreen();
     }
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-
+      
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Entre com',
+            'Informe seus dados',
             style: context.textStyles.authTitle,
           ),
-    
+
           elevation: 0,
+          automaticallyImplyLeading: false,
         ),
-    
+
         body: Align(
           alignment: Alignment.bottomCenter,
         
@@ -86,13 +79,13 @@ class _LoginState extends State<Login> {
                 child: Column(
                   children: [                
                     TextFormField(    
-                      controller: emailEC,
+                      controller: courseEC,
                       cursorColor: ColorsStyles.white,
                       style: context.textStyles.mainTitle,
           
                       decoration: InputDecoration(
                         label: Text(
-                          'E-mail',
+                          'Seu curso',
                           style: context.textStyles.mainTitle,
                         ),
           
@@ -109,21 +102,18 @@ class _LoginState extends State<Login> {
                         ),
                       ),
           
-                      validator: Validatorless.multiple([
-                        Validatorless.required('Obrigatório!'),
-                        Validatorless.email('E-Mail inválido!'),
-                      ]),
+                      validator: Validatorless.required('Obrigatório!'),
                     ),
                   
                     TextFormField(    
-                      controller: passwordEC,
+                      controller: periodEC,
                       cursorColor: ColorsStyles.white,
                       style: context.textStyles.mainTitle,
-                      obscureText: !lookPassword ? true : false,
+                      keyboardType: TextInputType.number,
                     
                       decoration: InputDecoration(
                         label: Text(
-                          'Senha',
+                          'Período Atual',
                           style: context.textStyles.mainTitle,
                         ),
           
@@ -138,62 +128,19 @@ class _LoginState extends State<Login> {
                             color: ColorsStyles.white,
                           ),
                         ),
-          
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            !lookPassword 
-                              ? Icons.visibility 
-                              : Icons.visibility_off,
-                          ),
-          
-                          color: ColorsStyles.white,
-          
-                          onPressed: () {
-                            setState(() {
-                              lookPassword = !lookPassword;
-                            });
-                          },
-                        ), 
                       ),
           
-                      validator: Validatorless.multiple([
-                        Validatorless.required('Obrigatório!'),
-                        Validatorless.min(
-                          8,
-                          'Senha deve conter oito caracteres',
-                        ),
-                      ]),
+                      validator: Validatorless.required('Obrigatório!'),
                     ),
                   
                     SizedBox(height: height * .05,),
-                  
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: SvgPicture.asset(
-                            'assets/images/google.svg',
-                            height: 35,
-                          ),
-                        ),
-                    
-                        TextButtonApp(
-                          title: 'Cadastre-se',
-                          action: () => registerScreen(),
-                        ),
-                      ],
-                    ),
-          
-                    SizedBox(height: height * .02,),
                     
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     
                       children: [
                         Text(
-                          'Login',
+                          'Entrar',
                           style: context.textStyles.authTitle,
                         ),
                     

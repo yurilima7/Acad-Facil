@@ -7,9 +7,9 @@ class User with ChangeNotifier{
   int period;
 
   User({
-    required this.id,
-    required this.name,
-    required this.course,
-    required this.period,
+    this.id = '',
+    this.name = '',
+    this.course = '',
+    this.period = 1,
   });
 }

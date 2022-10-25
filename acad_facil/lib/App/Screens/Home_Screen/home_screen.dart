@@ -18,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = true;
+  bool _isLoading2 = true;
 
   @override
   void initState() {
@@ -29,6 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             _isLoading = false;
           });
+        });
+
+      Provider.of<UserController>(context, listen: false)
+        .loadUser().then((value) => {
+          setState(() {
+            _isLoading2 = false;
+          },)
         });
     });
   }
@@ -72,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
 
                       Visibility(
-                        visible: !_isLoading, 
+                        visible: !_isLoading && !_isLoading2, 
               
                         child: providerDiscipline.disciplinesCount != 0
                             ? TextButtonApp(
@@ -88,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
 
-                _isLoading 
+                _isLoading && _isLoading2
                   ? CircularProgressIndicator(color: ColorsStyles.white,)
                   : const GridDisciplines(presentsAll: false),
               ],

@@ -43,8 +43,8 @@ class Auth {
 
       userCredential.user!.updateDisplayName(model.userName);
 
-      await Constants.userRefence.add({
-        'Name': model.userName,
+      await Constants.userRefence.doc(userCredential.user!.uid).set({
+        'name': model.userName,
       });
 
       result = true;
@@ -64,5 +64,9 @@ class Auth {
   }
 
   static Future<void> signInGoogle(AuthModel model) async {}
-  static Future<void> logout(AuthModel model) async {}
+  
+  static Future<void> logout(AuthModel model) async {
+    Constants.auth.signOut();
+    Messages.showSuccess(model.context, 'Logout com sucesso!');
+  }
 }

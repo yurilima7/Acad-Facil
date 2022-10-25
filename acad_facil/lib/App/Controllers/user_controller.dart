@@ -1,21 +1,56 @@
+import 'dart:developer';
+
 import 'package:acad_facil/App/Controllers/user_provider.dart';
-import 'package:acad_facil/App/Core/Data/dummy_user.dart';
+import 'package:acad_facil/App/Core/Data/constants.dart';
 import 'package:acad_facil/App/Models/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class UserController with ChangeNotifier implements UserProvider {
-
-  final User _user = dummyUser;
+  User _user = User();
   User get user => _user;
-  
+
   @override
-  Future<void> editName() {
+  Future<void> editData(User user) {
     throw UnimplementedError();
   }
-  
+
   @override
-  Future<void> loadUser() {
+  Future<void> loadUser() async {
+    try {
+      await Constants.idUserCollection.get().then((doc) {
+        _user = User(
+          id: doc.id,
+          name: doc.data()!['Name'],
+          course: doc.data()!['course'],
+          period: doc.data()!['period'],
+        );
+      });
+    } on FirebaseException catch (e) {
+      log(e.toString());
+    } on Exception catch (e) {
+      log(e.toString());
+    }
+
+    notifyListeners();
+  }
+
+  @override
+  Future<void> addData(User user) async {
+    try {
+      await Constants.idUserCollection.update({
+        'course': user.course,
+        'period': user.period,
+      });
+    } on FirebaseException catch (e) {
+      log(e.toString());
+    } on Exception catch (e) {
+      log(e.toString());
+    }
+  }
+
+  @override
+  Future<void> deleteUser(User user) async {
     throw UnimplementedError();
   }
-  
 }

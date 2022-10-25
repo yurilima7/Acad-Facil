@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:acad_facil/App/Core/Auth/auth.dart';
 import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
@@ -32,15 +34,33 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height; 
+    double height = MediaQuery.of(context).size.height;
 
-    void nextScreen(){
+    void loginScreen() {
       Navigator.of(context).pushNamedAndRemoveUntil(
         AppRoutes.loginScreen,
         (Route<dynamic> route) => false,
       );
     }
-    
+
+    void nextScreen() async {
+      var result = await Auth.signInEmail(
+        AuthModel(
+          context: context,
+          email: emailEC.text.trim(),
+          password: passwordEC.text.trim(),
+        ),
+      );
+
+      if (!mounted) return;
+      
+      log(result.toString());
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        AppRoutes.registerDataScreen,
+        (Route<dynamic> route) => false,
+      );
+    }
+
     void verifySuccess() async {
       var success = await Auth.registerUser(
         AuthModel(
@@ -56,131 +76,133 @@ class _RegisterState extends State<Register> {
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      
+
       child: Scaffold(
         appBar: AppBar(
           title: Text(
             'Crie sua conta',
             style: context.textStyles.authTitle,
           ),
-    
+
           elevation: 0,
           automaticallyImplyLeading: false,
         ),
-    
+
         body: Align(
           alignment: Alignment.bottomCenter,
-        
+
           child: SingleChildScrollView(
             child: Form(
               key: formKey,
-                    
+
               child: Padding(
-                padding: const EdgeInsets.only(left: 45.0, right: 45.0,),
-              
+                padding: const EdgeInsets.only(
+                  left: 45.0,
+                  right: 45.0,
+                ),
+
                 child: Column(
-                  
-                  children: [                 
-                    TextFormField(    
+                  children: [
+                    TextFormField(
                       controller: userNameEC,
                       cursorColor: ColorsStyles.white,
                       style: context.textStyles.mainTitle,
-          
+                      
                       decoration: InputDecoration(
+
                         label: Text(
                           'Nome de usuário',
                           style: context.textStyles.mainTitle,
                         ),
-          
+
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: ColorsStyles.white,
                           ),
                         ),
-                        
+
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: ColorsStyles.white,
                           ),
                         ),
                       ),
-          
+
                       validator: Validatorless.multiple([
                         Validatorless.required('Obrigatório!'),
                       ]),
                     ),
-              
-                    TextFormField(    
+
+                    TextFormField(
                       controller: emailEC,
                       cursorColor: ColorsStyles.white,
                       style: context.textStyles.mainTitle,
-          
+
                       decoration: InputDecoration(
                         label: Text(
                           'E-mail',
                           style: context.textStyles.mainTitle,
                         ),
-          
+
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: ColorsStyles.white,
                           ),
                         ),
-                        
+
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: ColorsStyles.white,
                           ),
                         ),
                       ),
-          
+
                       validator: Validatorless.multiple([
                         Validatorless.required('Obrigatório!'),
                         Validatorless.email('E-Mail inválido!'),
                       ]),
                     ),
                     
-                    TextFormField(    
+                    TextFormField(
                       controller: passwordEC,
                       cursorColor: ColorsStyles.white,
                       style: context.textStyles.mainTitle,
                       obscureText: !lookPassword ? true : false,
-                    
+
                       decoration: InputDecoration(
+
                         label: Text(
                           'Senha',
                           style: context.textStyles.mainTitle,
                         ),
-          
+
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: ColorsStyles.white,
                           ),
                         ),
-          
+
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: ColorsStyles.white,
                           ),
                         ),
-          
+
                         suffixIcon: IconButton(
                           icon: Icon(
-                            !lookPassword 
-                              ? Icons.visibility 
-                              : Icons.visibility_off,
+                            !lookPassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
                           ),
-          
                           color: ColorsStyles.white,
-          
                           onPressed: () {
                             setState(() {
                               lookPassword = !lookPassword;
                             });
                           },
-                        ), 
+                        ),
                       ),
-          
+
                       validator: Validatorless.multiple([
                         Validatorless.required('Obrigatório!'),
                         Validatorless.min(
@@ -189,47 +211,50 @@ class _RegisterState extends State<Register> {
                         ),
                       ]),
                     ),
-                    
-                    SizedBox(height: height * .05,),
-                    
+
+                    SizedBox(
+                      height: height * .05,
+                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      
-                      children: [ 
+                      children: [
                         TextButtonApp(
                           title: 'Faça login',
-                          action: () => nextScreen(),
+                          action: () => loginScreen(),
                         ),
                       ],
                     ),
-          
-                    SizedBox(height: height * .02,),
-                      
+
+                    SizedBox(
+                      height: height * .02,
+                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      
+
                       children: [
                         Text(
                           'Cadastrar',
                           style: context.textStyles.authTitle,
                         ),
-                      
+
                         ElevatedButton(
                           onPressed: () {
                             final valid =
-                                formKey.currentState?.validate() ??
-                                    false;
-          
+                                formKey.currentState?.validate() ?? false;
+
                             if (valid) {
                               verifySuccess();
                             }
                           },
+
                           style: context.buttonStyles.circleButton,
                           child: const Icon(Icons.arrow_forward),
                         ),
                       ],
                     ),
-                  ]
+                  ],
                 ),
               ),
             ),
