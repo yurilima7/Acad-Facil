@@ -40,7 +40,7 @@ class GridDisciplines extends StatelessWidget {
     )
     : 
     SizedBox(
-      height: 200,
+      height: MediaQuery.of(context).size.height * 0.45,
       
       child: Center(
         child: Text(
