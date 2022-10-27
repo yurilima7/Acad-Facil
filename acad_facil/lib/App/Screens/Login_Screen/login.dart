@@ -3,7 +3,6 @@ import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
-import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:flutter/material.dart';
@@ -40,27 +39,14 @@ class _LoginState extends State<Login> {
       );
     }
 
-    void homeScreen(){
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        AppRoutes.tabs,
-        (Route<dynamic> route) => false,
-      );
-    }
-
-    void verifySuccess() async {
-      var success = await Auth.signInEmail(
+    void login() async {
+      await Auth().signInEmail(
         AuthModel(
           context: context,
           email: emailEC.text.trim(),
           password: passwordEC.text.trim(),
         ),
       );
-
-      if(success) {
-        if (!mounted) return;
-        Messages.showSuccess(context, 'Login realizado com sucesso!');
-        Future.delayed(const Duration(seconds: 3), homeScreen);
-      }
     }
 
     return GestureDetector(
@@ -207,7 +193,7 @@ class _LoginState extends State<Login> {
                                     false;
           
                             if (valid) {
-                              verifySuccess();
+                              login();
                             }
                           },
                           style: context.buttonStyles.circleButton,

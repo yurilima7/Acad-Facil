@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:acad_facil/App/Core/Auth/auth.dart';
 import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
-import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:flutter/material.dart';
@@ -44,26 +41,8 @@ class _RegisterState extends State<Register> {
       );
     }
 
-    void nextScreen() async {
-      var result = await Auth.signInEmail(
-        AuthModel(
-          context: context,
-          email: emailEC.text.trim(),
-          password: passwordEC.text.trim(),
-        ),
-      );
-
-      if (!mounted) return;
-      
-      log(result.toString());
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        AppRoutes.registerDataScreen,
-        (Route<dynamic> route) => false,
-      );
-    }
-
-    void verifySuccess() async {
-      var success = await Auth.registerUser(
+    void register() async {
+      await Auth().registerUser(
         AuthModel(
           context: context,
           userName: userNameEC.text.trim(),
@@ -71,12 +50,6 @@ class _RegisterState extends State<Register> {
           password: passwordEC.text.trim(),
         ),
       );
-
-      if (success) {
-        if (!mounted) return;
-        Messages.showSuccess(context, 'Registro realizado com sucesso!');
-        Future.delayed(const Duration(seconds: 3), nextScreen);    
-      }
     }
 
     return GestureDetector(
@@ -250,7 +223,7 @@ class _RegisterState extends State<Register> {
                                 formKey.currentState?.validate() ?? false;
 
                             if (valid) {
-                              verifySuccess();
+                              register();
                             }
                           },
 

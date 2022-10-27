@@ -34,8 +34,6 @@ class _RegisterDataState extends State<RegisterData> {
     var providerUser = Provider.of<UserController>(context, listen: false);
 
     void nextScreen() {  
-      
-
       Navigator.of(context).pushNamedAndRemoveUntil(
         AppRoutes.tabs,
         (Route<dynamic> route) => false,

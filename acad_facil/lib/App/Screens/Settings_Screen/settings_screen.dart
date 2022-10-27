@@ -1,5 +1,4 @@
 import 'package:acad_facil/App/Core/Auth/auth.dart';
-import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:flutter/material.dart';
 
@@ -10,12 +9,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     
     void logout() async {
-      await Auth.logout(AuthModel(context: context));
-
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        AppRoutes.loginScreen,
-        (Route<dynamic> route) => false,
-      );
+      await Auth().logout(AuthModel(context: context));
     }
 
     return Column(

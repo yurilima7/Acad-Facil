@@ -38,7 +38,8 @@ class UserController with ChangeNotifier implements UserProvider {
   @override
   Future<void> addData(User user) async {
     try {
-      await Constants.idUserCollection.update({
+      await Constants.idUserCollection.set({
+        'name': Constants.auth.currentUser!.displayName,
         'course': user.course,
         'period': user.period,
       });

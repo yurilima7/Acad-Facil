@@ -1,13 +1,13 @@
 import 'package:acad_facil/App/Core/Data/constants.dart';
+import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Auth {
-  
-  static Future<bool> signInEmail(AuthModel model) async {
+
+  Future<void> signInEmail(AuthModel model) async {
     String returnMessenger = "Falha na autenticação!";
-    bool result = false;
 
     try {
       await Constants.auth.signInWithEmailAndPassword(
@@ -15,7 +15,7 @@ class Auth {
         password: model.password,
       );
 
-      result = true;
+      Functions().verify(model);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         returnMessenger = "Este e-mail não está cadastrado!";
@@ -26,13 +26,10 @@ class Auth {
     } catch (e) {
       Messages.showError(model.context, returnMessenger);
     }
-
-    return result;
   }
 
-  static Future<bool> registerUser(AuthModel model) async {
+  Future<void> registerUser(AuthModel model) async {
     String returnMessenger = "Falha na autenticação!";
-    bool result = false;
 
     try {
       UserCredential userCredential =
@@ -43,11 +40,7 @@ class Auth {
 
       userCredential.user!.updateDisplayName(model.userName);
 
-      await Constants.userRefence.doc(userCredential.user!.uid).set({
-        'name': model.userName,
-      });
-
-      result = true;
+      Functions().loginScreen(model);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         returnMessenger = "Senha não aceita, crie uma mais forte!";
@@ -59,14 +52,16 @@ class Auth {
     } catch (e) {
       Messages.showError(model.context, returnMessenger);
     }
-
-    return result;
   }
 
-  static Future<void> signInGoogle(AuthModel model) async {}
-  
-  static Future<void> logout(AuthModel model) async {
-    Constants.auth.signOut();
-    Messages.showSuccess(model.context, 'Logout com sucesso!');
+  Future<void> signInGoogle(AuthModel model) async {}
+
+  Future<void> logout(AuthModel model) async {   
+    try {
+      Constants.auth.signOut();
+      Functions().logoutApp(model);
+    } catch (e) {
+      Messages.showError(model.context, 'Falha no logout!');
+    }
   }
 }
