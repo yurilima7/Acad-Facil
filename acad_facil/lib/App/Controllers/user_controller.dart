@@ -43,8 +43,7 @@ class UserController with ChangeNotifier implements UserProvider {
   }
 
   @override
-  Future<void> addData(User user, BuildContext context) async {
-    bool success = false;
+  Future<void> addData(User user, BuildContext context, bool mounted) async {
 
     try {
       await Constants.idUserCollection.set({
@@ -52,15 +51,13 @@ class UserController with ChangeNotifier implements UserProvider {
         'course': user.course,
         'period': user.period,
       });
-      success = true;
+      
+      if (!mounted) return;
+      successAction(context);
     } on FirebaseException catch (e) {
       log(e.toString());
     } on Exception catch (e) {
       log(e.toString());
-    }
-
-    if (success) {
-      successAction(context);
     }
   }
 

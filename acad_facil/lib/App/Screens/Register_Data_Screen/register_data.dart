@@ -32,15 +32,20 @@ class _RegisterDataState extends State<RegisterData> {
     var providerUser = Provider.of<UserController>(context, listen: false);
 
     void verifySuccess() async {
-      await providerUser.addData(
-        User(
-          id: '',
-          name: '',
-          course: courseEC.text.trim(),
-          period: int.tryParse(periodEC.text)!,
-        ),
-        context,
-      );    
+      final valid = formKey.currentState?.validate() ?? false;
+
+      if (valid) {
+        await providerUser.addData(
+          User(
+            id: '',
+            name: '',
+            course: courseEC.text.trim(),
+            period: int.tryParse(periodEC.text)!,
+          ),
+          context,
+          mounted,
+        );
+      }          
     }
 
     return GestureDetector(
@@ -136,15 +141,7 @@ class _RegisterDataState extends State<RegisterData> {
                         ),
                     
                         ElevatedButton(
-                          onPressed: () {
-                            final valid =
-                                formKey.currentState?.validate() ??
-                                    false;
-          
-                            if (valid) {
-                              verifySuccess();
-                            }
-                          },
+                          onPressed: verifySuccess,
                           style: context.buttonStyles.circleButton,
                           child: const Icon(Icons.arrow_forward),
                         ),
