@@ -27,10 +27,7 @@ class Functions {
   void homeScreen(AuthModel model) {
     Messages.showSuccess(model.context, 'Login realizado com sucesso!');
 
-    Navigator.of(model.context).pushNamedAndRemoveUntil(
-      AppRoutes.tabs,
-      (Route<dynamic> route) => false,
-    );
+    nextScreen(model.context);
   }
 
   void registerDataScreen(AuthModel model) {
@@ -45,6 +42,13 @@ class Functions {
 
     Navigator.of(model.context).pushNamedAndRemoveUntil(
       AppRoutes.loginScreen,
+      (Route<dynamic> route) => false,
+    );
+  }
+
+  void nextScreen(BuildContext context) {
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      AppRoutes.tabs,
       (Route<dynamic> route) => false,
     );
   }
