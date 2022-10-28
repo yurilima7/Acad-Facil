@@ -1,10 +1,8 @@
-import 'package:acad_facil/App/Core/Auth/auth.dart';
-import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
-import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
-import 'package:acad_facil/App/Models/auth_model.dart';
+import 'package:acad_facil/App/Screens/Login_Screen/Widgets/button_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:validatorless/validatorless.dart';
@@ -33,22 +31,6 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
 
-    void registerScreen(){
-      Navigator.of(context).pushNamed(
-        AppRoutes.registerScreen,
-      );
-    }
-
-    void login() async {
-      await Auth().signInEmail(
-        AuthModel(
-          context: context,
-          email: emailEC.text.trim(),
-          password: passwordEC.text.trim(),
-        ),
-      );
-    }
-
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
 
@@ -70,7 +52,11 @@ class _LoginState extends State<Login> {
               key: formKey,
                     
               child: Padding(
-                padding: const EdgeInsets.only(left: 45.0, right: 45.0,),
+                padding: const EdgeInsets.only(
+                  left: 45.0,
+                  right: 45.0,
+                  bottom: 20.0,
+                ),
               
                 child: Column(
                   children: [                
@@ -78,6 +64,7 @@ class _LoginState extends State<Login> {
                       controller: emailEC,
                       cursorColor: ColorsStyles.white,
                       style: context.textStyles.secundaryTitle,
+                      keyboardType: TextInputType.emailAddress,
           
                       decoration: InputDecoration(
                         label: Text(
@@ -170,7 +157,7 @@ class _LoginState extends State<Login> {
                     
                         TextButtonApp(
                           title: 'Cadastre-se',
-                          action: () => registerScreen(),
+                          action: () => Functions().registerScreen(context),
                         ),
                       ],
                     ),
@@ -186,18 +173,10 @@ class _LoginState extends State<Login> {
                           style: context.textStyles.authTitle,
                         ),
                     
-                        ElevatedButton(
-                          onPressed: () {
-                            final valid =
-                                formKey.currentState?.validate() ??
-                                    false;
-          
-                            if (valid) {
-                              login();
-                            }
-                          },
-                          style: context.buttonStyles.circleButton,
-                          child: const Icon(Icons.arrow_forward),
+                        ButtonLogin(
+                          email: emailEC.text.trim(),
+                          password: passwordEC.text.trim(),
+                          formKey: formKey,
                         ),
                       ],
                     ),

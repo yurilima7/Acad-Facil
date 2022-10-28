@@ -1,10 +1,9 @@
-import 'package:acad_facil/App/Core/Auth/auth.dart';
-import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
-import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
+import 'package:acad_facil/App/Screens/Register_Screen/Widgets/button_register.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -34,24 +33,6 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
 
-    void loginScreen() {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        AppRoutes.loginScreen,
-        (Route<dynamic> route) => false,
-      );
-    }
-
-    void register() async {
-      await Auth().registerUser(
-        AuthModel(
-          context: context,
-          userName: userNameEC.text.trim(),
-          email: emailEC.text.trim(),
-          password: passwordEC.text.trim(),
-        ),
-      );
-    }
-
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
 
@@ -77,6 +58,7 @@ class _RegisterState extends State<Register> {
                 padding: const EdgeInsets.only(
                   left: 45.0,
                   right: 45.0,
+                  bottom: 20.0,
                 ),
 
                 child: Column(
@@ -85,6 +67,7 @@ class _RegisterState extends State<Register> {
                       controller: userNameEC,
                       cursorColor: ColorsStyles.white,
                       style: context.textStyles.secundaryTitle,
+                      keyboardType: TextInputType.emailAddress,
                       
                       decoration: InputDecoration(
 
@@ -199,7 +182,9 @@ class _RegisterState extends State<Register> {
                       children: [
                         TextButtonApp(
                           title: 'Faça login',
-                          action: () => loginScreen(),
+                          action: () => Functions().loginScreen(
+                            AuthModel(context: context),
+                          ),
                         ),
                       ],
                     ),
@@ -217,18 +202,11 @@ class _RegisterState extends State<Register> {
                           style: context.textStyles.authTitle,
                         ),
 
-                        ElevatedButton(
-                          onPressed: () {
-                            final valid =
-                                formKey.currentState?.validate() ?? false;
-
-                            if (valid) {
-                              register();
-                            }
-                          },
-
-                          style: context.buttonStyles.circleButton,
-                          child: const Icon(Icons.arrow_forward),
+                        ButtonRegister(
+                          email: emailEC.text.trim(),
+                          password: passwordEC.text.trim(),
+                          userName: userNameEC.text.trim(),
+                          formKey: formKey,
                         ),
                       ],
                     ),

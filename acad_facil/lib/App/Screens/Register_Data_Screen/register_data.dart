@@ -1,10 +1,7 @@
-import 'package:acad_facil/App/Controllers/user_controller.dart';
-import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
-import 'package:acad_facil/App/Models/user.dart';
+import 'package:acad_facil/App/Screens/Register_Data_Screen/Widgets/button_register_data.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class RegisterData extends StatefulWidget {
@@ -29,24 +26,6 @@ class _RegisterDataState extends State<RegisterData> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    var providerUser = Provider.of<UserController>(context, listen: false);
-
-    void verifySuccess() async {
-      final valid = formKey.currentState?.validate() ?? false;
-
-      if (valid) {
-        await providerUser.addData(
-          User(
-            id: '',
-            name: '',
-            course: courseEC.text.trim(),
-            period: int.tryParse(periodEC.text)!,
-          ),
-          context,
-          mounted,
-        );
-      }          
-    }
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -70,7 +49,11 @@ class _RegisterDataState extends State<RegisterData> {
               key: formKey,
                     
               child: Padding(
-                padding: const EdgeInsets.only(left: 45.0, right: 45.0,),
+                padding: const EdgeInsets.only(
+                  left: 45.0,
+                  right: 45.0,
+                  bottom: 20.0,
+                ),
               
                 child: Column(
                   children: [                
@@ -140,10 +123,10 @@ class _RegisterDataState extends State<RegisterData> {
                           style: context.textStyles.authTitle,
                         ),
                     
-                        ElevatedButton(
-                          onPressed: verifySuccess,
-                          style: context.buttonStyles.circleButton,
-                          child: const Icon(Icons.arrow_forward),
+                        ButtonRegisterData(
+                          course: courseEC.text.trim(),
+                          period: periodEC.text,
+                          formKey: formKey,
                         ),
                       ],
                     ),
