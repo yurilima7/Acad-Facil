@@ -2,7 +2,6 @@ import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
-import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:acad_facil/App/Screens/Register_Screen/Widgets/button_register.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
@@ -182,9 +181,7 @@ class _RegisterState extends State<Register> {
                       children: [
                         TextButtonApp(
                           title: 'Faça login',
-                          action: () => Functions().loginScreen(
-                            AuthModel(context: context),
-                          ),
+                          action: () => Functions().login(context,),
                         ),
                       ],
                     ),
