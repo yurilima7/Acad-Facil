@@ -58,31 +58,29 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
 
-        child: Wrap(
-          runSpacing: MediaQuery.of(context).size.height * 0.06,
-          
-          children: [
-            InformationCard(title: 'Curso' ,subTitle: providerUser.course),             
-            
-            Column(
+        child: !_isLoading && !_isLoading2
+          ? Wrap(
+              runSpacing: MediaQuery.of(context).size.height * 0.06,
               
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                InformationCard(title: 'Curso' ,subTitle: providerUser.course),             
+                
+                Column(
                   
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    
-                    children: [
-                      Text(
-                        'Disciplinas',
-                        style: context.textStyles.mainTitle,
-                      ),
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        
+                        children: [
+                          Text(
+                            'Disciplinas',
+                            style: context.textStyles.mainTitle,
+                          ),
 
-                      Visibility(
-                        visible: !_isLoading && !_isLoading2, 
-              
-                        child: providerDiscipline.disciplinesCount != 0
+                          providerDiscipline.disciplinesCount != 0
                             ? TextButtonApp(
                                 title: 'Ver todas',
                                 action: nextScreen,
@@ -91,18 +89,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 title: 'Adicionar',
                                 action: nextScreen,
                               ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+      
+                    const GridDisciplines(presentsAll: false),
+                  ],
                 ),
-
-                _isLoading && _isLoading2
-                  ? CircularProgressIndicator(color: ColorsStyles.white,)
-                  : const GridDisciplines(presentsAll: false),
               ],
-            ),
-          ],
-        ),
+            )
+          : CircularProgressIndicator(color: ColorsStyles.white,),
       ),
     );
   }

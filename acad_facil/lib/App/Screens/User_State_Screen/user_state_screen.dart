@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:acad_facil/App/Core/Data/constants.dart';
+import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class UserStateScreen extends StatefulWidget {
   const UserStateScreen({Key? key}) : super(key: key);
@@ -47,10 +49,27 @@ class _UserStateScreenState extends State<UserStateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Image(
-          image: const AssetImage('assets/images/logo.png'),
-          width: MediaQuery.of(context).size.width * .5,
+      body: SizedBox(
+        width: double.infinity,
+
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+
+          children: [
+            Image(
+              image: const AssetImage('assets/images/logo.png'),
+              width: MediaQuery.of(context).size.width * .5,
+            ),
+
+            const SizedBox(
+              height: 50,
+            ),
+
+            SpinKitCircle(
+              color: ColorsStyles.terciary,
+              size: 50.0,
+            ),
+          ],
         ),
       ),
     );
