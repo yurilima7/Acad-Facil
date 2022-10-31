@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:acad_facil/App/Controllers/disciplines_provider.dart';
 import 'package:acad_facil/App/Core/Data/constants.dart';
 import 'package:acad_facil/App/Core/Data/dummy_disciplines.dart';
+import 'package:acad_facil/App/Core/Utils/functions.dart';
+import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,11 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
 
   int get disciplinesCount {
     return _disciplines.length;
+  }
+
+  void successAction(BuildContext context) {
+    Messages.showSuccess(context, 'Dados inseridos com sucesso!');
+    Functions().disciplinesScreen(context);
   }
 
   @override
@@ -44,7 +51,11 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
   }
 
   @override
-  Future<void> addDisciplines(Disciplines discipline) async {
+  Future<void> addDisciplines(
+    Disciplines discipline,
+    bool mounted,
+    BuildContext context,
+  ) async {
 
     try {
       var newDisciplineRef = Constants.disciplinesReference.doc();
@@ -67,6 +78,9 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
         schedule: {},
         avarage: 0.0,
       ));
+
+      if (!mounted) return;
+      successAction(context);
     } on FirebaseException catch (e) {
       log(e.toString());
     } on Exception catch (e) {

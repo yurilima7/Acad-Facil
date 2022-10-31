@@ -11,4 +11,5 @@ class AppRoutes {
   static const registerScreen = '/register';
   static const registerDataScreen = '/registerData';
   static const userStateScreen = '/';
+  static const addDisciplines = '/addDisciplines';
 }

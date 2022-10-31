@@ -62,4 +62,11 @@ class Functions {
       AppRoutes.registerScreen,
     );
   }
+
+  void disciplinesScreen(BuildContext context){
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      AppRoutes.disciplines,
+      (Route<dynamic> route) => false,
+    );
+  }
 }
