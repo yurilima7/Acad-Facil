@@ -1,7 +1,10 @@
+import 'package:acad_facil/App/Controllers/user_controller.dart';
+import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
-import 'package:acad_facil/App/Screens/Register_Data_Screen/Widgets/button_register_data.dart';
+import 'package:acad_facil/App/Models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class RegisterData extends StatefulWidget {
@@ -15,6 +18,7 @@ class _RegisterDataState extends State<RegisterData> {
   final courseEC = TextEditingController();
   final periodEC = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -26,6 +30,7 @@ class _RegisterDataState extends State<RegisterData> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    UserController providerUser = Provider.of<UserController>(context, listen: false);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -123,11 +128,37 @@ class _RegisterDataState extends State<RegisterData> {
                           style: context.textStyles.authTitle,
                         ),
                     
-                        ButtonRegisterData(
-                          course: courseEC.text.trim(),
-                          period: periodEC.text,
-                          formKey: formKey,
-                        ),
+                        isLoading
+                          ? CircularProgressIndicator(color: ColorsStyles.terciary,)
+                          : ElevatedButton(
+                              onPressed: () async {
+                                final valid =
+                                    formKey.currentState?.validate() ?? false;
+
+                                if (valid) {
+                                  setState(() {
+                                    isLoading = true;
+                                  });
+
+                                  await providerUser.addData(
+                                    User(
+                                      id: '',
+                                      name: '',
+                                      course: courseEC.text.trim(),
+                                      period: int.tryParse(periodEC.text)!,
+                                    ),
+                                    context,
+                                    mounted,
+                                  );
+
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                }
+                              },
+                              style: context.buttonStyles.circleButton,
+                              child: const Icon(Icons.arrow_forward),
+                            ),
                       ],
                     ),
                   ],
