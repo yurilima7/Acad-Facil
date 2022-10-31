@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
       
-                    const GridDisciplines(presentsAll: false),
+                    const GridDisciplines(),
                   ],
                 ),
               ],

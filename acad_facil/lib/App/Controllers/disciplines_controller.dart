@@ -26,20 +26,22 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
   @override
   Future<void> loadDisciplines() async {
     try {
-      await Constants.disciplinesReference.get().then(
-          (QuerySnapshot querySnapshot) {
-            _disciplines = querySnapshot.docs.map(
+      await Constants.db.collection('Users').doc(Constants.userId)
+      .collection('Disciplines').get().then(
+          (snapshot) {
+            _disciplines = snapshot.docs.map(
             (item) => Disciplines(
                 id: item.id,
-                name: item['name'],
-                classroom: item['classroom'],
-                grades: item['grades'],
-                period: item['period'],
-                schedule: item['schedule'],
-                avarage: item['avarage'],
+                name: item.data()['name'],
+                classroom: item.data()['classroom'],
+                grades: item.data()['grades'] ?? {},
+                period: item.data()['period'],
+                schedule: item.data()['schedule'] ?? {},
+                avarage: item.data()['avarage'],
               ),
           ).toList();
         }
+        
       );
     } on FirebaseException catch (e) {
       log(e.toString());
@@ -62,10 +64,8 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
 
       await newDisciplineRef.set({
         'name': discipline.name,
-        'classroom': discipline.classroom,
-        'grades': {},
-        'period': discipline.period,
-        'schedule': {},
+        'classroom': discipline.classroom,  
+        'period': discipline.period,    
         'avarage': 0.0,
       });
       
