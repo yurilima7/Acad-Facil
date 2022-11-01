@@ -12,4 +12,5 @@ class AppRoutes {
   static const registerDataScreen = '/registerData';
   static const userStateScreen = '/';
   static const addDisciplines = '/addDisciplines';
+  static const addGrades = '/addGrades';
 }

@@ -23,7 +23,7 @@ class StickerPercent extends StatelessWidget {
 
           child: Center(
             child: Text(
-              '$avarage',
+              avarage.toStringAsFixed(2),
               style: context.textStyles.chartTitle,
             ),
           ),

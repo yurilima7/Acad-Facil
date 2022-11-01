@@ -18,23 +18,19 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
     return _disciplines.length;
   }
 
-  void successAction(BuildContext context) {
-    Messages.showSuccess(context, 'Dados inseridos com sucesso!');
-    Functions().disciplinesScreen(context);
-  }
-
   @override
   Future<void> loadDisciplines() async {
     try {
       await Constants.db.collection('Users').doc(Constants.userId)
-      .collection('Disciplines').get().then(
+      .collection('Disciplines').orderBy('name').get().then(
           (snapshot) {
             _disciplines = snapshot.docs.map(
             (item) => Disciplines(
                 id: item.id,
                 name: item.data()['name'],
                 classroom: item.data()['classroom'],
-                grades: item.data()['grades'] ?? {},
+                grades: Map.castFrom<String, dynamic, String, double>(
+                    item.data()['grades'] ?? {}),
                 period: item.data()['period'],
                 schedule: item.data()['schedule'] ?? {},
                 avarage: item.data()['avarage'],
@@ -80,7 +76,9 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
       ));
 
       if (!mounted) return;
-      successAction(context);
+      Messages.showSuccess(context, 'Dados inseridos com sucesso!');
+      Functions().nextScreen(context);
+      
     } on FirebaseException catch (e) {
       log(e.toString());
     } on Exception catch (e) {
@@ -131,6 +129,41 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
   }
 
   @override
+  Future<void> addGrades(
+    String id,
+    Map<String, double> grade,
+    double avarage,
+    bool mounted,
+    BuildContext context,
+  ) 
+  async {
+    if(grade.length < 6){
+      try {
+        await Constants.disciplinesReference.doc(id).update({
+          'grades': grade,
+          'avarage': avarage,
+        });
+
+        if(!mounted) return;
+        Messages.showSuccess(context, 'Nota adicionada com sucesso!');
+        Functions().nextScreen(context);
+
+      } on FirebaseException catch (e) {
+        log(e.toString());
+      } on Exception catch (e) {
+        log(e.toString());
+      }
+
+      notifyListeners();
+    } else{
+      Messages.showError(
+        context,
+        'Máximo de 5 notas já alcançado!',
+      );
+    }
+  }
+
+  @override
   List disciplinesDay(String day) {
 
     List disciplinesOfDay = dummyDisciplines.map(
@@ -161,4 +194,5 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
    
     return disciplinesOfDay;
   }
+  
 }

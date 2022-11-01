@@ -2,6 +2,7 @@ import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
 import 'package:acad_facil/App/Controllers/user_controller.dart';
 import 'package:acad_facil/App/Core/Theme/theme_setttings.dart';
 import 'package:acad_facil/App/Screens/Add_Disciplines/add_disciplines.dart';
+import 'package:acad_facil/App/Screens/Add_Grades/add_grades.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/details_screen.dart';
 import 'package:acad_facil/App/Screens/Disciplines_Screen/disciplines_screen.dart';
 import 'package:acad_facil/App/Screens/Grades_Screen/grades_screen.dart';
@@ -52,6 +53,7 @@ class AcadFacil extends StatelessWidget {
           AppRoutes.registerScreen:(context) => const Register(),
           AppRoutes.registerDataScreen:(context) => const RegisterData(),
           AppRoutes.addDisciplines:(context) => const AddDisciplines(),
+          AppRoutes.addGrades:(context) => const AddGrades(),
         },
       ),
     );
