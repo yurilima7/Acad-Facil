@@ -40,148 +40,150 @@ class _AddDisciplinesState extends State<AddDisciplines> {
         automaticallyImplyLeading: false,
       ),
       
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
+      body: Align(
+        alignment: Alignment.bottomCenter,
 
-        child: Form(
-          key: formKey,
-
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-
-            children: [
-              const Spacer(),
-
-              TextFormField(    
-                cursorColor: ColorsStyles.white,
-                style: context.textStyles.secundaryTitle,
-                controller: nameEC,
-                
-                decoration: InputDecoration(
-                  label: Text(
-                    'Disciplina',
-                    style: context.textStyles.mainTitle,
-                  ),
-                
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: ColorsStyles.primary,
-                    ),
-                  ),
-                  
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: ColorsStyles.primary,
-                    ),
-                  ),
-                ),
-                
-                validator: Validatorless.required('Obrigatório!'),
-              ),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+      
+          child: SingleChildScrollView(
+            child: Form(
+              key: formKey,
           
-              TextFormField(    
-                cursorColor: ColorsStyles.white,
-                style: context.textStyles.secundaryTitle,
-                controller: classroomEC,
-                
-                decoration: InputDecoration(
-                  label: Text(
-                    'Sala',
-                    style: context.textStyles.mainTitle,
-                  ),
-                
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: ColorsStyles.primary,
-                    ),
-                  ),
-                  
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: ColorsStyles.primary,
-                    ),
-                  ),
-                ),
-                
-                validator: Validatorless.required('Obrigatório!'),
-              ),
-          
-              TextFormField(    
-                cursorColor: ColorsStyles.white,
-                style: context.textStyles.secundaryTitle,
-                controller: periodEC,
-                keyboardType: TextInputType.number,
-                
-                decoration: InputDecoration(
-                  label: Text(
-                    'Período',
-                    style: context.textStyles.mainTitle,
-                  ),
-                
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: ColorsStyles.primary,
-                    ),
-                  ),
-                  
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: ColorsStyles.primary,
-                    ),
-                  ),
-                ),
-                
-                validator: Validatorless.required('Obrigatório!'),
-              ),
-
-              const Spacer(),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Wrap(
+                runSpacing: MediaQuery.of(context).size.height * 0.02,
 
                 children: [
-                  Text(
-                    'Salvar',
-                    style: context.textStyles.authTitle,
-                  ),
-
-                  isLoading
-                    ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                    : ElevatedButton(
-                        onPressed: () async {
-                            final valid =
-                                formKey.currentState?.validate() ?? false;
-
-                            if (valid) {
-                              setState(() {
-                                isLoading = true;
-                              });
-                              
-                              await disciplinesProvider.addDisciplines(
-                                Disciplines(
-                                  id: '',
-                                  name: nameEC.text.trim(),
-                                  classroom: classroomEC.text.trim(),
-                                  grades: {},
-                                  period: int.tryParse(periodEC.text)!,
-                                  schedule: {},
-                                  avarage: 0.0,
-                                ),
-                                mounted,
-                                context
-                              );
-
-                              setState(() {
-                                isLoading = false;
-                              });
-                            }
-                        },
-                        style: context.buttonStyles.circleButton,
-                        child: const Icon(Icons.arrow_forward),
+                  TextFormField(    
+                    cursorColor: ColorsStyles.white,
+                    style: context.textStyles.secundaryTitle,
+                    controller: nameEC,
+                    
+                    decoration: InputDecoration(
+                      label: Text(
+                        'Disciplina',
+                        style: context.textStyles.mainTitle,
                       ),
+                    
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: ColorsStyles.white,
+                        ),
+                      ),
+                      
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: ColorsStyles.white,
+                        ),
+                      ),
+                    ),
+                    
+                    validator: Validatorless.required('Obrigatório!'),
+                  ),
+              
+                  TextFormField(    
+                    cursorColor: ColorsStyles.white,
+                    style: context.textStyles.secundaryTitle,
+                    controller: classroomEC,
+                    
+                    decoration: InputDecoration(
+                      label: Text(
+                        'Sala',
+                        style: context.textStyles.mainTitle,
+                      ),
+                    
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: ColorsStyles.white,
+                        ),
+                      ),
+                      
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: ColorsStyles.white,
+                        ),
+                      ),
+                    ),
+                    
+                    validator: Validatorless.required('Obrigatório!'),
+                  ),
+              
+                  TextFormField(    
+                    cursorColor: ColorsStyles.white,
+                    style: context.textStyles.secundaryTitle,
+                    controller: periodEC,
+                    keyboardType: TextInputType.number,
+                    
+                    decoration: InputDecoration(
+                      label: Text(
+                        'Período',
+                        style: context.textStyles.mainTitle,
+                      ),
+                    
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: ColorsStyles.white,
+                        ),
+                      ),
+                      
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: ColorsStyles.white,
+                        ),
+                      ),
+                    ),
+                    
+                    validator: Validatorless.required('Obrigatório!'),
+                  ),
+                  
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          
+                    children: [
+                      Text(
+                        'Salvar',
+                        style: context.textStyles.authTitle,
+                      ),
+          
+                      isLoading
+                        ? CircularProgressIndicator(color: ColorsStyles.terciary,)
+                        : ElevatedButton(
+                            onPressed: () async {
+                                final valid =
+                                    formKey.currentState?.validate() ?? false;
+          
+                                if (valid) {
+                                  setState(() {
+                                    isLoading = true;
+                                  });
+                                  
+                                  await disciplinesProvider.addDisciplines(
+                                    Disciplines(
+                                      id: '',
+                                      name: nameEC.text.trim(),
+                                      classroom: classroomEC.text.trim(),
+                                      grades: {},
+                                      period: int.tryParse(periodEC.text)!,
+                                      schedule: {},
+                                      avarage: 0.0,
+                                    ),
+                                    mounted,
+                                    context
+                                  );
+          
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                }
+                            },
+                            style: context.buttonStyles.circleButton,
+                            child: const Icon(Icons.arrow_forward),
+                          ),
+                    ],
+                  ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),
