@@ -11,8 +11,6 @@ import 'package:acad_facil/App/Screens/Home_Screen/home_screen.dart';
 import 'package:acad_facil/App/Screens/Login_Screen/login.dart';
 import 'package:acad_facil/App/Screens/Register_Data_Screen/register_data.dart';
 import 'package:acad_facil/App/Screens/Register_Screen/register.dart';
-import 'package:acad_facil/App/Screens/Schedule_Details/schedule_details_screen.dart';
-import 'package:acad_facil/App/Screens/Schedules_Screen/schedules_screen.dart';
 import 'package:acad_facil/App/Screens/Settings_Screen/settings_screen.dart';
 import 'package:acad_facil/App/Screens/User_State_Screen/user_state_screen.dart';
 import 'package:acad_facil/App/Screens/tabs_screen.dart';
@@ -46,11 +44,9 @@ class AcadFacil extends StatelessWidget {
           AppRoutes.tabs:(context) => const TabsScreen(),
           AppRoutes.home:(context) => const HomeScreen(),
           AppRoutes.settings:(context) => const SettingsScreen(),
-          AppRoutes.schedules:(context) => const SchedulesScreen(),
           AppRoutes.grades:(context) => const GradesScreen(),
           AppRoutes.disciplines:(context) => const DisciplinesScreen(),
           AppRoutes.details:(context) => const DetailsScreen(),
-          AppRoutes.scheduleDetails:(context) => const ScheduleDetailsScreen(),
           AppRoutes.registerScreen:(context) => const Register(),
           AppRoutes.registerDataScreen:(context) => const RegisterData(),
           AppRoutes.addDisciplines:(context) => const AddDisciplines(),

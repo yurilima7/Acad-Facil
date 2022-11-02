@@ -53,95 +53,99 @@ class _AddGradesState extends State<AddGrades> {
       return disciplines.grades;
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Inserir Notas'),
-        elevation: 0,
-        automaticallyImplyLeading: false,
-      ),
-
-      body: Align(
-        alignment: Alignment.bottomCenter,
-
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       
-          child: SingleChildScrollView(
-            child: Form(
-              key: formKey,
-          
-              child: Wrap(
-                runSpacing: MediaQuery.of(context).size.height * 0.02,
-
-                children: [           
-                  TextFormField(    
-                    cursorColor: ColorsStyles.white,
-                    style: context.textStyles.secundaryTitle,
-                    controller: gradeEC,
-                    keyboardType: TextInputType.number,
-                    
-                    decoration: InputDecoration(
-                      label: Text(
-                        'Digite sua nota',
-                        style: context.textStyles.mainTitle,
-                      ),
-                    
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ColorsStyles.white,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Inserir Notas'),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+        ),
+    
+        body: Align(
+          alignment: Alignment.bottomCenter,
+    
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+        
+            child: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+            
+                child: Wrap(
+                  runSpacing: MediaQuery.of(context).size.height * 0.02,
+    
+                  children: [           
+                    TextFormField(    
+                      cursorColor: ColorsStyles.white,
+                      style: context.textStyles.secundaryTitle,
+                      controller: gradeEC,
+                      keyboardType: TextInputType.number,
+                      
+                      decoration: InputDecoration(
+                        label: Text(
+                          'Digite sua nota',
+                          style: context.textStyles.mainTitle,
+                        ),
+                      
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorsStyles.white,
+                          ),
+                        ),
+                        
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorsStyles.white,
+                          ),
                         ),
                       ),
                       
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ColorsStyles.white,
-                        ),
-                      ),
+                      validator: Validatorless.required('Obrigatório!'),
                     ),
                     
-                    validator: Validatorless.required('Obrigatório!'),
-                  ),
-                  
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          
-                    children: [
-                      Text(
-                        'Salvar',
-                        style: context.textStyles.authTitle,
-                      ),
-          
-                      isLoading
-                        ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                        : ElevatedButton(
-                            onPressed: () async {
-                                final valid =
-                                    formKey.currentState?.validate() ?? false;
-          
-                                if (valid) {
-                                  setState(() {
-                                    isLoading = true;
-                                  });
-                                  
-                                  await disciplinesProvider.addGrades(
-                                    disciplines.id,
-                                    grades({'n$gradesLength': double.tryParse(gradeEC.text)!},),
-                                    avagare(double.tryParse(gradeEC.text)!),
-                                    mounted,
-                                    context
-                                  );
-                            
-                                  setState(() {
-                                    isLoading = false;
-                                  });
-                                }
-                            },
-                            style: context.buttonStyles.circleButton,
-                            child: const Icon(Icons.arrow_forward),
-                          ),
-                    ],
-                  ),
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            
+                      children: [
+                        Text(
+                          'Salvar',
+                          style: context.textStyles.authTitle,
+                        ),
+            
+                        isLoading
+                          ? CircularProgressIndicator(color: ColorsStyles.terciary,)
+                          : ElevatedButton(
+                              onPressed: () async {
+                                  final valid =
+                                      formKey.currentState?.validate() ?? false;
+            
+                                  if (valid) {
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                    
+                                    await disciplinesProvider.addGrades(
+                                      disciplines.id,
+                                      grades({'n$gradesLength': double.tryParse(gradeEC.text)!},),
+                                      avagare(double.tryParse(gradeEC.text)!),
+                                      mounted,
+                                      context
+                                    );
+                              
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                  }
+                              },
+                              style: context.buttonStyles.circleButton,
+                              child: const Icon(Icons.arrow_forward),
+                            ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

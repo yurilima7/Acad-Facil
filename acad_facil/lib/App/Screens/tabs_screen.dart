@@ -1,6 +1,5 @@
 import 'package:acad_facil/App/Screens/Settings_Screen/settings_screen.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/home_screen.dart';
-import 'package:acad_facil/App/Screens/Schedules_Screen/schedules_screen.dart';
 import 'package:acad_facil/App/Screens/Grades_Screen/grades_screen.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,6 @@ class _TabsScreenState extends State<TabsScreen> {
 
     _screen = [
       {'Titulo': 'Home', 'Tela': const HomeScreen()},
-      {'Titulo': 'Horário', 'Tela': const SchedulesScreen()},
       {'Titulo': 'Notas', 'Tela': const GradesScreen()},
       {'Titulo': 'Configurações', 'Tela': const SettingsScreen()},
     ];
@@ -65,16 +63,6 @@ class _TabsScreenState extends State<TabsScreen> {
               color: _selectedScreen == 0 ? Theme.of(context).colorScheme.tertiary : Colors.white,
             ),
             label: "Home",
-            // backgroundColor: Theme.of(context).colorScheme.primary,
-          ),
-
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/horario.svg',
-              height: 32,
-              color: _selectedScreen == 1 ? Theme.of(context).colorScheme.tertiary : Colors.white,
-            ),
-            label: "Horário",
             // backgroundColor: Theme.of(context).colorScheme.primary,
           ),
 

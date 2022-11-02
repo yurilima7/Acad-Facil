@@ -1,4 +1,5 @@
 import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
+import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Screens/Grades_Screen/Widgets/card_avarage.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class GradesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final providerDisciplines = Provider.of<DisciplinesControler>(context);
     final List<Disciplines> disciplines = providerDisciplines.disciplines;
+    final int disciplinesLength = disciplines.length;
     
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -18,10 +20,10 @@ class GradesScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20,),
 
-        child: SingleChildScrollView(
+        child: disciplinesLength > 0 ? SingleChildScrollView(
           child: Column(
             children: List.generate(
-              disciplines.length,
+              disciplinesLength,
               
               (i) => ChangeNotifierProvider.value(
                 value: disciplines[i],
@@ -32,7 +34,13 @@ class GradesScreen extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        ) 
+        : Center(
+            child: Text(
+              'Sem notas no momento!',
+              style: context.textStyles.secundaryTitle,
+            ),
+          ),
       ),
     );
   }

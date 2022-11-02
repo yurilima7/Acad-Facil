@@ -33,155 +33,159 @@ class _AddDisciplinesState extends State<AddDisciplines> {
   Widget build(BuildContext context) {
      final disciplinesProvider = Provider.of<DisciplinesControler>(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Inserir Disciplina'),
-        elevation: 0,
-        automaticallyImplyLeading: false,
-      ),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       
-      body: Align(
-        alignment: Alignment.bottomCenter,
-
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-      
-          child: SingleChildScrollView(
-            child: Form(
-              key: formKey,
-          
-              child: Wrap(
-                runSpacing: MediaQuery.of(context).size.height * 0.02,
-
-                children: [
-                  TextFormField(    
-                    cursorColor: ColorsStyles.white,
-                    style: context.textStyles.secundaryTitle,
-                    controller: nameEC,
-                    
-                    decoration: InputDecoration(
-                      label: Text(
-                        'Disciplina',
-                        style: context.textStyles.mainTitle,
-                      ),
-                    
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ColorsStyles.white,
-                        ),
-                      ),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Inserir Disciplina'),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+        ),
+        
+        body: Align(
+          alignment: Alignment.bottomCenter,
+    
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+        
+            child: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+            
+                child: Wrap(
+                  runSpacing: MediaQuery.of(context).size.height * 0.02,
+    
+                  children: [
+                    TextFormField(    
+                      cursorColor: ColorsStyles.white,
+                      style: context.textStyles.secundaryTitle,
+                      controller: nameEC,
                       
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ColorsStyles.white,
+                      decoration: InputDecoration(
+                        label: Text(
+                          'Disciplina',
+                          style: context.textStyles.mainTitle,
                         ),
-                      ),
-                    ),
-                    
-                    validator: Validatorless.required('Obrigatório!'),
-                  ),
-              
-                  TextFormField(    
-                    cursorColor: ColorsStyles.white,
-                    style: context.textStyles.secundaryTitle,
-                    controller: classroomEC,
-                    
-                    decoration: InputDecoration(
-                      label: Text(
-                        'Sala',
-                        style: context.textStyles.mainTitle,
-                      ),
-                    
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ColorsStyles.white,
-                        ),
-                      ),
                       
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ColorsStyles.white,
-                        ),
-                      ),
-                    ),
-                    
-                    validator: Validatorless.required('Obrigatório!'),
-                  ),
-              
-                  TextFormField(    
-                    cursorColor: ColorsStyles.white,
-                    style: context.textStyles.secundaryTitle,
-                    controller: periodEC,
-                    keyboardType: TextInputType.number,
-                    
-                    decoration: InputDecoration(
-                      label: Text(
-                        'Período',
-                        style: context.textStyles.mainTitle,
-                      ),
-                    
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ColorsStyles.white,
-                        ),
-                      ),
-                      
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ColorsStyles.white,
-                        ),
-                      ),
-                    ),
-                    
-                    validator: Validatorless.required('Obrigatório!'),
-                  ),
-                  
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          
-                    children: [
-                      Text(
-                        'Salvar',
-                        style: context.textStyles.authTitle,
-                      ),
-          
-                      isLoading
-                        ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                        : ElevatedButton(
-                            onPressed: () async {
-                                final valid =
-                                    formKey.currentState?.validate() ?? false;
-          
-                                if (valid) {
-                                  setState(() {
-                                    isLoading = true;
-                                  });
-                                  
-                                  await disciplinesProvider.addDisciplines(
-                                    Disciplines(
-                                      id: '',
-                                      name: nameEC.text.trim(),
-                                      classroom: classroomEC.text.trim(),
-                                      grades: {},
-                                      period: int.tryParse(periodEC.text)!,
-                                      schedule: {},
-                                      avarage: 0.0,
-                                    ),
-                                    mounted,
-                                    context
-                                  );
-          
-                                  setState(() {
-                                    isLoading = false;
-                                  });
-                                }
-                            },
-                            style: context.buttonStyles.circleButton,
-                            child: const Icon(Icons.arrow_forward),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorsStyles.white,
                           ),
-                    ],
-                  ),
-                ],
+                        ),
+                        
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorsStyles.white,
+                          ),
+                        ),
+                      ),
+                      
+                      validator: Validatorless.required('Obrigatório!'),
+                    ),
+                
+                    TextFormField(    
+                      cursorColor: ColorsStyles.white,
+                      style: context.textStyles.secundaryTitle,
+                      controller: classroomEC,
+                      
+                      decoration: InputDecoration(
+                        label: Text(
+                          'Sala',
+                          style: context.textStyles.mainTitle,
+                        ),
+                      
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorsStyles.white,
+                          ),
+                        ),
+                        
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorsStyles.white,
+                          ),
+                        ),
+                      ),
+                      
+                      validator: Validatorless.required('Obrigatório!'),
+                    ),
+                
+                    TextFormField(    
+                      cursorColor: ColorsStyles.white,
+                      style: context.textStyles.secundaryTitle,
+                      controller: periodEC,
+                      keyboardType: TextInputType.number,
+                      
+                      decoration: InputDecoration(
+                        label: Text(
+                          'Período',
+                          style: context.textStyles.mainTitle,
+                        ),
+                      
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorsStyles.white,
+                          ),
+                        ),
+                        
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorsStyles.white,
+                          ),
+                        ),
+                      ),
+                      
+                      validator: Validatorless.required('Obrigatório!'),
+                    ),
+                    
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            
+                      children: [
+                        Text(
+                          'Salvar',
+                          style: context.textStyles.authTitle,
+                        ),
+            
+                        isLoading
+                          ? CircularProgressIndicator(color: ColorsStyles.terciary,)
+                          : ElevatedButton(
+                              onPressed: () async {
+                                  final valid =
+                                      formKey.currentState?.validate() ?? false;
+            
+                                  if (valid) {
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                    
+                                    await disciplinesProvider.addDisciplines(
+                                      Disciplines(
+                                        id: '',
+                                        name: nameEC.text.trim(),
+                                        classroom: classroomEC.text.trim(),
+                                        grades: {},
+                                        period: int.tryParse(periodEC.text)!,
+                                        schedule: {},
+                                        avarage: 0.0,
+                                      ),
+                                      mounted,
+                                      context
+                                    );
+            
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                  }
+                              },
+                              style: context.buttonStyles.circleButton,
+                              child: const Icon(Icons.arrow_forward),
+                            ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

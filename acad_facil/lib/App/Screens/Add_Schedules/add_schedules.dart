@@ -75,150 +75,154 @@ class _AddSchedulesState extends State<AddSchedules> {
       return disciplines.schedule;
     }
         
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Inserir Horário'),
-        elevation: 0,
-        automaticallyImplyLeading: false,
-      ),
-
-      body: Align(
-        alignment: Alignment.bottomCenter,
-
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-
-          child: SingleChildScrollView(
-
-            child:Wrap(
-              runSpacing: 10,
-
-              children: [
-                Visibility(
-                  visible: isClicked == false,
-
-                  child: Wrap(
-                    children: [
-                      Row(
-                        children: [
-                          Text('Selecione uma data', style: TextStyles.i.mainTitle,),
-                        ],
-                      ),
-
-                      Row(             
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,   
-                        children: [
-                          button(0, 'Seg'),
-                          button(1, 'Ter'),
-                          button(2, 'Qua'),
-                          button(3, 'Qui'),
-                          button(4, 'Sex'),
-                          button(5, 'Sab'),
-                        ],
-                      ),
-                    ],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Inserir Horário'),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+        ),
+    
+        body: Align(
+          alignment: Alignment.bottomCenter,
+    
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+    
+            child: SingleChildScrollView(
+    
+              child:Wrap(
+                runSpacing: 10,
+    
+                children: [
+                  Visibility(
+                    visible: isClicked == false,
+    
+                    child: Wrap(
+                      children: [
+                        Row(
+                          children: [
+                            Text('Selecione uma data', style: TextStyles.i.mainTitle,),
+                          ],
+                        ),
+    
+                        Row(             
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,   
+                          children: [
+                            button(0, 'Seg'),
+                            button(1, 'Ter'),
+                            button(2, 'Qua'),
+                            button(3, 'Qui'),
+                            button(4, 'Sex'),
+                            button(5, 'Sab'),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-
-                Visibility(
-                  visible: isClicked == true,
-
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    
+                  Visibility(
+                    visible: isClicked == true,
+    
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      
+                      children: [
+                        Text(
+                          'Data selecionada: $day',
+                          style: TextStyles.i.mainTitleBlue,
+                        ),
+    
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              isClicked = !isClicked;
+                            });
+                          },
+                          child: Text('Selecionar nova data', style: TextStyles.i.mainTitle,),
+                        ),
+                      ],
+                    ), 
+                  ),
+    
+                  GestureDetector(
+                    onTap: () => selectStartTime(context),
                     
+                    child: Row(
+                      children: [
+                        Icon(Icons.alarm, size: 32, color: ColorsStyles.white,),
+                        const SizedBox(width: 5,),
+                        Text('Início da Aula', style: TextStyles.i.mainTitle,),
+                      ],
+                    ),
+                  ),
+    
+                  GestureDetector(
+                    onTap: () => selectEndTime(context),
+                    
+                    child: Row(
+                      children: [
+                        Icon(Icons.alarm, size: 32, color: ColorsStyles.white,),
+                        const SizedBox(width: 5,),
+                        Text('Fim da Aula', style: TextStyles.i.mainTitle,),
+                      ],
+                    ),
+                  ),                
+                  
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  
                     children: [
                       Text(
-                        'Data selecionada: $day',
-                        style: TextStyles.i.mainTitleBlue,
+                        'Salvar',
+                        style: context.textStyles.authTitle,
                       ),
-
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            isClicked = !isClicked;
-                          });
-                        },
-                        child: Text('Selecionar nova data', style: TextStyles.i.mainTitle,),
-                      ),
-                    ],
-                  ), 
-                ),
-
-                GestureDetector(
-                  onTap: () => selectStartTime(context),
-                  
-                  child: Row(
-                    children: [
-                      Icon(Icons.alarm, size: 32, color: ColorsStyles.white,),
-                      const SizedBox(width: 5,),
-                      Text('Início da Aula', style: TextStyles.i.mainTitle,),
-                    ],
-                  ),
-                ),
-
-                GestureDetector(
-                  onTap: () => selectEndTime(context),
-                  
-                  child: Row(
-                    children: [
-                      Icon(Icons.alarm, size: 32, color: ColorsStyles.white,),
-                      const SizedBox(width: 5,),
-                      Text('Fim da Aula', style: TextStyles.i.mainTitle,),
-                    ],
-                  ),
-                ),                
-                
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                
-                  children: [
-                    Text(
-                      'Salvar',
-                      style: context.textStyles.authTitle,
-                    ),
-        
-                    isLoading
-                      ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                      : ElevatedButton(
-                          onPressed: () async {
-    
-                            if ((startTime != endTime) && day != null) {
-                              setState(() {
-                                isLoading = true;
-                              });
-                              
-                              await disciplinesProvider.addSchedules(
-                                AddScheduleModel(
-                                  id: disciplines.id,
-                                  schedule: schedules(
-                                    day!.substring(0, 3),
-                                    '${startTime.hour}:${startTime.minute} - ${endTime.hour}:${endTime.minute}',
-                                  ),
-                                  mounted: mounted,
-                                  context: context,
-                                  day: day!,
-                                  discipline: disciplines.name,
-                                  duration:
+          
+                      isLoading
+                        ? CircularProgressIndicator(color: ColorsStyles.terciary,)
+                        : ElevatedButton(
+                            onPressed: () async {
+      
+                              if ((startTime != endTime) && day != null) {
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                
+                                await disciplinesProvider.addSchedules(
+                                  AddScheduleModel(
+                                    id: disciplines.id,
+                                    schedule: schedules(
+                                      day!.substring(0, 3),
                                       '${startTime.hour}:${startTime.minute} - ${endTime.hour}:${endTime.minute}',
-                                ),
-                              );
-                        
-                              setState(() {
-                                isLoading = false;
-                              });
-                            }
-                            else {
-                              Messages.showError(context,
-                                'Erro ao inserir, verifique se horário de início e término estão corretos',
-                              );
-                            }
-                          },
-                          style: context.buttonStyles.circleButton,
-                          child: const Icon(Icons.arrow_forward),
-                        ),
-                  ],
-                ),
-              ],
+                                    ),
+                                    mounted: mounted,
+                                    context: context,
+                                    day: day!,
+                                    discipline: disciplines.name,
+                                    duration:
+                                        '${startTime.hour}:${startTime.minute} - ${endTime.hour}:${endTime.minute}',
+                                  ),
+                                );
+                          
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              }
+                              else {
+                                Messages.showError(context,
+                                  'Erro ao inserir, verifique se horário de início e término estão corretos',
+                                );
+                              }
+                            },
+                            style: context.buttonStyles.circleButton,
+                            child: const Icon(Icons.arrow_forward),
+                          ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

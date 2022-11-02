@@ -105,30 +105,6 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
   }
 
   @override
-  Future<void> editDisciplines(Disciplines discipline) async {
-    int index = _disciplines.indexWhere((d) => d.id == discipline.id);
-
-    try {
-      await Constants.disciplinesReference.doc().update({
-        'name': discipline.name,
-        'classroom': discipline.classroom,
-        'grades': discipline.grades,
-        'period': discipline.period,
-        'schedule': discipline.schedule,
-        'avarage': discipline.avarage,
-      });
-
-      _disciplines[index] = discipline;
-    } on FirebaseException catch (e) {
-      log(e.toString());
-    } on Exception catch (e) {
-      log(e.toString());
-    }
-
-    notifyListeners();
-  }
-
-  @override
   Future<void> addGrades(
     String id,
     Map<String, double> grade,
@@ -188,35 +164,5 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
     } on Exception catch (e) {
       log(e.toString());
     }
-  }
-
-  @override
-  List disciplinesDay(String day) {
-    List disciplinesOfDay = _disciplines.map(
-      (e) {
-        if (e.schedule[day] != null) {
-          return e.schedule[day];
-        }
-      },
-    ).toList();
-
-    disciplinesOfDay.removeWhere((element) => element == null);
-
-    return disciplinesOfDay;
-  }
-
-  @override
-  List disciplineSchedule(String day) {
-    List disciplinesOfDay = _disciplines.map(
-      (e) {
-        if (e.schedule[day] != null) {
-          return e.name;
-        }
-      },
-    ).toList();
-
-    disciplinesOfDay.removeWhere((element) => element == null);
-
-    return disciplinesOfDay;
   }
 }

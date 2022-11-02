@@ -9,7 +9,6 @@ abstract class DisciplinesProvider {
     bool mounted,
     BuildContext context,
   );
-  Future<void> editDisciplines(Disciplines discipline);
   Future<void> deleteDisciplines(Disciplines discipline);
   Future<void> addGrades(
     String id,
@@ -19,6 +18,4 @@ abstract class DisciplinesProvider {
     BuildContext context,
   );
   Future<void> addSchedules(AddScheduleModel model);
-  List disciplinesDay(String day);
-  List disciplineSchedule(String day);
 }
