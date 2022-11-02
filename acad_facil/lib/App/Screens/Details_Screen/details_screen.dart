@@ -1,4 +1,7 @@
+import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
+import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
+import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/information_card.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/modal_add_disciplines.dart';
@@ -6,6 +9,7 @@ import 'package:acad_facil/App/Screens/Details_Screen/Widgets/grid_grades.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/grid_schedule.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/local_avarage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatelessWidget {
 
@@ -13,7 +17,7 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    final disciplinesProvider = Provider.of<DisciplinesControler>(context);
     Disciplines disciplines =
         ModalRoute.of(context)!.settings.arguments as Disciplines;
 
@@ -79,7 +83,34 @@ class DetailsScreen extends StatelessWidget {
                         GridSchedule(schedules: disciplines.schedule),
                       ],
                     ),
-                               
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                      children: [
+                        Text(
+                          'Delete a disciplina',
+                          style: context.textStyles.mainTitle,
+                        ),
+
+                        IconButton(
+                          onPressed: () {
+                            disciplinesProvider
+                                .deleteDisciplines(disciplines);
+                                
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                              AppRoutes.tabs,
+                              (Route<dynamic> route) => false,
+                            );
+                          },
+                          icon: Icon(
+                            Icons.delete,
+                            size: 28,
+                            color: ColorsStyles.white,
+                          ),
+                        ),
+                      ],
+                    ),         
                   ],
                 ),
               ),
