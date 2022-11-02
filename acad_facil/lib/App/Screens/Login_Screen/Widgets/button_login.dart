@@ -1,4 +1,4 @@
-import 'package:acad_facil/App/Core/Auth/auth.dart';
+import 'package:acad_facil/App/Controllers/Auth/auth.dart';
 import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
