@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:acad_facil/App/Controllers/disciplines_provider.dart';
 import 'package:acad_facil/App/Core/Data/constants.dart';
-import 'package:acad_facil/App/Core/Data/dummy_disciplines.dart';
 import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Models/add_schedule_model.dart';
@@ -22,8 +21,10 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
   @override
   Future<void> loadDisciplines() async {
     try {
-      await Constants.disciplinesReference.orderBy('name').get()
-        .then((snapshot) {
+      await Constants.disciplinesReference
+          .orderBy('name')
+          .get()
+          .then((snapshot) {
         _disciplines = snapshot.docs
             .map(
               (item) => Disciplines(
@@ -34,8 +35,7 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
                     item.data()['grades'] ?? {}),
                 period: item.data()['period'],
                 schedule: Map.castFrom<String, dynamic, String, String>(
-                  item.data()['schedule'] ?? {}
-                ),
+                    item.data()['schedule'] ?? {}),
                 avarage: item.data()['avarage'],
               ),
             )
@@ -161,27 +161,24 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
     }
   }
 
-   @override
+  @override
   Future<void> addSchedules(AddScheduleModel model) async {
-    
     try {
       await Constants.disciplinesReference.doc(model.id).update({
         'schedule': model.schedule,
       });
 
-      await Constants.schedulesReference.doc(model.day).get().then(
-        (doc) {
-          if(doc.exists){
-            Constants.schedulesReference.doc(model.day).update({
-              model.discipline: model.duration,
-            });
-          } else {
-            Constants.schedulesReference.doc(model.day).set({
-              model.discipline: model.duration,
-            });
-          }
+      await Constants.schedulesReference.doc(model.day).get().then((doc) {
+        if (doc.exists) {
+          Constants.schedulesReference.doc(model.day).update({
+            model.discipline: model.duration,
+          });
+        } else {
+          Constants.schedulesReference.doc(model.day).set({
+            model.discipline: model.duration,
+          });
         }
-      );
+      });
 
       if (!model.mounted) return;
       Messages.showSuccess(model.context, 'Horário adicionado com sucesso!');
@@ -195,7 +192,7 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
 
   @override
   List disciplinesDay(String day) {
-    List disciplinesOfDay = dummyDisciplines.map(
+    List disciplinesOfDay = _disciplines.map(
       (e) {
         if (e.schedule[day] != null) {
           return e.schedule[day];
@@ -210,7 +207,7 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
 
   @override
   List disciplineSchedule(String day) {
-    List disciplinesOfDay = dummyDisciplines.map(
+    List disciplinesOfDay = _disciplines.map(
       (e) {
         if (e.schedule[day] != null) {
           return e.name;
