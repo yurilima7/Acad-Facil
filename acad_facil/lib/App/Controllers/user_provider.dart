@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 abstract class UserProvider {
   Future<void> loadUser();
-  Future<void> editData(User user);
   Future<void> addData(User user, BuildContext context, bool mounted);
-  Future<void> deleteUser(User user);
+  Future<void> deleteUser(BuildContext context, bool mounted);
 }

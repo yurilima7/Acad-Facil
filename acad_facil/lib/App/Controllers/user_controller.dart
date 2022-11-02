@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:acad_facil/App/Controllers/user_provider.dart';
 import 'package:acad_facil/App/Core/Data/constants.dart';
+import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Models/user.dart';
@@ -15,11 +16,6 @@ class UserController with ChangeNotifier implements UserProvider {
   void successAction(BuildContext context) {
     Messages.showSuccess(context, 'Dados inseridos com sucesso!');
     Functions().nextScreen(context);
-  }
-
-  @override
-  Future<void> editData(User user) {
-    throw UnimplementedError();
   }
 
   @override
@@ -62,7 +58,25 @@ class UserController with ChangeNotifier implements UserProvider {
   }
 
   @override
-  Future<void> deleteUser(User user) async {
-    throw UnimplementedError();
+  Future<void> deleteUser(BuildContext context, bool mounted) async {
+    try {
+      await Constants.disciplinesReference.get()
+        .then(
+          (snapshot) {
+            for (var doc in snapshot.docs) {
+              doc.reference.delete();
+            }
+          }
+        );
+
+      await Constants.userRefence.doc(Constants.userId).delete();
+      if(!mounted) return;
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(AppRoutes.loginScreen, (route) => false);
+    } on FirebaseException catch (e) {
+      log(e.toString());
+    } on Exception catch (e) {
+      log(e.toString());
+    }
   }
 }
