@@ -37,6 +37,11 @@ class TextStyles {
     fontSize: 16,
   );
 
+  TextStyle get mainTitleBlue => primaryRegular.copyWith(
+    color: ColorsStyles.terciary,
+    fontSize: 16,
+  );
+
   TextStyle get authTitle => primaryRegular.copyWith(
     color: ColorsStyles.white,
     fontSize: 25,

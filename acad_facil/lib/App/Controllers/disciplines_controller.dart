@@ -5,6 +5,7 @@ import 'package:acad_facil/App/Core/Data/constants.dart';
 import 'package:acad_facil/App/Core/Data/dummy_disciplines.dart';
 import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Core/Utils/messages.dart';
+import 'package:acad_facil/App/Models/add_schedule_model.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -21,30 +22,31 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
   @override
   Future<void> loadDisciplines() async {
     try {
-      await Constants.db.collection('Users').doc(Constants.userId)
-      .collection('Disciplines').orderBy('name').get().then(
-          (snapshot) {
-            _disciplines = snapshot.docs.map(
-            (item) => Disciplines(
+      await Constants.disciplinesReference.orderBy('name').get()
+        .then((snapshot) {
+        _disciplines = snapshot.docs
+            .map(
+              (item) => Disciplines(
                 id: item.id,
                 name: item.data()['name'],
                 classroom: item.data()['classroom'],
                 grades: Map.castFrom<String, dynamic, String, double>(
                     item.data()['grades'] ?? {}),
                 period: item.data()['period'],
-                schedule: item.data()['schedule'] ?? {},
+                schedule: Map.castFrom<String, dynamic, String, String>(
+                  item.data()['schedule'] ?? {}
+                ),
                 avarage: item.data()['avarage'],
               ),
-          ).toList();
-        }
-        
-      );
+            )
+            .toList();
+      });
     } on FirebaseException catch (e) {
       log(e.toString());
     } on Exception catch (e) {
       log(e.toString());
     }
-    
+
     notifyListeners();
   }
 
@@ -54,17 +56,16 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
     bool mounted,
     BuildContext context,
   ) async {
-
     try {
       var newDisciplineRef = Constants.disciplinesReference.doc();
 
       await newDisciplineRef.set({
         'name': discipline.name,
-        'classroom': discipline.classroom,  
-        'period': discipline.period,    
+        'classroom': discipline.classroom,
+        'period': discipline.period,
         'avarage': 0.0,
       });
-      
+
       _disciplines.add(Disciplines(
         id: newDisciplineRef.id,
         name: discipline.name,
@@ -78,7 +79,6 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
       if (!mounted) return;
       Messages.showSuccess(context, 'Dados inseridos com sucesso!');
       Functions().nextScreen(context);
-      
     } on FirebaseException catch (e) {
       log(e.toString());
     } on Exception catch (e) {
@@ -95,7 +95,7 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
 
     try {
       await Constants.disciplinesReference.doc(discipline.id).delete();
-            
+
       _disciplines.remove(delDiscipline);
     } on FirebaseException catch (e) {
       log(e.toString());
@@ -135,19 +135,17 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
     double avarage,
     bool mounted,
     BuildContext context,
-  ) 
-  async {
-    if(grade.length < 6){
+  ) async {
+    if (grade.length < 6) {
       try {
         await Constants.disciplinesReference.doc(id).update({
           'grades': grade,
           'avarage': avarage,
         });
 
-        if(!mounted) return;
+        if (!mounted) return;
         Messages.showSuccess(context, 'Nota adicionada com sucesso!');
         Functions().nextScreen(context);
-
       } on FirebaseException catch (e) {
         log(e.toString());
       } on Exception catch (e) {
@@ -155,7 +153,7 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
       }
 
       notifyListeners();
-    } else{
+    } else {
       Messages.showError(
         context,
         'Máximo de 5 notas já alcançado!',
@@ -163,36 +161,65 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
     }
   }
 
+   @override
+  Future<void> addSchedules(AddScheduleModel model) async {
+    
+    try {
+      await Constants.disciplinesReference.doc(model.id).update({
+        'schedule': model.schedule,
+      });
+
+      await Constants.schedulesReference.doc(model.day).get().then(
+        (doc) {
+          if(doc.exists){
+            Constants.schedulesReference.doc(model.day).update({
+              model.discipline: model.duration,
+            });
+          } else {
+            Constants.schedulesReference.doc(model.day).set({
+              model.discipline: model.duration,
+            });
+          }
+        }
+      );
+
+      if (!model.mounted) return;
+      Messages.showSuccess(model.context, 'Horário adicionado com sucesso!');
+      Functions().nextScreen(model.context);
+    } on FirebaseException catch (e) {
+      log(e.toString());
+    } on Exception catch (e) {
+      log(e.toString());
+    }
+  }
+
   @override
   List disciplinesDay(String day) {
-
     List disciplinesOfDay = dummyDisciplines.map(
       (e) {
-          if(e.schedule[day] != null){
-            return e.schedule[day];
-          }
+        if (e.schedule[day] != null) {
+          return e.schedule[day];
+        }
       },
     ).toList();
-    
+
     disciplinesOfDay.removeWhere((element) => element == null);
-   
+
     return disciplinesOfDay;
   }
-  
+
   @override
   List disciplineSchedule(String day) {
-
     List disciplinesOfDay = dummyDisciplines.map(
       (e) {
-          if(e.schedule[day] != null){
-            return e.name;
-          }
+        if (e.schedule[day] != null) {
+          return e.name;
+        }
       },
     ).toList();
-    
+
     disciplinesOfDay.removeWhere((element) => element == null);
-   
+
     return disciplinesOfDay;
   }
-  
 }

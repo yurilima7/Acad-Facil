@@ -20,6 +20,14 @@ class ModalAddDisciplines extends StatelessWidget {
       );
     }
 
+    void addSchedules(Disciplines disciplines) {
+      Navigator.of(context).pop();// fecha modal
+      Navigator.of(context).pushNamed(
+        AppRoutes.addSchedules,
+        arguments: disciplines,
+      );
+    }
+
     return Container(
       height: 150,
       color: ColorsStyles.primary,
@@ -39,7 +47,7 @@ class ModalAddDisciplines extends StatelessWidget {
               ),
 
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => addSchedules(disciplines),
                 style: context.buttonStyles.circleButton,
                 child: const Icon(Icons.arrow_forward),
               ),

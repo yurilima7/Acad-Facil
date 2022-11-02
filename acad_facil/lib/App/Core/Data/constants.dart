@@ -9,4 +9,6 @@ class Constants {
   static final idUserCollection = userRefence.doc(userId);
   static final disciplinesReference =
       idUserCollection.collection('Disciplines');
+  static final schedulesReference = 
+      idUserCollection.collection('Schedules');
 }
