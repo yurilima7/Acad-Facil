@@ -144,18 +144,6 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
         'schedule': model.schedule,
       });
 
-      await Constants.schedulesReference.doc(model.day).get().then((doc) {
-        if (doc.exists) {
-          Constants.schedulesReference.doc(model.day).update({
-            model.discipline: model.duration,
-          });
-        } else {
-          Constants.schedulesReference.doc(model.day).set({
-            model.discipline: model.duration,
-          });
-        }
-      });
-
       if (!model.mounted) return;
       Messages.showSuccess(model.context, 'Horário adicionado com sucesso!');
       Functions().nextScreen(model.context);
