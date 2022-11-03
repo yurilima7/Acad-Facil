@@ -3,8 +3,8 @@ import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Screens/Login_Screen/Widgets/button_login.dart';
+import 'package:acad_facil/App/Screens/Login_Screen/Widgets/google_login.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:validatorless/validatorless.dart';
 
 class Login extends StatefulWidget {
@@ -147,13 +147,7 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     
                       children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: SvgPicture.asset(
-                            'assets/images/google.svg',
-                            height: 35,
-                          ),
-                        ),
+                        const GoogleLogin(),
                     
                         TextButtonApp(
                           title: 'Cadastre-se',
