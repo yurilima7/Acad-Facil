@@ -1,7 +1,7 @@
 import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
 import 'package:acad_facil/App/Controllers/user_controller.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
-import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Core/Widgets/information_card.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/Widgets/grid_disciplines.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
@@ -39,10 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
           },)
         });
     });
-  }
-
-  void nextScreen(){
-    Navigator.of(context).pushNamed(AppRoutes.disciplines);
   }
 
   @override
@@ -83,11 +79,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           providerDiscipline.disciplinesCount != 0
                             ? TextButtonApp(
                                 title: 'Ver todas',
-                                action: nextScreen,
+                                action: () => Functions().disciplinesScreenWithoutRemoving(context),
                               )
                             : TextButtonApp(
                                 title: 'Adicionar',
-                                action: nextScreen,
+                                action: () => Functions().disciplinesScreenWithoutRemoving(context),
                               ),
                         ],
                       ),

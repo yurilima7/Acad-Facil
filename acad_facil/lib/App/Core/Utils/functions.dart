@@ -2,6 +2,7 @@ import 'package:acad_facil/App/Core/Data/constants.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
+import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
 
 class Functions {
@@ -68,5 +69,36 @@ class Functions {
       AppRoutes.disciplines,
       (Route<dynamic> route) => false,
     );
+  }
+
+  void addSchedules(Disciplines disciplines, BuildContext context) {
+    Navigator.of(context).pop();// fecha modal
+    Navigator.of(context).pushNamed(
+      AppRoutes.addSchedules,
+      arguments: disciplines,
+    );
+  }
+
+  void addGrades(Disciplines disciplines, BuildContext context) {
+    Navigator.of(context).pop();// fecha modal
+    Navigator.of(context).pushNamed(
+      AppRoutes.addGrades,
+      arguments: disciplines,
+    );
+  }
+
+  void detailsScreen(Disciplines discipline, BuildContext context) {
+    Navigator.of(context).pushNamed(
+        AppRoutes.details,
+        arguments: discipline,
+    );
+  }
+
+  void disciplinesScreenWithoutRemoving(BuildContext context) {
+    Navigator.of(context).pushNamed(AppRoutes.disciplines);
+  }
+
+  void addDisciplines(BuildContext context) {
+    Navigator.of(context).pushNamed(AppRoutes.addDisciplines);
   }
 }

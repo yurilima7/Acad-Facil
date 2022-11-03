@@ -1,7 +1,7 @@
 import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
-import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
 
@@ -11,23 +11,6 @@ class ModalAddDisciplines extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    void addGrades(Disciplines disciplines) {
-      Navigator.of(context).pop();// fecha modal
-      Navigator.of(context).pushNamed(
-        AppRoutes.addGrades,
-        arguments: disciplines,
-      );
-    }
-
-    void addSchedules(Disciplines disciplines) {
-      Navigator.of(context).pop();// fecha modal
-      Navigator.of(context).pushNamed(
-        AppRoutes.addSchedules,
-        arguments: disciplines,
-      );
-    }
-
     return Container(
       height: 150,
       color: ColorsStyles.primary,
@@ -47,7 +30,7 @@ class ModalAddDisciplines extends StatelessWidget {
               ),
 
               ElevatedButton(
-                onPressed: () => addSchedules(disciplines),
+                onPressed: () => Functions().addSchedules(disciplines, context),
                 style: context.buttonStyles.circleButton,
                 child: const Icon(Icons.arrow_forward),
               ),
@@ -64,7 +47,7 @@ class ModalAddDisciplines extends StatelessWidget {
               ),
 
               ElevatedButton(
-                onPressed: () => addGrades(disciplines),
+                onPressed: () => Functions().addGrades(disciplines, context),
                 style: context.buttonStyles.circleButton,
                 child: const Icon(Icons.arrow_forward),
               ),

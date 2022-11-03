@@ -1,4 +1,4 @@
-import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -14,15 +14,8 @@ class DisciplineCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final discipline = Provider.of<Disciplines>(context, listen: false);
 
-    void nextScreen(){
-      Navigator.of(context).pushNamed(
-        AppRoutes.details,
-        arguments: discipline,
-      );
-    }
-
     return InkWell(
-      onTap: () => nextScreen(),
+      onTap: () => Functions().detailsScreen(discipline, context),
       child: Card(
     
         color: Theme.of(context).colorScheme.secondary,
