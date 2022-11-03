@@ -70,7 +70,9 @@ class UserController with ChangeNotifier implements UserProvider {
         );
 
       await Constants.userRefence.doc(Constants.userId).delete();
+      await Constants.user?.delete();
       if(!mounted) return;
+      Messages.showSuccess(context, 'Conta deletada com sucesso!');
       Navigator.of(context)
           .pushNamedAndRemoveUntil(AppRoutes.loginScreen, (route) => false);
     } on FirebaseException catch (e) {
