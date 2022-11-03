@@ -70,7 +70,7 @@ class _TabsScreenState extends State<TabsScreen> {
             icon: SvgPicture.asset(
               'assets/icons/notas.svg',
               height: 32,
-              color: _selectedScreen == 2 ? Theme.of(context).colorScheme.tertiary : Colors.white,
+              color: _selectedScreen == 1 ? Theme.of(context).colorScheme.tertiary : Colors.white,
             ),
             label: 'Notas',
             // backgroundColor: Theme.of(context).colorScheme.primary,
@@ -80,7 +80,7 @@ class _TabsScreenState extends State<TabsScreen> {
             icon: SvgPicture.asset(
               'assets/icons/configuracao.svg',
               height: 32,
-              color: _selectedScreen == 3 ? Theme.of(context).colorScheme.tertiary : Colors.white,
+              color: _selectedScreen == 2 ? Theme.of(context).colorScheme.tertiary : Colors.white,
             ),
             label: 'Configurações',
             // backgroundColor: Theme.of(context).colorScheme.primary,
