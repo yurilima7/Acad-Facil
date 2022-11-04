@@ -198,7 +198,6 @@ class _AddSchedulesState extends State<AddSchedules> {
                                       '${startTime.hour}:${startTime.minute} - ${endTime.hour}:${endTime.minute}',
                                     ),
                                     mounted: mounted,
-                                    context: context,
                                     day: day!,
                                     discipline: disciplines.name,
                                     duration:
@@ -211,7 +210,7 @@ class _AddSchedulesState extends State<AddSchedules> {
                                 });
                               }
                               else {
-                                Messages.showError(context,
+                                Messages.showError(
                                   'Erro ao inserir, verifique se horário de início e término estão corretos',
                                 );
                               }

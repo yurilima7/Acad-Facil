@@ -147,8 +147,6 @@ class _RegisterDataState extends State<RegisterData> {
                                       course: courseEC.text.trim(),
                                       period: int.tryParse(periodEC.text)!,
                                     ),
-                                    context,
-                                    mounted,
                                   );
 
                                   setState(() {

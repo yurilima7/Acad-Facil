@@ -40,7 +40,6 @@ class _ButtonRegisterState extends State<ButtonRegister> {
 
                 await Auth().registerUser(
                   AuthModel(
-                    context: context,
                     userName: widget.userName,
                     email: widget.email,
                     password: widget.password,

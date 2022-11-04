@@ -30,7 +30,7 @@ class ModalAddDisciplines extends StatelessWidget {
               ),
 
               ElevatedButton(
-                onPressed: () => Functions().addSchedules(disciplines, context),
+                onPressed: () => Functions().addSchedules(disciplines),
                 style: context.buttonStyles.circleButton,
                 child: const Icon(Icons.arrow_forward),
               ),
@@ -47,7 +47,7 @@ class ModalAddDisciplines extends StatelessWidget {
               ),
 
               ElevatedButton(
-                onPressed: () => Functions().addGrades(disciplines, context),
+                onPressed: () => Functions().addGrades(disciplines),
                 style: context.buttonStyles.circleButton,
                 child: const Icon(Icons.arrow_forward),
               ),

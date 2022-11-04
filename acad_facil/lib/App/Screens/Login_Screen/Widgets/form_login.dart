@@ -127,7 +127,7 @@ class _FormLoginState extends State<FormLogin> {
           
               TextButtonApp(
                 title: 'Cadastre-se',
-                action: () => Functions().registerScreen(context),
+                action: () => Functions().registerScreen(),
               ),
             ],
           ),

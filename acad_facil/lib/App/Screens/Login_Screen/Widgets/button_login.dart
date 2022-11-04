@@ -38,7 +38,6 @@ class _ButtonLoginState extends State<ButtonLogin> {
 
                 await Auth().signInEmail(
                   AuthModel(
-                    context: context,
                     email: widget.email,
                     password: widget.password,
                   ),

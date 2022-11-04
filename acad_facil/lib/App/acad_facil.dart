@@ -18,9 +18,11 @@ import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+ GlobalKey <NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+ GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+
 class AcadFacil extends StatelessWidget {
   const AcadFacil({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -28,30 +30,30 @@ class AcadFacil extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => DisciplinesControler(),
         ),
-
         ChangeNotifierProvider(
           create: (_) => UserController(),
         ),
       ],
-      
       child: MaterialApp(
+        navigatorKey: navigatorKey,
+        scaffoldMessengerKey: scaffoldMessengerKey,
         theme: ThemeSettings.theme,
         debugShowCheckedModeBanner: false,
-        
-        routes: { 
-          AppRoutes.userStateScreen:(context) => const UserStateScreen(),
-          AppRoutes.loginScreen:(context) => const Login(),
-          AppRoutes.tabs:(context) => const TabsScreen(),
-          AppRoutes.home:(context) => const HomeScreen(),
-          AppRoutes.settings:(context) => const SettingsScreen(),
-          AppRoutes.grades:(context) => const GradesScreen(),
-          AppRoutes.disciplines:(context) => const DisciplinesScreen(),
-          AppRoutes.details:(context) => const DetailsScreen(),
-          AppRoutes.registerScreen:(context) => const Register(),
-          AppRoutes.registerDataScreen:(context) => const RegisterData(),
-          AppRoutes.addDisciplines:(context) => const AddDisciplines(),
-          AppRoutes.addGrades:(context) => const AddGrades(),
-          AppRoutes.addSchedules:(context) => const AddSchedules(),
+
+        routes: {
+          AppRoutes.userStateScreen: (context) => const UserStateScreen(),
+          AppRoutes.loginScreen: (context) => const Login(),
+          AppRoutes.tabs: (context) => const TabsScreen(),
+          AppRoutes.home: (context) => const HomeScreen(),
+          AppRoutes.settings: (context) => const SettingsScreen(),
+          AppRoutes.grades: (context) => const GradesScreen(),
+          AppRoutes.disciplines: (context) => const DisciplinesScreen(),
+          AppRoutes.details: (context) => const DetailsScreen(),
+          AppRoutes.registerScreen: (context) => const Register(),
+          AppRoutes.registerDataScreen: (context) => const RegisterData(),
+          AppRoutes.addDisciplines: (context) => const AddDisciplines(),
+          AppRoutes.addGrades: (context) => const AddGrades(),
+          AppRoutes.addSchedules: (context) => const AddSchedules(),
         },
       ),
     );

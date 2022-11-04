@@ -156,7 +156,7 @@ class _FormRegisterState extends State<FormRegister> {
             children: [
               TextButtonApp(
                 title: 'Faça login',
-                action: () => Functions().login(context,),
+                action: () => Functions().login(),
               ),
             ],
           ),

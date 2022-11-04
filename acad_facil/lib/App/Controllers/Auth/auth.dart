@@ -15,16 +15,16 @@ class Auth {
         password: model.password,
       );
 
-      Functions().verify(model);
+      Functions().verify();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         returnMessenger = "Este e-mail não está cadastrado!";
       } else if (e.code == 'wrong-password') {
         returnMessenger = "Sua senha está incorreta, tente novamente!";
       }
-      Messages.showError(model.context, returnMessenger);
+      Messages.showError(returnMessenger);
     } catch (e) {
-      Messages.showError(model.context, returnMessenger);
+      Messages.showError(returnMessenger);
     }
   }
 
@@ -40,7 +40,7 @@ class Auth {
 
       userCredential.user!.updateDisplayName(model.userName);
 
-      Functions().loginScreen(model);
+      Functions().loginScreen();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         returnMessenger = "Senha não aceita, crie uma mais forte!";
@@ -48,9 +48,9 @@ class Auth {
         returnMessenger = "Este e-mail já está cadastrado!";
       }
 
-      Messages.showError(model.context, returnMessenger);
+      Messages.showError(returnMessenger);
     } catch (e) {
-      Messages.showError(model.context, returnMessenger);
+      Messages.showError(returnMessenger);
     }
   }
 
@@ -70,7 +70,7 @@ class Auth {
 
       await Constants.auth.signInWithCredential(credential);
 
-      Functions().verify(model);
+      Functions().verify();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-exists-with-different-credential') {
         returnMessenger = "Este e-mail já está cadastrado!";
@@ -78,20 +78,22 @@ class Auth {
         returnMessenger = "Conta inválida!";
       }
       
-      Messages.showError(model.context, returnMessenger);
+      Messages.showError(returnMessenger);
     } catch (e) {
       
-      Messages.showError(model.context, returnMessenger);
+      Messages.showError(returnMessenger);
     }
   }
 
   Future<void> logout(AuthModel model) async {
     try {
-      Constants.googleSignIn.signOut();
-      Constants.auth.signOut();
-      Functions().logoutApp(model);
+      await Constants.db.terminate();
+      await Constants.db.clearPersistence();
+      await Constants.googleSignIn.signOut();
+      await Constants.auth.signOut();
+      Functions().logoutApp();
     } catch (e) {
-      Messages.showError(model.context, 'Falha no logout!');
+      Messages.showError('Falha no logout!');
     }
   }
 }

@@ -25,9 +25,7 @@ class _GoogleLoginState extends State<GoogleLogin> {
           });
 
           await Auth().signInGoogle(
-            AuthModel(
-              context: context,
-            ),
+            AuthModel(),
           );
 
           setState(() {

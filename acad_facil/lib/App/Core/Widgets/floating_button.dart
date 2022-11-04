@@ -8,7 +8,7 @@ class FloatingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => Functions().addDisciplines(context),
+      onPressed: () => Functions().addDisciplines(),
       backgroundColor: ColorsStyles.white,
       child: Icon(Icons.add, color: ColorsStyles.secundary, size: 32),
     );

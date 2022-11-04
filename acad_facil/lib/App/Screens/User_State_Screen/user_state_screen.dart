@@ -33,9 +33,9 @@ class _UserStateScreenState extends State<UserStateScreen> {
     .authStateChanges()
     .listen((User? user) {
       if (user == null) {
-        Functions().login(context);
+        Functions().login();
       } else {
-        Functions().nextScreen(context);
+        Functions().nextScreen();
       }
     });
   }

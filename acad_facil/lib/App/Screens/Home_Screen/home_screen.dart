@@ -79,11 +79,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           providerDiscipline.disciplinesCount != 0
                             ? TextButtonApp(
                                 title: 'Ver todas',
-                                action: () => Functions().disciplinesScreenWithoutRemoving(context),
+                                action: () => Functions().disciplinesScreenWithoutRemoving(),
                               )
                             : TextButtonApp(
                                 title: 'Adicionar',
-                                action: () => Functions().disciplinesScreenWithoutRemoving(context),
+                                action: () => Functions().disciplinesScreenWithoutRemoving(),
                               ),
                         ],
                       ),

@@ -19,7 +19,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
      UserController providerUser = Provider.of<UserController>(context, listen: false);
     
     void logout() async {
-      await Auth().logout(AuthModel(context: context));
+      await Auth().logout(AuthModel());
     }
 
     return Padding(
@@ -30,20 +30,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
         children: [
           ElevatedButton(
-            onPressed: () => logout(),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorsStyles.secundary,
-              padding: const EdgeInsets.all(10),
-            ),
-            child: Text(
-              'Sair',
-              style: context.textStyles.mainTitle,
-            ),
-          ),
-
-          ElevatedButton(
             onPressed: () async {
-              await providerUser.deleteUser(context, mounted);
+              await providerUser.deleteUser();
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorsStyles.secundary,
@@ -51,6 +39,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             child: Text(
               'Encerrar conta',
+              style: context.textStyles.mainTitle,
+            ),
+          ),
+
+          ElevatedButton(
+            onPressed: () => logout(),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorsStyles.secundary,
+              padding: const EdgeInsets.all(10),
+            ), 
+            child: Text(
+              'Sair',
               style: context.textStyles.mainTitle,
             ),
           ),

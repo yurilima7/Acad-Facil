@@ -170,8 +170,6 @@ class _AddDisciplinesState extends State<AddDisciplines> {
                                         schedule: {},
                                         avarage: 0.0,
                                       ),
-                                      mounted,
-                                      context
                                     );
             
                                     setState(() {

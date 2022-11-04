@@ -1,104 +1,104 @@
 import 'package:acad_facil/App/Core/Data/constants.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Utils/messages.dart';
-import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
+import 'package:acad_facil/App/acad_facil.dart';
 import 'package:flutter/material.dart';
 
 class Functions {
-  void verify(AuthModel model) async {
+  void verify() async {
     await Constants.userRefence.doc(Constants.userId).get().then((doc) {
       if (doc.exists) {
-        homeScreen(model);
+        homeScreen();
       } else {
-        registerDataScreen(model);
+        registerDataScreen();
       }
     });
   }
 
-  void loginScreen(AuthModel model) {
-    Messages.showSuccess(model.context, 'Registro realizado com sucesso!');
+  void loginScreen() {
+    Messages.showSuccess('Registro realizado com sucesso!');
 
-    login(model.context);
+    login();
   }
 
-  void homeScreen(AuthModel model) {
-    Messages.showSuccess(model.context, 'Login realizado com sucesso!');
+  void homeScreen() {
+    Messages.showSuccess('Login realizado com sucesso!');
 
-    nextScreen(model.context);
+    nextScreen();
   }
 
-  void registerDataScreen(AuthModel model) {
-    Navigator.of(model.context).pushNamedAndRemoveUntil(
+  void registerDataScreen() {
+    navigatorKey.currentState!.pushNamedAndRemoveUntil(
       AppRoutes.registerDataScreen,
       (Route<dynamic> route) => false,
     );
   }
 
-  void logoutApp(AuthModel model) {
-    Messages.showSuccess(model.context, 'Logout realizado com sucesso!');
+  void logoutApp() {
+    Messages.showSuccess('Logout realizado com sucesso!');
 
-    Navigator.of(model.context).pushNamedAndRemoveUntil(
+    navigatorKey.currentState!.pushNamedAndRemoveUntil(
       AppRoutes.loginScreen,
       (Route<dynamic> route) => false,
     );
   }
 
-  void nextScreen(BuildContext context) {
-    Navigator.of(context).pushNamedAndRemoveUntil(
+  void nextScreen() {
+    navigatorKey.currentState!.pushNamedAndRemoveUntil(
       AppRoutes.tabs,
       (Route<dynamic> route) => false,
     );
   }
 
-  void login(BuildContext context) {
-    Navigator.of(context).pushNamedAndRemoveUntil(
+  void login() {
+    navigatorKey.currentState!.pushNamedAndRemoveUntil(
       AppRoutes.loginScreen,
       (Route<dynamic> route) => false,
     );
   }
 
-  void registerScreen(BuildContext context){
-    Navigator.of(context).pushNamed(
+  void registerScreen() {
+    navigatorKey.currentState!.pushNamed(
       AppRoutes.registerScreen,
     );
   }
 
-  void disciplinesScreen(BuildContext context){
-    Navigator.of(context).pushNamedAndRemoveUntil(
+  void disciplinesScreen() {
+    navigatorKey.currentState!.pushNamedAndRemoveUntil(
       AppRoutes.disciplines,
       (Route<dynamic> route) => false,
     );
   }
 
-  void addSchedules(Disciplines disciplines, BuildContext context) {
-    Navigator.of(context).pop();// fecha modal
-    Navigator.of(context).pushNamed(
+  void addSchedules(Disciplines disciplines) {
+    navigatorKey.currentState!.pop(); // fecha modal
+    navigatorKey.currentState!.pushNamed(
       AppRoutes.addSchedules,
       arguments: disciplines,
     );
   }
 
-  void addGrades(Disciplines disciplines, BuildContext context) {
-    Navigator.of(context).pop();// fecha modal
-    Navigator.of(context).pushNamed(
+  void addGrades(Disciplines disciplines) {
+    navigatorKey.currentState!.pop(); // fecha modal
+    navigatorKey.currentState!.pushNamed(
       AppRoutes.addGrades,
       arguments: disciplines,
     );
   }
 
-  void detailsScreen(Disciplines discipline, BuildContext context) {
-    Navigator.of(context).pushNamed(
-        AppRoutes.details,
-        arguments: discipline,
+  void detailsScreen(Disciplines discipline) {
+    navigatorKey.currentState!.pushNamed(
+      AppRoutes.details,
+      arguments: discipline,
     );
   }
 
-  void disciplinesScreenWithoutRemoving(BuildContext context) {
-    Navigator.of(context).pushNamed(AppRoutes.disciplines);
+  void disciplinesScreenWithoutRemoving() {
+    navigatorKey.currentState!.pushNamed(AppRoutes.disciplines);
   }
 
-  void addDisciplines(BuildContext context) {
-    Navigator.of(context).pushNamed(AppRoutes.addDisciplines);
+  void addDisciplines() {
+    navigatorKey.currentState!.pushNamed(AppRoutes.addDisciplines);
   }
 }

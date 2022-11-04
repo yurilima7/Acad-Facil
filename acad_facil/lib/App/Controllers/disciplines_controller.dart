@@ -51,11 +51,7 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
   }
 
   @override
-  Future<void> addDisciplines(
-    Disciplines discipline,
-    bool mounted,
-    BuildContext context,
-  ) async {
+  Future<void> addDisciplines(Disciplines discipline) async {
     try {
       var newDisciplineRef = Constants.disciplinesReference.doc();
 
@@ -76,9 +72,8 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
         avarage: 0.0,
       ));
 
-      if (!mounted) return;
-      Messages.showSuccess(context, 'Dados inseridos com sucesso!');
-      Functions().nextScreen(context);
+      Messages.showSuccess('Dados inseridos com sucesso!');
+      Functions().nextScreen();
     } on FirebaseException catch (e) {
       log(e.toString());
     } on Exception catch (e) {
@@ -97,6 +92,7 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
       await Constants.disciplinesReference.doc(discipline.id).delete();
 
       _disciplines.remove(delDiscipline);
+      Messages.showSuccess('Disciplina deletada com sucesso!');
     } on FirebaseException catch (e) {
       log(e.toString());
     } on Exception catch (e) {
@@ -109,8 +105,6 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
     String id,
     Map<String, double> grade,
     double avarage,
-    bool mounted,
-    BuildContext context,
   ) async {
     if (grade.length < 6) {
       try {
@@ -119,9 +113,8 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
           'avarage': avarage,
         });
 
-        if (!mounted) return;
-        Messages.showSuccess(context, 'Nota adicionada com sucesso!');
-        Functions().nextScreen(context);
+        Messages.showSuccess('Nota adicionada com sucesso!');
+        Functions().nextScreen();
       } on FirebaseException catch (e) {
         log(e.toString());
       } on Exception catch (e) {
@@ -130,10 +123,7 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
 
       notifyListeners();
     } else {
-      Messages.showError(
-        context,
-        'Máximo de 5 notas já alcançado!',
-      );
+      Messages.showError('Máximo de 5 notas já alcançado!');
     }
   }
 
@@ -144,9 +134,8 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
         'schedule': model.schedule,
       });
 
-      if (!model.mounted) return;
-      Messages.showSuccess(model.context, 'Horário adicionado com sucesso!');
-      Functions().nextScreen(model.context);
+      Messages.showSuccess('Horário adicionado com sucesso!');
+      Functions().nextScreen();
     } on FirebaseException catch (e) {
       log(e.toString());
     } on Exception catch (e) {

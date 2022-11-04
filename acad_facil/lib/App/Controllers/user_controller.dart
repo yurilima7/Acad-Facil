@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:acad_facil/App/Controllers/user_provider.dart';
 import 'package:acad_facil/App/Core/Data/constants.dart';
-import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Models/user.dart';
@@ -13,9 +12,9 @@ class UserController with ChangeNotifier implements UserProvider {
   User _user = User();
   User get user => _user;
 
-  void successAction(BuildContext context) {
-    Messages.showSuccess(context, 'Dados inseridos com sucesso!');
-    Functions().nextScreen(context);
+  void successAction() {
+    Messages.showSuccess('Dados inseridos com sucesso!');
+    Functions().nextScreen();
   }
 
   @override
@@ -39,7 +38,7 @@ class UserController with ChangeNotifier implements UserProvider {
   }
 
   @override
-  Future<void> addData(User user, BuildContext context, bool mounted) async {
+  Future<void> addData(User user) async {
 
     try {
       await Constants.idUserCollection.set({
@@ -48,8 +47,7 @@ class UserController with ChangeNotifier implements UserProvider {
         'period': user.period,
       });
       
-      if (!mounted) return;
-      successAction(context);
+      successAction();
     } on FirebaseException catch (e) {
       log(e.toString());
     } on Exception catch (e) {
@@ -58,7 +56,7 @@ class UserController with ChangeNotifier implements UserProvider {
   }
 
   @override
-  Future<void> deleteUser(BuildContext context, bool mounted) async {
+  Future<void> deleteUser() async {
     try {
       await Constants.disciplinesReference.get()
         .then(
@@ -71,10 +69,8 @@ class UserController with ChangeNotifier implements UserProvider {
 
       await Constants.userRefence.doc(Constants.userId).delete();
       await Constants.user?.delete();
-      if(!mounted) return;
-      Messages.showSuccess(context, 'Conta deletada com sucesso!');
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(AppRoutes.loginScreen, (route) => false);
+      Messages.showSuccess('Conta deletada com sucesso!');
+      Functions().login();
     } on FirebaseException catch (e) {
       log(e.toString());
     } on Exception catch (e) {

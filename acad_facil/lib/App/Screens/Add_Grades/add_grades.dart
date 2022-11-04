@@ -130,8 +130,6 @@ class _AddGradesState extends State<AddGrades> {
                                       disciplines.id,
                                       grades({'n$gradesLength': double.tryParse(gradeEC.text)!},),
                                       avagare(double.tryParse(gradeEC.text)!),
-                                      mounted,
-                                      context
                                     );
                               
                                     setState(() {

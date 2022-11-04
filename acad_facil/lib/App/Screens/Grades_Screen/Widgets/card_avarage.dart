@@ -21,7 +21,7 @@ class CardAvarage extends StatelessWidget {
     final discipline = Provider.of<Disciplines>(context, listen: false);
 
     return InkWell(
-      onTap: () => Functions().detailsScreen(discipline, context),
+      onTap: () => Functions().detailsScreen(discipline),
 
       child: Card(
         color: ColorsStyles.secundary,
