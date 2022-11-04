@@ -85,13 +85,13 @@ class Auth {
     }
   }
 
-  Future<void> logout(AuthModel model) async {
+  Future<void> logout(String msg) async {
     try {
       await Constants.db.terminate();
       await Constants.db.clearPersistence();
       await Constants.googleSignIn.signOut();
       await Constants.auth.signOut();
-      Functions().logoutApp();
+      Functions().logoutApp(msg);
     } catch (e) {
       Messages.showError('Falha no logout!');
     }

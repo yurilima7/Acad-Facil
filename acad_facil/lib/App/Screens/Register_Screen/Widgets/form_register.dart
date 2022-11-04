@@ -1,8 +1,10 @@
+import 'package:acad_facil/App/Controllers/Auth/auth.dart';
+import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
-import 'package:acad_facil/App/Screens/Register_Screen/Widgets/button_register.dart';
+import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -19,6 +21,7 @@ class _FormRegisterState extends State<FormRegister> {
   final passwordEC = TextEditingController();
   final userNameEC = TextEditingController();
   bool lookPassword = false;
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -26,6 +29,28 @@ class _FormRegisterState extends State<FormRegister> {
     passwordEC.dispose();
     userNameEC.dispose();
     super.dispose();
+  }
+
+  void screenLogin(String? text) async {
+    final valid = formKey.currentState?.validate() ?? false;
+
+    if (valid) {
+      setState(() {
+        isLoading = true;
+      });
+
+      await Auth().registerUser(
+        AuthModel(
+          userName: userNameEC.text.trim(),
+          email: emailEC.text.trim(),
+          password: passwordEC.text.trim(),
+        ),
+      );
+
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
   
   @override
@@ -41,7 +66,7 @@ class _FormRegisterState extends State<FormRegister> {
             controller: userNameEC,
             cursorColor: ColorsStyles.white,
             style: context.textStyles.secundaryTitle,
-            keyboardType: TextInputType.emailAddress,
+            textInputAction: TextInputAction.next,
             
             decoration: InputDecoration(
     
@@ -72,6 +97,8 @@ class _FormRegisterState extends State<FormRegister> {
             controller: emailEC,
             cursorColor: ColorsStyles.white,
             style: context.textStyles.secundaryTitle,
+            keyboardType: TextInputType.emailAddress,
+            textInputAction: TextInputAction.next,
     
             decoration: InputDecoration(
               label: Text(
@@ -102,6 +129,8 @@ class _FormRegisterState extends State<FormRegister> {
             controller: passwordEC,
             cursorColor: ColorsStyles.white,
             style: context.textStyles.secundaryTitle,
+            textInputAction: TextInputAction.done,
+            onFieldSubmitted: screenLogin,
             obscureText: !lookPassword ? true : false,
     
             decoration: InputDecoration(
@@ -173,13 +202,14 @@ class _FormRegisterState extends State<FormRegister> {
                 'Cadastrar',
                 style: context.textStyles.authTitle,
               ),
-    
-              ButtonRegister(
-                email: emailEC.text.trim(),
-                password: passwordEC.text.trim(),
-                userName: userNameEC.text.trim(),
-                formKey: formKey,
-              ),
+
+              isLoading
+                ? CircularProgressIndicator(color: ColorsStyles.terciary,)
+                : ElevatedButton(
+                    onPressed: () => screenLogin(''),
+                    style: context.buttonStyles.circleButton,
+                    child: const Icon(Icons.arrow_forward),
+                  ),
             ],
           ),
         ],

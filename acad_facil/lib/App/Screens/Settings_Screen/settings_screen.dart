@@ -2,7 +2,6 @@ import 'package:acad_facil/App/Controllers/Auth/auth.dart';
 import 'package:acad_facil/App/Controllers/user_controller.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
-import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +18,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
      UserController providerUser = Provider.of<UserController>(context, listen: false);
     
     void logout() async {
-      await Auth().logout(AuthModel());
+      await Auth().logout('Logout realizado com sucesso!');
     }
 
     return Padding(

@@ -5,19 +5,15 @@ import 'package:flutter/material.dart';
 class InformationCard extends StatelessWidget {
   final String title;
   final String subTitle;
-  final bool isCourse;
 
   const InformationCard({
     super.key,
     required this.title,
     required this.subTitle,
-    this.isCourse = true,
   });
 
   @override
   Widget build(BuildContext context) {
-
-    Image image = Image.asset('assets/icons/book.png');
 
     return Card(
     
@@ -43,13 +39,11 @@ class InformationCard extends StatelessWidget {
                 ],
               ),
               
-              trailing: isCourse 
-                ? Icon(
-                    Icons.school,
-                    color: ColorsStyles.white,
-                    size: 90,
-                )
-                : image,
+              trailing: Icon(
+                  Icons.school,
+                  color: ColorsStyles.white,
+                  size: 90,
+              ),
             ),
     
             Padding(

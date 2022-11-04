@@ -35,8 +35,8 @@ class Functions {
     );
   }
 
-  void logoutApp() {
-    Messages.showSuccess('Logout realizado com sucesso!');
+  void logoutApp(String msg) {
+    Messages.showSuccess(msg);
 
     navigatorKey.currentState!.pushNamedAndRemoveUntil(
       AppRoutes.loginScreen,

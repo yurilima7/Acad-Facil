@@ -42,8 +42,10 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
             .toList();
       });
     } on FirebaseException catch (e) {
+      Messages.showError('Falha na leitura, tente novamente!');
       log(e.toString());
     } on Exception catch (e) {
+      Messages.showError('Falha na leitura, tente novamente!');
       log(e.toString());
     }
 
@@ -75,8 +77,10 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
       Messages.showSuccess('Dados inseridos com sucesso!');
       Functions().nextScreen();
     } on FirebaseException catch (e) {
+      Messages.showError('Falha ao inserir dados, tente novamente!');
       log(e.toString());
     } on Exception catch (e) {
+      Messages.showError('Falha ao inserir dados, tente novamente!');
       log(e.toString());
     }
 
@@ -94,8 +98,10 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
       _disciplines.remove(delDiscipline);
       Messages.showSuccess('Disciplina deletada com sucesso!');
     } on FirebaseException catch (e) {
+      Messages.showError('Falha ao deletar disciplina, tente novamente!');
       log(e.toString());
     } on Exception catch (e) {
+      Messages.showError('Falha ao deletar disciplina, tente novamente!');
       log(e.toString());
     }
   }
@@ -116,8 +122,10 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
         Messages.showSuccess('Nota adicionada com sucesso!');
         Functions().nextScreen();
       } on FirebaseException catch (e) {
+        Messages.showError('Falha ao registrar nota, tente novamente!');
         log(e.toString());
       } on Exception catch (e) {
+        Messages.showError('Falha ao registrar nota, tente novamente!');
         log(e.toString());
       }
 
@@ -137,8 +145,10 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
       Messages.showSuccess('Horário adicionado com sucesso!');
       Functions().nextScreen();
     } on FirebaseException catch (e) {
+      Messages.showError('Falha ao registrar horário, tente novamente!');
       log(e.toString());
     } on Exception catch (e) {
+      Messages.showError('Falha ao registrar horário, tente novamente!');
       log(e.toString());
     }
   }

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:acad_facil/App/Controllers/Auth/auth.dart';
 import 'package:acad_facil/App/Controllers/user_provider.dart';
 import 'package:acad_facil/App/Core/Data/constants.dart';
 import 'package:acad_facil/App/Core/Utils/functions.dart';
@@ -29,8 +30,10 @@ class UserController with ChangeNotifier implements UserProvider {
         );
       });
     } on FirebaseException catch (e) {
+      Messages.showError('Falha na leitura, tente novamente!');
       log(e.toString());
     } on Exception catch (e) {
+      Messages.showError('Falha na leitura, tente novamente!');
       log(e.toString());
     }
 
@@ -49,8 +52,10 @@ class UserController with ChangeNotifier implements UserProvider {
       
       successAction();
     } on FirebaseException catch (e) {
+      Messages.showError('Falha ao inserir dados, tente novamente!');
       log(e.toString());
     } on Exception catch (e) {
+      Messages.showError('Falha ao inserir dados, tente novamente!');
       log(e.toString());
     }
   }
@@ -69,11 +74,12 @@ class UserController with ChangeNotifier implements UserProvider {
 
       await Constants.userRefence.doc(Constants.userId).delete();
       await Constants.user?.delete();
-      Messages.showSuccess('Conta deletada com sucesso!');
-      Functions().login();
+      Auth().logout('Conta deletada com sucesso!');
     } on FirebaseException catch (e) {
+      Messages.showError('Falha ao deletar conta, tente novamente!');
       log(e.toString());
     } on Exception catch (e) {
+      Messages.showError('Falha ao deletar conta, tente novamente!');
       log(e.toString());
     }
   }

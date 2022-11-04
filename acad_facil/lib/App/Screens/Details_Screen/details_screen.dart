@@ -61,7 +61,6 @@ class DetailsScreen extends StatelessWidget {
                     InformationCard(
                       title: "Sala ${disciplines.classroom}",
                       subTitle: "Periodo: ${disciplines.period}°",
-                      isCourse: false,
                     ),
             
                     Wrap(
