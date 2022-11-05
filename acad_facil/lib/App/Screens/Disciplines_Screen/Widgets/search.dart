@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Search extends StatefulWidget {
-  const Search({Key? key}) : super(key: key);
+  final TextEditingController controller;
+  final Function(String) onChanged;
+
+  const Search({
+    Key? key,
+    required this.onChanged,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   State<Search> createState() => _SearchState();
@@ -14,11 +21,10 @@ class _SearchState extends State<Search> {
     return TextFormField( 
       // coloração do texto digitado
       style: const TextStyle(color: Colors.white),
+      controller: widget.controller,
+      onChanged: widget.onChanged,
 
       decoration: InputDecoration(
-        // desativa a subida da label
-        floatingLabelBehavior: FloatingLabelBehavior.never, 
-       
         border: OutlineInputBorder(
           // definindo o tamanho das bordas
           borderRadius: BorderRadius.circular(20.0),
