@@ -1,8 +1,8 @@
 import 'package:acad_facil/App/Controllers/Auth/auth.dart';
-import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/functions.dart';
+import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:acad_facil/App/Screens/Login_Screen/Widgets/google_login.dart';
@@ -30,7 +30,7 @@ class _FormLoginState extends State<FormLogin> {
     super.dispose();
   }
 
-  void home(String? text) async {
+  void home() async {
     final valid = formKey.currentState?.validate() ?? false;
 
     if (valid) {
@@ -98,7 +98,7 @@ class _FormLoginState extends State<FormLogin> {
             style: context.textStyles.secundaryTitle,
             textInputAction: TextInputAction.done,
             obscureText: !lookPassword ? true : false,
-            onFieldSubmitted: home,
+            onFieldSubmitted: (_) => home(),
           
             decoration: InputDecoration(
               label: Text(
@@ -172,11 +172,7 @@ class _FormLoginState extends State<FormLogin> {
 
               isLoading
                 ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                : ElevatedButton(
-                    onPressed: () => home(''),
-                    style: context.buttonStyles.circleButton,
-                    child: const Icon(Icons.arrow_forward),
-                  ),
+                : Button(action: home),
             ],
           ),
         ],

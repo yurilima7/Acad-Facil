@@ -1,7 +1,7 @@
 import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
-import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
+import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,6 +53,26 @@ class _AddGradesState extends State<AddGrades> {
       return disciplines.grades;
     }
 
+    void registerGrade() async {
+      final valid = formKey.currentState?.validate() ?? false;
+
+      if (valid) {
+        setState(() {
+          isLoading = true;
+        });
+        
+        await disciplinesProvider.addGrades(
+          disciplines.id,
+          grades({'n$gradesLength': double.tryParse(gradeEC.text)!},),
+          avagare(double.tryParse(gradeEC.text)!),
+        );
+  
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       
@@ -82,6 +102,8 @@ class _AddGradesState extends State<AddGrades> {
                       style: context.textStyles.secundaryTitle,
                       controller: gradeEC,
                       keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (_) => registerGrade(),
                       
                       decoration: InputDecoration(
                         label: Text(
@@ -116,30 +138,7 @@ class _AddGradesState extends State<AddGrades> {
             
                         isLoading
                           ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                          : ElevatedButton(
-                              onPressed: () async {
-                                  final valid =
-                                      formKey.currentState?.validate() ?? false;
-            
-                                  if (valid) {
-                                    setState(() {
-                                      isLoading = true;
-                                    });
-                                    
-                                    await disciplinesProvider.addGrades(
-                                      disciplines.id,
-                                      grades({'n$gradesLength': double.tryParse(gradeEC.text)!},),
-                                      avagare(double.tryParse(gradeEC.text)!),
-                                    );
-                              
-                                    setState(() {
-                                      isLoading = false;
-                                    });
-                                  }
-                              },
-                              style: context.buttonStyles.circleButton,
-                              child: const Icon(Icons.arrow_forward),
-                            ),
+                          : Button(action: registerGrade),
                       ],
                     ),
                   ],

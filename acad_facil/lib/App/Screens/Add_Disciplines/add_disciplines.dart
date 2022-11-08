@@ -1,7 +1,7 @@
 import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
-import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
+import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +31,33 @@ class _AddDisciplinesState extends State<AddDisciplines> {
 
   @override
   Widget build(BuildContext context) {
-     final disciplinesProvider = Provider.of<DisciplinesControler>(context);
+    final disciplinesProvider = Provider.of<DisciplinesControler>(context);
+
+    void registerDiscipline() async {
+      final valid = formKey.currentState?.validate() ?? false;
+
+      if (valid) {
+        setState(() {
+          isLoading = true;
+        });
+        
+        await disciplinesProvider.addDisciplines(
+          Disciplines(
+            id: '',
+            name: nameEC.text.trim(),
+            classroom: classroomEC.text.trim(),
+            grades: {},
+            period: int.tryParse(periodEC.text)!,
+            schedule: {},
+            avarage: 0.0,
+          ),
+        );
+
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -60,6 +86,7 @@ class _AddDisciplinesState extends State<AddDisciplines> {
                     TextFormField(    
                       cursorColor: ColorsStyles.white,
                       style: context.textStyles.secundaryTitle,
+                      textInputAction: TextInputAction.next,
                       controller: nameEC,
                       
                       decoration: InputDecoration(
@@ -88,6 +115,7 @@ class _AddDisciplinesState extends State<AddDisciplines> {
                       cursorColor: ColorsStyles.white,
                       style: context.textStyles.secundaryTitle,
                       controller: classroomEC,
+                      textInputAction: TextInputAction.next,
                       
                       decoration: InputDecoration(
                         label: Text(
@@ -116,6 +144,8 @@ class _AddDisciplinesState extends State<AddDisciplines> {
                       style: context.textStyles.secundaryTitle,
                       controller: periodEC,
                       keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (_) => registerDiscipline(),
                       
                       decoration: InputDecoration(
                         label: Text(
@@ -150,36 +180,7 @@ class _AddDisciplinesState extends State<AddDisciplines> {
             
                         isLoading
                           ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                          : ElevatedButton(
-                              onPressed: () async {
-                                  final valid =
-                                      formKey.currentState?.validate() ?? false;
-            
-                                  if (valid) {
-                                    setState(() {
-                                      isLoading = true;
-                                    });
-                                    
-                                    await disciplinesProvider.addDisciplines(
-                                      Disciplines(
-                                        id: '',
-                                        name: nameEC.text.trim(),
-                                        classroom: classroomEC.text.trim(),
-                                        grades: {},
-                                        period: int.tryParse(periodEC.text)!,
-                                        schedule: {},
-                                        avarage: 0.0,
-                                      ),
-                                    );
-            
-                                    setState(() {
-                                      isLoading = false;
-                                    });
-                                  }
-                              },
-                              style: context.buttonStyles.circleButton,
-                              child: const Icon(Icons.arrow_forward),
-                            ),
+                          : Button(action: registerDiscipline),
                       ],
                     ),
                   ],
