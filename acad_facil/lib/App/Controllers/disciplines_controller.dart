@@ -97,6 +97,7 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
 
       _disciplines.remove(delDiscipline);
       Messages.showSuccess('Disciplina deletada com sucesso!');
+      Functions().nextScreen();
     } on FirebaseException catch (e) {
       Messages.showError('Falha ao deletar disciplina, tente novamente!');
       log(e.toString());

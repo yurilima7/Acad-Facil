@@ -1,7 +1,6 @@
 import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
-import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/information_card.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/modal_add_disciplines.dart';
@@ -96,11 +95,6 @@ class DetailsScreen extends StatelessWidget {
                           onPressed: () {
                             disciplinesProvider
                                 .deleteDisciplines(disciplines);
-                                
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                              AppRoutes.tabs,
-                              (Route<dynamic> route) => false,
-                            );
                           },
                           icon: Icon(
                             Icons.delete,

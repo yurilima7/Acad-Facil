@@ -47,9 +47,7 @@ class _AddGradesState extends State<AddGrades> {
     }
 
     Map<String, double> grades( Map<String, double> grade) {
-      disciplines.grades.addAll(
-        {'n$gradesLength': double.tryParse(gradeEC.text)!},
-      );
+      disciplines.grades.addAll(grade);
       return disciplines.grades;
     }
 

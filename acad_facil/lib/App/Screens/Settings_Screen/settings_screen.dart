@@ -1,7 +1,6 @@
 import 'package:acad_facil/App/Controllers/Auth/auth.dart';
 import 'package:acad_facil/App/Controllers/user_controller.dart';
-import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
-import 'package:acad_facil/App/Core/Styles/text_styles.dart';
+import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,38 +20,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
       await Auth().logout('Logout realizado com sucesso!');
     }
 
+    void delete() async {
+      await providerUser.deleteUser();
+    }
+
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
-          ElevatedButton(
-            onPressed: () async {
-              await providerUser.deleteUser();
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorsStyles.secundary,
-              padding: const EdgeInsets.all(10),
-            ),
-            child: Text(
-              'Encerrar conta',
-              style: context.textStyles.mainTitle,
-            ),
-          ),
+          TextButtonApp(title: 'Encerrar conta', action: delete),
 
-          ElevatedButton(
-            onPressed: () => logout(),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorsStyles.secundary,
-              padding: const EdgeInsets.all(10),
-            ), 
-            child: Text(
-              'Sair',
-              style: context.textStyles.mainTitle,
-            ),
-          ),
+          TextButtonApp(title: 'Sair da conta', action: logout),
         ],
       ),
     );
