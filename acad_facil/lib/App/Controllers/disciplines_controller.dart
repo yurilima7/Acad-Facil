@@ -4,7 +4,6 @@ import 'package:acad_facil/App/Controllers/disciplines_provider.dart';
 import 'package:acad_facil/App/Core/Data/constants.dart';
 import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Core/Utils/messages.dart';
-import 'package:acad_facil/App/Models/add_schedule_model.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -31,11 +30,8 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
                 id: item.id,
                 name: item.data()['name'],
                 classroom: item.data()['classroom'],
-                grades: Map.castFrom<String, dynamic, String, double>(
-                    item.data()['grades'] ?? {}),
+                grades: item.data()['grades'] ?? [],
                 period: item.data()['period'],
-                schedule: Map.castFrom<String, dynamic, String, String>(
-                    item.data()['schedule'] ?? {}),
                 avarage: item.data()['avarage'],
               ),
             )
@@ -68,9 +64,8 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
         id: newDisciplineRef.id,
         name: discipline.name,
         classroom: discipline.classroom,
-        grades: {},
+        grades: [],
         period: discipline.period,
-        schedule: {},
         avarage: 0.0,
       ));
 
@@ -110,7 +105,7 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
   @override
   Future<void> addGrades(
     String id,
-    Map<String, double> grade,
+    List grade,
     double avarage,
   ) async {
     if (grade.length < 6) {
@@ -133,24 +128,6 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
       notifyListeners();
     } else {
       Messages.showError('Máximo de 5 notas já alcançado!');
-    }
-  }
-
-  @override
-  Future<void> addSchedules(AddScheduleModel model) async {
-    try {
-      await Constants.disciplinesReference.doc(model.id).update({
-        'schedule': model.schedule,
-      });
-
-      Messages.showSuccess('Horário adicionado com sucesso!');
-      Functions().nextScreen();
-    } on FirebaseException catch (e) {
-      Messages.showError('Falha ao registrar horário, tente novamente!');
-      log(e.toString());
-    } on Exception catch (e) {
-      Messages.showError('Falha ao registrar horário, tente novamente!');
-      log(e.toString());
     }
   }
 }

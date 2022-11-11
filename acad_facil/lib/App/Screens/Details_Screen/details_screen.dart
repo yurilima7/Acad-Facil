@@ -5,7 +5,6 @@ import 'package:acad_facil/App/Core/Widgets/information_card.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/modal_add_disciplines.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/grid_grades.dart';
-import 'package:acad_facil/App/Screens/Details_Screen/Widgets/grid_schedule.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/local_avarage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -69,16 +68,6 @@ class DetailsScreen extends StatelessWidget {
                       children: [
                         Text('Notas', style: context.textStyles.mainTitle,),
                         GridGrades(disciplines: disciplines),
-                      ],
-                    ),
-                    
-                    Wrap(
-                      alignment: WrapAlignment.start,
-                      runSpacing: 9,
-            
-                      children: [
-                        Text('Aulas', style: context.textStyles.mainTitle,),
-                        GridSchedule(schedules: disciplines.schedule),
                       ],
                     ),
 

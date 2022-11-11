@@ -12,7 +12,7 @@ class ModalAddDisciplines extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: 100,
       color: ColorsStyles.primary,
       padding: const EdgeInsets.all(20.0),
 
@@ -20,22 +20,6 @@ class ModalAddDisciplines extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
 
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-            children: [
-              Text(
-                'Adicionar Horário',
-                style: context.textStyles.mainTitle,
-              ),
-
-              ElevatedButton(
-                onPressed: () => Functions().addSchedules(disciplines),
-                style: context.buttonStyles.circleButton,
-                child: const Icon(Icons.arrow_forward),
-              ),
-            ],
-          ),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

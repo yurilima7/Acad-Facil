@@ -14,7 +14,6 @@ class GridGrades extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final disciplinesCount = disciplines.grades.length;
-
     return SizedBox(
       
       child: disciplinesCount > 0 ? GridView.builder(
@@ -32,7 +31,7 @@ class GridGrades extends StatelessWidget {
         itemCount: disciplinesCount <= 5? disciplinesCount : 5,
           itemBuilder: (context, i) => GradesForm(
             i: i + 1,
-            grade: disciplines.grades.values.elementAt(i),
+            grade: disciplines.grades[i],
           ),
       )
       :

@@ -37,8 +37,7 @@ class _AddGradesState extends State<AddGrades> {
     double avagare(double newGrade) {
 
       if (gradesLength - 1 > 0) {
-        var grades = disciplines.grades.entries.map((grade) => grade.value);
-        var sum = grades.reduce((value, element) => value + element);
+        var sum = disciplines.grades.reduce((sum, element) => sum + element);
         return sum / gradesLength;
       }
       else {
@@ -46,8 +45,8 @@ class _AddGradesState extends State<AddGrades> {
       }     
     }
 
-    Map<String, double> grades( Map<String, double> grade) {
-      disciplines.grades.addAll(grade);
+    List grades(double grade) {
+      disciplines.grades.add(grade);
       return disciplines.grades;
     }
 
@@ -61,7 +60,7 @@ class _AddGradesState extends State<AddGrades> {
         
         await disciplinesProvider.addGrades(
           disciplines.id,
-          grades({'n$gradesLength': double.tryParse(gradeEC.text)!},),
+          grades(double.tryParse(gradeEC.text)!),
           avagare(double.tryParse(gradeEC.text)!),
         );
   

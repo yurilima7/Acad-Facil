@@ -46,9 +46,8 @@ class _AddDisciplinesState extends State<AddDisciplines> {
             id: '',
             name: nameEC.text.trim(),
             classroom: classroomEC.text.trim(),
-            grades: {},
+            grades: [],
             period: int.tryParse(periodEC.text)!,
-            schedule: {},
             avarage: 0.0,
           ),
         );

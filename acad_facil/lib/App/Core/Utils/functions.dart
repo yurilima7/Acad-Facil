@@ -71,14 +71,6 @@ class Functions {
     );
   }
 
-  void addSchedules(Disciplines disciplines) {
-    navigatorKey.currentState!.pop(); // fecha modal
-    navigatorKey.currentState!.pushNamed(
-      AppRoutes.addSchedules,
-      arguments: disciplines,
-    );
-  }
-
   void addGrades(Disciplines disciplines) {
     navigatorKey.currentState!.pop(); // fecha modal
     navigatorKey.currentState!.pushNamed(

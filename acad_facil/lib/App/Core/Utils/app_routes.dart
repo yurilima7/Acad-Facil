@@ -11,5 +11,4 @@ class AppRoutes {
   static const userStateScreen = '/';
   static const addDisciplines = '/addDisciplines';
   static const addGrades = '/addGrades';
-  static const addSchedules = '/addSchedules';
 }

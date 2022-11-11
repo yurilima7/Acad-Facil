@@ -5,8 +5,7 @@ class Disciplines with ChangeNotifier{
   String name;
   String classroom;
   int period;
-  Map<String, double> grades;
-  Map<String, String> schedule;
+  List grades;
   double avarage;
 
   Disciplines({
@@ -15,7 +14,6 @@ class Disciplines with ChangeNotifier{
     required this.classroom,
     required this.grades,
     required this.period,
-    required this.schedule,
     required this.avarage,
   });
 }
