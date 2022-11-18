@@ -57,6 +57,11 @@ class TextStyles {
     fontSize: 30,
   );
 
+  TextStyle get alertTitle => primaryRegular.copyWith(
+    color: ColorsStyles.white,
+    fontSize: 20,
+  );
+
   TextStyle get appBarTitle => primaryRegular.copyWith(
     color: ColorsStyles.white,
     fontSize: 20,

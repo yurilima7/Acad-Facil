@@ -1,6 +1,7 @@
 import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
+import 'package:acad_facil/App/Core/Widgets/alert.dart';
 import 'package:acad_facil/App/Core/Widgets/information_card.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/modal_add_disciplines.dart';
@@ -18,6 +19,10 @@ class DetailsScreen extends StatelessWidget {
     final disciplinesProvider = Provider.of<DisciplinesControler>(context);
     Disciplines disciplines =
         ModalRoute.of(context)!.settings.arguments as Disciplines;
+
+    void deleteDiscipline() {
+      disciplinesProvider.deleteDisciplines(disciplines);
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -81,10 +86,10 @@ class DetailsScreen extends StatelessWidget {
                         ),
 
                         IconButton(
-                          onPressed: () {
-                            disciplinesProvider
-                                .deleteDisciplines(disciplines);
-                          },
+                          onPressed: () => showDialog(
+                            context: context,
+                            builder: (_) => Alert(action: deleteDiscipline),
+                          ),
                           icon: Icon(
                             Icons.delete,
                             size: 28,
