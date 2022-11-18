@@ -1,6 +1,6 @@
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
-import 'package:acad_facil/App/Core/Utils/functions.dart';
+import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/sticker_percent.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class CardAvarage extends StatelessWidget {
     final discipline = Provider.of<Disciplines>(context, listen: false);
 
     return InkWell(
-      onTap: () => Functions().detailsScreen(discipline),
+      onTap: () => NavigatorRoutes().detailsScreen(discipline),
 
       child: Card(
         color: ColorsStyles.secundary,

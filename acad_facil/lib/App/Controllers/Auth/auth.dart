@@ -1,5 +1,5 @@
 import 'package:acad_facil/App/Core/Data/constants.dart';
-import 'package:acad_facil/App/Core/Utils/functions.dart';
+import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,7 +15,7 @@ class Auth {
         password: model.password,
       );
 
-      Functions().verify();
+      NavigatorRoutes().verify();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         returnMessenger = "Este e-mail não está cadastrado!";
@@ -40,7 +40,7 @@ class Auth {
 
       userCredential.user!.updateDisplayName(model.userName);
 
-      Functions().loginScreen();
+      NavigatorRoutes().loginScreen();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         returnMessenger = "Senha não aceita, crie uma mais forte!";
@@ -70,7 +70,7 @@ class Auth {
 
       await Constants.auth.signInWithCredential(credential);
 
-      Functions().verify();
+      NavigatorRoutes().verify();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-exists-with-different-credential') {
         returnMessenger = "Este e-mail já está cadastrado!";
@@ -91,7 +91,7 @@ class Auth {
       await Constants.db.clearPersistence();
       await Constants.googleSignIn.signOut();
       await Constants.auth.signOut();
-      Functions().logoutApp(msg);
+      NavigatorRoutes().logoutApp(msg);
     } catch (e) {
       Messages.showError('Falha no logout!');
     }

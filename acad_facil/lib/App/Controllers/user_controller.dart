@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:acad_facil/App/Controllers/Auth/auth.dart';
 import 'package:acad_facil/App/Controllers/user_provider.dart';
 import 'package:acad_facil/App/Core/Data/constants.dart';
-import 'package:acad_facil/App/Core/Utils/functions.dart';
+import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,7 +15,7 @@ class UserController with ChangeNotifier implements UserProvider {
 
   void successAction() {
     Messages.showSuccess('Dados inseridos com sucesso!');
-    Functions().nextScreen();
+    NavigatorRoutes().nextScreen();
   }
 
   @override

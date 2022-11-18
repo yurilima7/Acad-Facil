@@ -1,7 +1,7 @@
 import 'package:acad_facil/App/Controllers/Auth/auth.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
-import 'package:acad_facil/App/Core/Utils/functions.dart';
+import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
@@ -137,7 +137,7 @@ class _FormLoginState extends State<FormLogin> {
           
               TextButtonApp(
                 title: 'Cadastre-se',
-                action: () => Functions().registerScreen(),
+                action: () => NavigatorRoutes().registerScreen(),
               ),
             ],
           ),

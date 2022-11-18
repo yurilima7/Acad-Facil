@@ -32,24 +32,6 @@ class _AddGradesState extends State<AddGrades> {
     Disciplines disciplines =
         ModalRoute.of(context)!.settings.arguments as Disciplines;
 
-    final gradesLength = (disciplines.grades.length + 1);
-
-    double avagare(double newGrade) {
-
-      if (gradesLength - 1 > 0) {
-        var sum = disciplines.grades.reduce((sum, element) => sum + element);
-        return sum / gradesLength;
-      }
-      else {
-        return newGrade;
-      }     
-    }
-
-    List grades(double grade) {
-      disciplines.grades.add(grade);
-      return disciplines.grades;
-    }
-
     void registerGrade() async {
       final valid = formKey.currentState?.validate() ?? false;
 
@@ -60,8 +42,8 @@ class _AddGradesState extends State<AddGrades> {
         
         await disciplinesProvider.addGrades(
           disciplines.id,
-          grades(double.tryParse(gradeEC.text)!),
-          avagare(double.tryParse(gradeEC.text)!),
+          disciplines.grades,
+          double.tryParse(gradeEC.text)!
         );
   
         setState(() {

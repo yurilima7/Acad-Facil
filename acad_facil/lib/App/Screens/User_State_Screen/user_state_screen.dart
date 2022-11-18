@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:acad_facil/App/Core/Data/constants.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
-import 'package:acad_facil/App/Core/Utils/functions.dart';
+import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -33,9 +33,9 @@ class _UserStateScreenState extends State<UserStateScreen> {
     .authStateChanges()
     .listen((User? user) {
       if (user == null) {
-        Functions().login();
+        NavigatorRoutes().login();
       } else {
-        Functions().nextScreen();
+        NavigatorRoutes().nextScreen();
       }
     });
   }

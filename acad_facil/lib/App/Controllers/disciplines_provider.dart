@@ -5,9 +5,5 @@ abstract class DisciplinesProvider {
   Future<void> loadDisciplines();
   Future<void> addDisciplines(Disciplines discipline);
   Future<void> deleteDisciplines(Disciplines discipline);
-  Future<void> addGrades(
-    String id,
-    List<double> grade,
-    double avarage,
-  );
+  Future<void> addGrades(String id, List<dynamic> grade, double newGrade);
 }

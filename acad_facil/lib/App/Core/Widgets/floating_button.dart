@@ -1,5 +1,5 @@
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
-import 'package:acad_facil/App/Core/Utils/functions.dart';
+import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:flutter/material.dart';
 
 class FloatingButton extends StatelessWidget {
@@ -8,7 +8,7 @@ class FloatingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => Functions().addDisciplines(),
+      onPressed: () => NavigatorRoutes().addDisciplines(),
       backgroundColor: ColorsStyles.white,
       child: Icon(Icons.add, color: ColorsStyles.secundary, size: 32),
     );

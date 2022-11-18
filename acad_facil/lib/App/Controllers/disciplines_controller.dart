@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:acad_facil/App/Controllers/disciplines_provider.dart';
 import 'package:acad_facil/App/Core/Data/constants.dart';
-import 'package:acad_facil/App/Core/Utils/functions.dart';
+import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -70,7 +70,7 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
       ));
 
       Messages.showSuccess('Dados inseridos com sucesso!');
-      Functions().nextScreen();
+      NavigatorRoutes().nextScreen();
     } on FirebaseException catch (e) {
       Messages.showError('Falha ao inserir dados, tente novamente!');
       log(e.toString());
@@ -92,7 +92,7 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
 
       _disciplines.remove(delDiscipline);
       Messages.showSuccess('Disciplina deletada com sucesso!');
-      Functions().nextScreen();
+      NavigatorRoutes().nextScreen();
     } on FirebaseException catch (e) {
       Messages.showError('Falha ao deletar disciplina, tente novamente!');
       log(e.toString());
@@ -103,20 +103,18 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
   }
 
   @override
-  Future<void> addGrades(
-    String id,
-    List grade,
-    double avarage,
-  ) async {
+  Future<void> addGrades(String id, List<dynamic> grade, double newGrade) async {
+    grade.add(newGrade);
+    
     if (grade.length < 6) {
       try {
         await Constants.disciplinesReference.doc(id).update({
           'grades': grade,
-          'avarage': avarage,
+          'avarage': (grade.reduce((sum, element) => sum + element)) / grade.length,
         });
 
         Messages.showSuccess('Nota adicionada com sucesso!');
-        Functions().nextScreen();
+        NavigatorRoutes().nextScreen();
       } on FirebaseException catch (e) {
         Messages.showError('Falha ao registrar nota, tente novamente!');
         log(e.toString());

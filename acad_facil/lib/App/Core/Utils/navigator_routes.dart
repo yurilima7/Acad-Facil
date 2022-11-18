@@ -5,7 +5,7 @@ import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/acad_facil.dart';
 import 'package:flutter/material.dart';
 
-class Functions {
+class NavigatorRoutes {
   void verify() async {
     await Constants.userRefence.doc(Constants.userId).get().then((doc) {
       if (doc.exists) {
