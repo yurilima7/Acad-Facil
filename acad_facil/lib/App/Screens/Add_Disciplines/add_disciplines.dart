@@ -82,8 +82,7 @@ class _AddDisciplinesState extends State<AddDisciplines> {
                   runSpacing: MediaQuery.of(context).size.height * 0.02,
     
                   children: [
-                    TextFormField(    
-                      cursorColor: ColorsStyles.white,
+                    TextFormField(
                       style: context.textStyles.secundaryTitle,
                       textInputAction: TextInputAction.next,
                       controller: nameEC,
@@ -110,59 +109,27 @@ class _AddDisciplinesState extends State<AddDisciplines> {
                       validator: Validatorless.required('Obrigatório!'),
                     ),
                 
-                    TextFormField(    
-                      cursorColor: ColorsStyles.white,
+                    TextFormField(
                       style: context.textStyles.secundaryTitle,
                       controller: classroomEC,
                       textInputAction: TextInputAction.next,
                       
-                      decoration: InputDecoration(
-                        label: Text(
-                          'Sala',
-                          style: context.textStyles.mainTitle,
-                        ),
-                      
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorsStyles.white,
-                          ),
-                        ),
-                        
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorsStyles.white,
-                          ),
-                        ),
+                      decoration: const InputDecoration(
+                        label: Text('Sala'),
                       ),
                       
                       validator: Validatorless.required('Obrigatório!'),
                     ),
                 
                     TextFormField(    
-                      cursorColor: ColorsStyles.white,
                       style: context.textStyles.secundaryTitle,
                       controller: periodEC,
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.done,
                       onFieldSubmitted: (_) => registerDiscipline(),
                       
-                      decoration: InputDecoration(
-                        label: Text(
-                          'Período',
-                          style: context.textStyles.mainTitle,
-                        ),
-                      
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorsStyles.white,
-                          ),
-                        ),
-                        
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorsStyles.white,
-                          ),
-                        ),
+                      decoration: const InputDecoration(
+                        label: Text( 'Período'),
                       ),
                       
                       validator: Validatorless.required('Obrigatório!'),

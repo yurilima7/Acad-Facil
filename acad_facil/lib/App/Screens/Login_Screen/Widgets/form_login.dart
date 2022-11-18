@@ -62,28 +62,12 @@ class _FormLoginState extends State<FormLogin> {
         children: [                
           TextFormField(    
             controller: emailEC,
-            cursorColor: ColorsStyles.white,
             style: context.textStyles.secundaryTitle,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
               
-            decoration: InputDecoration(
-              label: Text(
-                'E-mail',
-                style: context.textStyles.mainTitle,
-              ),
-              
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorsStyles.white,
-                ),
-              ),
-              
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorsStyles.white,
-                ),
-              ),
+            decoration: const InputDecoration(
+              label: Text('E-mail'),
             ),
               
             validator: Validatorless.multiple([
@@ -94,7 +78,6 @@ class _FormLoginState extends State<FormLogin> {
         
           TextFormField(    
             controller: passwordEC,
-            cursorColor: ColorsStyles.white,
             style: context.textStyles.secundaryTitle,
             textInputAction: TextInputAction.done,
             obscureText: !lookPassword ? true : false,

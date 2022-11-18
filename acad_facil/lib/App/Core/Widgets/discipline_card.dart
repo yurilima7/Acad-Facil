@@ -1,19 +1,18 @@
+import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/functions.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
-import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class DisciplineCard extends StatelessWidget {
+  final Disciplines discipline;
 
   const DisciplineCard({
     Key? key,
+    required this.discipline,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final discipline = Provider.of<Disciplines>(context, listen: false);
-
     return InkWell(
       onTap: () => Functions().detailsScreen(discipline),
       child: Card(

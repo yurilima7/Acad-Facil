@@ -95,30 +95,14 @@ class _AddGradesState extends State<AddGrades> {
     
                   children: [           
                     TextFormField(    
-                      cursorColor: ColorsStyles.white,
                       style: context.textStyles.secundaryTitle,
                       controller: gradeEC,
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.done,
                       onFieldSubmitted: (_) => registerGrade(),
                       
-                      decoration: InputDecoration(
-                        label: Text(
-                          'Digite sua nota',
-                          style: context.textStyles.mainTitle,
-                        ),
-                      
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorsStyles.white,
-                          ),
-                        ),
-                        
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorsStyles.white,
-                          ),
-                        ),
+                      decoration: const InputDecoration(
+                        label: Text('Digite sua nota'),
                       ),
                       
                       validator: Validatorless.required('Obrigatório!'),

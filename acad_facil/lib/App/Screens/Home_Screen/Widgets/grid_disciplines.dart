@@ -30,10 +30,7 @@ class GridDisciplines extends StatelessWidget {
         shrinkWrap: true,
         
         itemCount: providerDisciplines.disciplinesCount <= 6 ? providerDisciplines.disciplinesCount : 6,
-              itemBuilder: (context, i) => ChangeNotifierProvider.value(
-                value: disciplines[i],
-                child: const DisciplineCard(),
-              ),
+              itemBuilder: (context, i) => DisciplineCard(discipline: disciplines[i]),
       ),
     )
     : 

@@ -18,6 +18,12 @@ class _DisciplinesScreenState extends State<DisciplinesScreen> {
   final searchEC = TextEditingController();
 
   @override
+  void dispose() {
+    searchEC.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final providerDisciplines = Provider.of<DisciplinesControler>(context);
     final List<Disciplines> disciplines = providerDisciplines.disciplines;
@@ -27,7 +33,7 @@ class _DisciplinesScreenState extends State<DisciplinesScreen> {
         search = searchEC.text;
       });
     }
-    
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       

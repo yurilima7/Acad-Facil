@@ -64,28 +64,11 @@ class _FormRegisterState extends State<FormRegister> {
         children: [
           TextFormField(
             controller: userNameEC,
-            cursorColor: ColorsStyles.white,
             style: context.textStyles.secundaryTitle,
             textInputAction: TextInputAction.next,
             
-            decoration: InputDecoration(
-    
-              label: Text(
-                'Nome de usuário',
-                style: context.textStyles.mainTitle,
-              ),
-    
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorsStyles.white,
-                ),
-              ),
-    
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorsStyles.white,
-                ),
-              ),
+            decoration: const InputDecoration(
+              label: Text('Nome de usuário'),
             ),
     
             validator: Validatorless.multiple([
@@ -95,28 +78,12 @@ class _FormRegisterState extends State<FormRegister> {
     
           TextFormField(
             controller: emailEC,
-            cursorColor: ColorsStyles.white,
             style: context.textStyles.secundaryTitle,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
     
-            decoration: InputDecoration(
-              label: Text(
-                'E-mail',
-                style: context.textStyles.mainTitle,
-              ),
-    
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorsStyles.white,
-                ),
-              ),
-    
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorsStyles.white,
-                ),
-              ),
+            decoration: const InputDecoration(
+              label: Text('E-mail'),
             ),
     
             validator: Validatorless.multiple([
@@ -127,7 +94,6 @@ class _FormRegisterState extends State<FormRegister> {
           
           TextFormField(
             controller: passwordEC,
-            cursorColor: ColorsStyles.white,
             style: context.textStyles.secundaryTitle,
             textInputAction: TextInputAction.done,
             onFieldSubmitted: (_) => screenLogin(),
@@ -135,22 +101,7 @@ class _FormRegisterState extends State<FormRegister> {
     
             decoration: InputDecoration(
     
-              label: Text(
-                'Senha',
-                style: context.textStyles.mainTitle,
-              ),
-    
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorsStyles.white,
-                ),
-              ),
-    
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorsStyles.white,
-                ),
-              ),
+              label: const Text('Senha'),
     
               suffixIcon: IconButton(
                 icon: Icon(

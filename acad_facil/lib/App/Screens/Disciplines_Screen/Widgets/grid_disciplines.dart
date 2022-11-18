@@ -2,9 +2,8 @@ import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Widgets/discipline_card.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class GridDisciplines extends StatelessWidget {
+class GridDisciplines extends StatefulWidget {
   final List<Disciplines> disciplines;
   final String search;
 
@@ -15,8 +14,13 @@ class GridDisciplines extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<GridDisciplines> createState() => _GridDisciplinesState();
+}
+
+class _GridDisciplinesState extends State<GridDisciplines> {
+  @override
   Widget build(BuildContext context) {
-    if (disciplines.isEmpty) {
+    if (widget.disciplines.isEmpty) {
       return Expanded(
         child: Center(
           child: Text(
@@ -25,26 +29,23 @@ class GridDisciplines extends StatelessWidget {
           ),
         ),
       );
-    }
-    else {
-      List<Disciplines> filtered = disciplines.where((d) => 
-        d.name.toLowerCase().contains(search.toLowerCase()))
-        .toList();
-  
+    } else {
+      List<Disciplines> filtered = widget.disciplines
+          .where(
+              (d) => d.name.toLowerCase().contains(widget.search.toLowerCase()))
+          .toList();
+
       return Expanded(
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 3 / 2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 10,
+        child: GridView.count(
+          crossAxisCount: 2,
+          childAspectRatio: 3 / 2,
+          crossAxisSpacing: 20.0,
+          mainAxisSpacing: 10.0,
+
+          children: List.generate(
+            filtered.length,
+            (i) => DisciplineCard(discipline: filtered[i]),
           ),
-          
-          itemCount: filtered.length ,
-                itemBuilder: (context, i) => ChangeNotifierProvider.value(
-                  value: filtered[i],
-                  child: const DisciplineCard(),
-                ),
         ),
       );
     }

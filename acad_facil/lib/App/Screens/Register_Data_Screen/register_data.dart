@@ -87,26 +87,10 @@ class _RegisterDataState extends State<RegisterData> {
                   children: [                
                     TextFormField(    
                       controller: courseEC,
-                      cursorColor: ColorsStyles.white,
                       style: context.textStyles.secundaryTitle,
           
-                      decoration: InputDecoration(
-                        label: Text(
-                          'Seu curso',
-                          style: context.textStyles.mainTitle,
-                        ),
-          
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorsStyles.white,
-                          ),
-                        ),
-                        
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorsStyles.white,
-                          ),
-                        ),
+                      decoration: const InputDecoration(
+                        label: Text('Seu curso'),
                       ),
           
                       validator: Validatorless.required('Obrigatório!'),
@@ -114,28 +98,12 @@ class _RegisterDataState extends State<RegisterData> {
                   
                     TextFormField(    
                       controller: periodEC,
-                      cursorColor: ColorsStyles.white,
                       style: context.textStyles.secundaryTitle,
                       keyboardType: TextInputType.number,
                       onFieldSubmitted: (_) => registerData(),
                     
-                      decoration: InputDecoration(
-                        label: Text(
-                          'Período Atual',
-                          style: context.textStyles.mainTitle,
-                        ),
-          
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorsStyles.white,
-                          ),
-                        ),
-          
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorsStyles.white,
-                          ),
-                        ),
+                      decoration: const InputDecoration(
+                        label: Text('Período Atual'),
                       ),
           
                       validator: Validatorless.required('Obrigatório!'),
