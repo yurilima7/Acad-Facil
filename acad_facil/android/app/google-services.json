@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "120480731808-mv4s78956n9ckor4hb5u83lvrle9rdsm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.acad_facil",
+            "certificate_hash": "050efe90fbd3f21ba948a7baa183f180470298e8"
+          }
+        },
+        {
           "client_id": "120480731808-e1sn67o8mrm2ij5b7iu0ru11v8gq75ri.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "120480731808-e1sn67o8mrm2ij5b7iu0ru11v8gq75ri.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "120480731808-njthtl05o0r4n1h9e60lp2rhlohcleov.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.acadFacil"
+              }
             }
           ]
         }

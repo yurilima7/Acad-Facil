@@ -128,4 +128,28 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
       Messages.showError('Máximo de 5 notas já alcançado!');
     }
   }
+
+  @override 
+  Future<void> editGrade(String id, List<dynamic> grade, 
+    double newGrade, int position) async {
+      grade[position] = newGrade;
+
+      try {
+        await Constants.disciplinesReference.doc(id).update({
+          'grades': grade,
+          'avarage': (grade.reduce((sum, element) => sum + element)) / grade.length,
+        });
+
+        Messages.showSuccess('Nota editada com sucesso!');
+        NavigatorRoutes().nextScreen();
+      } on FirebaseException catch (e) {
+        Messages.showError('Falha ao registrar nota, tente novamente!');
+        log(e.toString());
+      } on Exception catch (e) {
+        Messages.showError('Falha ao registrar nota, tente novamente!');
+        log(e.toString());
+      }
+
+      notifyListeners();
+  }
 }

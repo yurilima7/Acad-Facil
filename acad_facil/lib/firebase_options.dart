@@ -66,6 +66,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '120480731808',
     projectId: 'acad-simples',
     storageBucket: 'acad-simples.appspot.com',
+    androidClientId: '120480731808-mv4s78956n9ckor4hb5u83lvrle9rdsm.apps.googleusercontent.com',
     iosClientId: '120480731808-njthtl05o0r4n1h9e60lp2rhlohcleov.apps.googleusercontent.com',
     iosBundleId: 'com.example.acadFacil',
   );
@@ -76,6 +77,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '120480731808',
     projectId: 'acad-simples',
     storageBucket: 'acad-simples.appspot.com',
+    androidClientId: '120480731808-mv4s78956n9ckor4hb5u83lvrle9rdsm.apps.googleusercontent.com',
     iosClientId: '120480731808-njthtl05o0r4n1h9e60lp2rhlohcleov.apps.googleusercontent.com',
     iosBundleId: 'com.example.acadFacil',
   );

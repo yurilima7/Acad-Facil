@@ -2,6 +2,7 @@ import 'package:acad_facil/App/Core/Data/constants.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Utils/messages.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
+import 'package:acad_facil/App/Models/edit_grade_model.dart';
 import 'package:acad_facil/App/acad_facil.dart';
 import 'package:flutter/material.dart';
 
@@ -92,5 +93,12 @@ class NavigatorRoutes {
 
   void addDisciplines() {
     navigatorKey.currentState!.pushNamed(AppRoutes.addDisciplines);
+  }
+
+  void editGrade(EditGradeModel model) {
+    navigatorKey.currentState!.pushNamed(
+      AppRoutes.editGrade,
+      arguments: model,
+    );
   }
 }

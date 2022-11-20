@@ -7,6 +7,7 @@
 * Sistema de Cadastro/Login com Google, e opção de E-Mail e Senha
 * Cadastro de usuário com possibilidade de exclusão
 * Registro de disciplinas do usuário, notas e sala de aula
+* Edição das notas inseridas
 
 ## :wrench: Tecnologias Utilizadas
 * Flutter

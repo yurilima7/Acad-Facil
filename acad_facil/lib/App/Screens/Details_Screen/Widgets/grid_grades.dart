@@ -30,8 +30,8 @@ class GridGrades extends StatelessWidget {
 
         itemCount: disciplinesCount <= 5? disciplinesCount : 5,
           itemBuilder: (context, i) => GradesForm(
-            i: i + 1,
-            grade: disciplines.grades[i],
+            i: i,
+            discipline: disciplines,
           ),
       )
       :
