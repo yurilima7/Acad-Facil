@@ -4,13 +4,20 @@ import 'package:flutter/material.dart';
 
 class Alert extends StatelessWidget {
   final Function() action;
+  final String message;
+  final int position;
+
   const Alert({
     Key? key,
     required this.action,
+    required this.message,
+    required this.position,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<String> title = ['Deletar', 'Encerrar Conta', 'Sair'];
+
     return AlertDialog(
       backgroundColor: ColorsStyles.primary,
       
@@ -20,10 +27,10 @@ class Alert extends StatelessWidget {
         ),
       ),
 
-      title: Text('Deletar', style: context.textStyles.alertTitle,),
+      title: Text(title[position], style: context.textStyles.alertTitle,),
 
       content: Text(
-        'Deseja deletar esta disciplina?',
+        message,
         style: context.textStyles.secundaryTitle,
       ),
 

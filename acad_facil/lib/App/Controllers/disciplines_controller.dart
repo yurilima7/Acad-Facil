@@ -143,13 +143,61 @@ class DisciplinesControler with ChangeNotifier implements DisciplinesProvider {
         Messages.showSuccess('Nota editada com sucesso!');
         NavigatorRoutes().nextScreen();
       } on FirebaseException catch (e) {
-        Messages.showError('Falha ao registrar nota, tente novamente!');
+        Messages.showError('Falha ao editar nota, tente novamente!');
         log(e.toString());
       } on Exception catch (e) {
-        Messages.showError('Falha ao registrar nota, tente novamente!');
+        Messages.showError('Falha ao editar nota, tente novamente!');
         log(e.toString());
       }
 
       notifyListeners();
+  }
+  
+  @override
+  Future<void> editDiscipline(Disciplines discipline) async {
+    try {
+      await Constants.disciplinesReference.doc(discipline.id)
+        .update({
+          'name': discipline.name,
+          'classroom': discipline.classroom,
+          'period': discipline.period,
+        });
+
+      Messages.showSuccess('Dados atualizados com sucesso!');
+      NavigatorRoutes().nextScreen();
+    } on FirebaseException catch (e) {
+      Messages.showError('Falha ao editar ao disciplina, tente novamente!');
+      log(e.toString());
+    } on Exception catch (e) {
+      Messages.showError('Falha ao editar ao disciplina, tente novamente!');
+      log(e.toString());
+    }
+
+    notifyListeners();
+  }
+  
+  @override
+  Future<void> deleteData() async {
+    try {
+      await Constants.disciplinesReference.get()
+      .then(
+        (snapshot) {
+          for (var doc in snapshot.docs) {
+            doc.reference.delete();
+          }
+        }
+      );
+
+      Messages.showSuccess('Disciplinas deletadas com sucesso!');
+      NavigatorRoutes().nextScreen();
+    } on FirebaseException catch (e) {
+      Messages.showError('Falha ao deletar os dados, tente novamente!');
+      log(e.toString());
+    } on Exception catch (e) {
+      Messages.showError('Falha ao deletar os dados, tente novamente!');
+      log(e.toString());
+    }
+
+    notifyListeners();
   }
 }

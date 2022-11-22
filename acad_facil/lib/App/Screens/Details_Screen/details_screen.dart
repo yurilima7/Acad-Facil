@@ -4,7 +4,7 @@ import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Widgets/alert.dart';
 import 'package:acad_facil/App/Core/Widgets/information_card.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
-import 'package:acad_facil/App/Screens/Details_Screen/Widgets/modal_add_disciplines.dart';
+import 'package:acad_facil/App/Screens/Details_Screen/Widgets/modal_options.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/grid_grades.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/local_avarage.dart';
 import 'package:flutter/material.dart';
@@ -35,10 +35,10 @@ class DetailsScreen extends StatelessWidget {
             onPressed: () => showModalBottomSheet(
               context: context,
               builder: (BuildContext context) {
-                return ModalAddDisciplines(disciplines: disciplines);
+                return ModalOptions(disciplines: disciplines);
               },
             ),
-            icon: const Icon(Icons.add),
+            icon: const Icon(Icons.more_vert),
           ),
         ],
       ),
@@ -88,7 +88,11 @@ class DetailsScreen extends StatelessWidget {
                         IconButton(
                           onPressed: () => showDialog(
                             context: context,
-                            builder: (_) => Alert(action: deleteDiscipline),
+                            builder: (_) => Alert(
+                              action: deleteDiscipline,
+                              message: 'Deseja deletar esta disciplina?',
+                              position: 0,
+                            ),
                           ),
                           icon: Icon(
                             Icons.delete,

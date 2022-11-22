@@ -101,4 +101,11 @@ class NavigatorRoutes {
       arguments: model,
     );
   }
+
+  void editDiscipline(Disciplines discipline) {
+    navigatorKey.currentState!.pushNamed(
+      AppRoutes.editDisciplines,
+      arguments: discipline,
+    );
+  }
 }

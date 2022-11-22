@@ -61,65 +61,76 @@ class _EditGradeState extends State<EditGrade> {
       }
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Editar Nota'),
-        elevation: 0,
-        automaticallyImplyLeading: false,
-      ),
-
-      body: Align(
-          alignment: Alignment.bottomCenter,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Editar Nota'),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+        ),
     
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-        
-            child: SingleChildScrollView(
-              child: Form(
-                key: formKey,
-            
-                child: Wrap(
-                  runSpacing: MediaQuery.of(context).size.height * 0.02,
+        body: Align(
+            alignment: Alignment.bottomCenter,
+      
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+          
+              child: SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+              
+                  child: Wrap(
+                    runSpacing: MediaQuery.of(context).size.height * 0.02,
+      
+                    children: [           
+                      TextFormField(    
+                        initialValue: formData['newGrade'].toString(),
+                        style: context.textStyles.secundaryTitle,
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.done,
     
-                  children: [           
-                    TextFormField(    
-                      initialValue: formData['newGrade'].toString(),
-                      style: context.textStyles.secundaryTitle,
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.done,
-
-                      onFieldSubmitted: (_) => registerGrade(),
-
-                      onSaved: (grade) => 
-                        formData['newGrade'] = double.parse(grade ?? '0'),
-                      
-                      decoration: const InputDecoration(
-                        label: Text('Digite sua nota'),
+                        onFieldSubmitted: (_) => registerGrade(),
+    
+                        onSaved: (grade) => 
+                          formData['newGrade'] = double.parse(grade ?? '0'),
+                        
+                        decoration: const InputDecoration(
+                          label: Text('Digite sua nota'),
+                        ),
+                        
+                        validator: Validatorless.multiple([
+                          Validatorless.required('Obrigatório!'),
+                          Validatorless.numbersBetweenInterval(
+                            0.0,
+                            10.0,
+                            'Sua nota deve ser entre 0.0 e 10',
+                          ),
+                        ]),
                       ),
                       
-                      validator: Validatorless.required('Obrigatório!'),
-                    ),
-                    
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            
-                      children: [
-                        Text(
-                          'Salvar',
-                          style: context.textStyles.authTitle,
-                        ),
-            
-                        isLoading
-                          ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                          : Button(action: registerGrade),
-                      ],
-                    ),
-                  ],
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              
+                        children: [
+                          Text(
+                            'Salvar',
+                            style: context.textStyles.authTitle,
+                          ),
+              
+                          isLoading
+                            ? CircularProgressIndicator(color: ColorsStyles.terciary,)
+                            : Button(action: registerGrade),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
+      ),
     );
   }
 }

@@ -1,13 +1,14 @@
-# acad_facil
+# Acad Fácil
 
 ## :memo: Descrição do Projeto
-<p>O projeto Acad-Facil tem como finalidade a prática de desenvolvimento mobile utilizando MVC. A aplicação em si tem como objetivo a realização do gerenciamento de notas de um estudante.</p>
+<p>O projeto Acad Facil tem como finalidade a prática de desenvolvimento mobile utilizando arquitetura MVC. A aplicação em si tem como objetivo a realização do gerenciamento de notas de um estudante.</p>
 
 ## :books: Funcionalidades
 * Sistema de Cadastro/Login com Google, e opção de E-Mail e Senha
-* Cadastro de usuário com possibilidade de exclusão
+* Cadastro de usuário com possibilidade de exclusão da conta
+* Possibilidade de exclusão de todas as disciplinas inseridas
 * Registro de disciplinas do usuário, notas e sala de aula
-* Edição das notas inseridas
+* Edição das notas inseridas e dos dados da disciplina
 
 ## :wrench: Tecnologias Utilizadas
 * Flutter
@@ -34,4 +35,4 @@ Para executar corretamente esta aplicação você precisará:
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes
 
 ## :dart: Status do Projeto
-Realização de testes e melhorias.
+Concluído.

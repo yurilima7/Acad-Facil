@@ -5,14 +5,14 @@ import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
 
-class ModalAddDisciplines extends StatelessWidget {
+class ModalOptions extends StatelessWidget {
   final Disciplines disciplines;
-  const ModalAddDisciplines({Key? key, required this.disciplines,}) : super(key: key);
+  const ModalOptions({Key? key, required this.disciplines,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 150,
       color: ColorsStyles.primary,
       padding: const EdgeInsets.all(20.0),
 
@@ -32,6 +32,23 @@ class ModalAddDisciplines extends StatelessWidget {
 
               ElevatedButton(
                 onPressed: () => NavigatorRoutes().addGrades(disciplines),
+                style: context.buttonStyles.circleButton,
+                child: const Icon(Icons.arrow_forward),
+              ),
+            ],
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+            children: [
+              Text(
+                'Editar Disciplina',
+                style: context.textStyles.mainTitle,
+              ),
+
+              ElevatedButton(
+                onPressed: () => NavigatorRoutes().editDiscipline(disciplines),
                 style: context.buttonStyles.circleButton,
                 child: const Icon(Icons.arrow_forward),
               ),

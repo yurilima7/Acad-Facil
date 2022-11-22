@@ -87,7 +87,14 @@ class _AddGradesState extends State<AddGrades> {
                         label: Text('Digite sua nota'),
                       ),
                       
-                      validator: Validatorless.required('Obrigatório!'),
+                      validator: Validatorless.multiple([
+                        Validatorless.required('Obrigatório!'),
+                        Validatorless.numbersBetweenInterval(
+                          0.0,
+                          10.0,
+                          'Sua nota deve ser entre 0.0 e 10',
+                        ),
+                      ]),
                     ),
                     
                     Row(
