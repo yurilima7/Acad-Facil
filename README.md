@@ -1,7 +1,7 @@
 # Acad Fácil
 
 ## :memo: Descrição do Projeto
-<p>O projeto Acad Facil tem como finalidade a prática de desenvolvimento mobile utilizando o padrão de projeto MVC. A aplicação em si tem como objetivo a realização do gerenciamento de notas de um estudante.</p>
+<p>O projeto Acad Facil tem como finalidade a prática de desenvolvimento mobile. A aplicação em si tem como objetivo a realização do gerenciamento de notas de um estudante.</p>
 
 ## :books: Funcionalidades
 * Sistema de Cadastro/Login com Google, e opção de E-Mail e Senha
