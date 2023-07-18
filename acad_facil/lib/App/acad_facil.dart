@@ -1,5 +1,4 @@
-import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
-import 'package:acad_facil/App/Controllers/user_controller.dart';
+import 'package:acad_facil/App/Core/Multi_Provider/multi_provider_app.dart';
 import 'package:acad_facil/App/Core/Theme/theme_setttings.dart';
 import 'package:acad_facil/App/Screens/Add_Disciplines/add_disciplines.dart';
 import 'package:acad_facil/App/Screens/Add_Grades/add_grades.dart';
@@ -9,38 +8,29 @@ import 'package:acad_facil/App/Screens/Edit_Disciplines/edit_disciplines.dart';
 import 'package:acad_facil/App/Screens/Edit_Grade/edit_grade.dart';
 import 'package:acad_facil/App/Screens/Grades_Screen/grades_screen.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/home_screen.dart';
-import 'package:acad_facil/App/Screens/Login_Screen/login.dart';
+import 'package:acad_facil/App/Screens/Auth/Login_Screen/login.dart';
 import 'package:acad_facil/App/Screens/Register_Data_Screen/register_data.dart';
-import 'package:acad_facil/App/Screens/Register_Screen/register.dart';
+import 'package:acad_facil/App/Screens/Auth/Register_Screen/register.dart';
 import 'package:acad_facil/App/Screens/Settings_Screen/settings_screen.dart';
 import 'package:acad_facil/App/Screens/User_State_Screen/user_state_screen.dart';
 import 'package:acad_facil/App/Screens/tabs_screen.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
- GlobalKey <NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
- GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
 
 class AcadFacil extends StatelessWidget {
   const AcadFacil({super.key});
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => DisciplinesControler(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => UserController(),
-        ),
-      ],
+    return MultiProviderApp(
       child: MaterialApp(
         navigatorKey: navigatorKey,
         scaffoldMessengerKey: scaffoldMessengerKey,
         theme: ThemeSettings.theme,
         debugShowCheckedModeBanner: false,
-
         routes: {
           AppRoutes.userStateScreen: (context) => const UserStateScreen(),
           AppRoutes.loginScreen: (context) => const Login(),

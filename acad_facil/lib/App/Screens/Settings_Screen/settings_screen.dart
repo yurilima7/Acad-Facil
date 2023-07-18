@@ -1,7 +1,7 @@
-import 'package:acad_facil/App/Controllers/Auth/auth.dart';
 import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
 import 'package:acad_facil/App/Controllers/user_controller.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
+import 'package:acad_facil/App/Screens/Auth/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       = Provider.of<DisciplinesControler>(context, listen: false);
     
     void logout() async {
-      await Auth().logout('Logout realizado com sucesso!');
+      await AuthController().logout('Logout realizado com sucesso!');
     }
 
     void delete() async {

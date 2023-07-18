@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:acad_facil/App/Core/Data/constants.dart';
 import 'package:acad_facil/App/Core/Exceptions/auth_exception.dart';
 import 'package:acad_facil/App/repositories/auth/auth_repository.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -10,6 +11,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuth _firebaseAuth = Constants.auth;
   final GoogleSignIn _firebaseGoogle = Constants.googleSignIn;
+  final FirebaseFirestore _firebaseFirestore = Constants.db;
 
   @override
   Future<void> google() async {
@@ -105,6 +107,19 @@ class AuthRepositoryImpl implements AuthRepository {
           );
         }
       }
+    }
+  }
+
+  @override
+  Future<void> logoutApp() async {
+    try {
+      await _firebaseFirestore.terminate();
+      await _firebaseFirestore.clearPersistence();
+      await _firebaseGoogle.signOut();
+      await _firebaseAuth.signOut();
+    } catch (e) {
+      log('Falha no logout!');
+      throw AuthException(message: 'Falha ao sair do Acad Fácil!');
     }
   }
 }

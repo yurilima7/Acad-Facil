@@ -12,13 +12,11 @@ class AppStatus extends ChangeNotifier {
   bool get hasError => _error != null;
   bool get isSuccess => _success;
 
-  // void showLoading() => _isLoading = true;
   void showLoading() {
     _isLoading = true;
     Loader.showLoader();
   }
 
-  // void hideLoading() => _isLoading = false;
   void hideLoading() {
     _isLoading = false;
     Loader.hideLoader();
@@ -32,7 +30,6 @@ class AppStatus extends ChangeNotifier {
     Messages.showSuccess(message);
   }
 
-  // void success() => _success = true;
   void success(String message) {
     _success = true;
     if (_success) {
@@ -40,7 +37,6 @@ class AppStatus extends ChangeNotifier {
     }
   }
 
-  // void setError(String? error) => _error = error;
   void setError(String? error) {
     _error = error;
     if (_error != null) {

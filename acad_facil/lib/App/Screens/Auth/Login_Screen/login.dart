@@ -1,14 +1,14 @@
-import 'package:acad_facil/App/Screens/Register_Screen/Widgets/form_register.dart';
+import 'package:acad_facil/App/Screens/Auth/Login_Screen/Widgets/form_login.dart';
 import 'package:flutter/material.dart';
 
-class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<Login> createState() => _LoginState();
 }
 
-class _RegisterState extends State<Register> {
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,9 +22,10 @@ class _RegisterState extends State<Register> {
               right: 16.0,
               bottom: 5.0,
             ),
-        
+
             child: LayoutBuilder(
               builder: (_, constraints) => SingleChildScrollView(
+
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: constraints.maxHeight),
 
@@ -42,14 +43,14 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                         ),
-
-                        const FormRegister(),
+                        
+                        const FormLogin(),
                       ],
                     ),
                   ),
                 ),
               ),
-            )
+            ),
           ),
         ),
       ),
