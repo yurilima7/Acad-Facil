@@ -16,22 +16,19 @@ class DisciplineCard extends StatelessWidget {
     return InkWell(
       onTap: () => NavigatorRoutes().detailsScreen(discipline),
       child: Card(
-    
         color: Theme.of(context).colorScheme.secondary,
         elevation: 5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-    
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          
           children: [
             ListTile(
               title: Text(
                 discipline.name,
-                style: context.textStyles.mainCardTitle,
+                style: context.textStyles.titleSmall,
               ),
-    
               subtitle: Text(
                 'Sala: ${discipline.classroom}',
                 style: context.textStyles.secundarySubTitle,

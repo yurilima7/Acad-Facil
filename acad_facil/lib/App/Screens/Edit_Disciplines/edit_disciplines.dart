@@ -8,8 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class EditDisciplines extends StatefulWidget {
-
-  const EditDisciplines({ Key? key }) : super(key: key);
+  const EditDisciplines({Key? key}) : super(key: key);
 
   @override
   State<EditDisciplines> createState() => _EditDisciplinesState();
@@ -49,7 +48,7 @@ class _EditDisciplinesState extends State<EditDisciplines> {
         });
 
         formKey.currentState?.save();
-        
+
         await disciplinesProvider.editDiscipline(
           Disciplines(
             id: formData['id'].toString(),
@@ -69,107 +68,90 @@ class _EditDisciplinesState extends State<EditDisciplines> {
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Editar Disciplina'),
           elevation: 0,
           automaticallyImplyLeading: false,
         ),
-    
         body: Align(
-            alignment: Alignment.bottomCenter,
-      
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-          
-              child: SingleChildScrollView(
-                child: Form(
-                  key: formKey,
-              
-                  child: Wrap(
-                    runSpacing: MediaQuery.of(context).size.height * 0.02,
-      
-                    children: [
-                      TextFormField(
-                        initialValue: formData['name'].toString(),
-                        style: context.textStyles.secundaryTitle,
-                        textInputAction: TextInputAction.next,
-    
-                        onSaved: (name) => formData['name'] = name ?? '',
-                        
-                        decoration: InputDecoration(
-                          label: Text(
-                            'Disciplina',
-                            style: context.textStyles.mainTitle,
-                          ),
-                        
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: ColorsStyles.white,
-                            ),
-                          ),
-                          
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: ColorsStyles.white,
-                            ),
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                child: Wrap(
+                  runSpacing: MediaQuery.of(context).size.height * 0.02,
+                  children: [
+                    TextFormField(
+                      initialValue: formData['name'].toString(),
+                      style: context.textStyles.secundaryTitle,
+                      textInputAction: TextInputAction.next,
+                      onSaved: (name) => formData['name'] = name ?? '',
+                      decoration: InputDecoration(
+                        label: Text(
+                          'Disciplina',
+                          style: context.textStyles.titleMedium,
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorsStyles.white,
                           ),
                         ),
-                        
-                        validator: Validatorless.required('Obrigatório!'),
-                      ),
-                  
-                      TextFormField(
-                        initialValue: formData['classroom'].toString(),
-                        style: context.textStyles.secundaryTitle,
-                        textInputAction: TextInputAction.next,
-    
-                        onSaved: (classroom) => formData['classroom'] = classroom ?? '',
-                        
-                        decoration: const InputDecoration(
-                          label: Text('Sala'),
-                        ),
-                        
-                        validator: Validatorless.required('Obrigatório!'),
-                      ),
-                  
-                      TextFormField(    
-                        initialValue: formData['period'].toString(),
-                        style: context.textStyles.secundaryTitle,
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.done,
-                        onFieldSubmitted: (_) => registerDiscipline(),
-    
-                        onSaved: (period) => formData['period'] = int.parse(period ?? ''),
-                        
-                        decoration: const InputDecoration(
-                          label: Text( 'Período'),
-                        ),
-                        
-                        validator: Validatorless.required('Obrigatório!'),
-                      ),
-                      
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              
-                        children: [
-                          Text(
-                            'Salvar',
-                            style: context.textStyles.authTitle,
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorsStyles.white,
                           ),
-              
-                          isLoading
-                            ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                            : Button(action: registerDiscipline),
-                        ],
+                        ),
                       ),
-                    ],
-                  ),
+                      validator: Validatorless.required('Obrigatório!'),
+                    ),
+                    TextFormField(
+                      initialValue: formData['classroom'].toString(),
+                      style: context.textStyles.secundaryTitle,
+                      textInputAction: TextInputAction.next,
+                      onSaved: (classroom) =>
+                          formData['classroom'] = classroom ?? '',
+                      decoration: const InputDecoration(
+                        label: Text('Sala'),
+                      ),
+                      validator: Validatorless.required('Obrigatório!'),
+                    ),
+                    TextFormField(
+                      initialValue: formData['period'].toString(),
+                      style: context.textStyles.secundaryTitle,
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (_) => registerDiscipline(),
+                      onSaved: (period) =>
+                          formData['period'] = int.parse(period ?? ''),
+                      decoration: const InputDecoration(
+                        label: Text('Período'),
+                      ),
+                      validator: Validatorless.required('Obrigatório!'),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Salvar',
+                          style: context.textStyles.titleLarge,
+                        ),
+                        isLoading
+                            ? CircularProgressIndicator(
+                                color: ColorsStyles.terciary,
+                              )
+                            : Button(
+                                title: 'Salvar', action: registerDiscipline),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
+        ),
       ),
     );
   }

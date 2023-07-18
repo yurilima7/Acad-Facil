@@ -11,8 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatelessWidget {
-
-  const DetailsScreen({ Key? key }) : super(key: key);
+  const DetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,6 @@ class DetailsScreen extends StatelessWidget {
         title: Text(disciplines.name),
         elevation: 0,
         automaticallyImplyLeading: false,
-
         actions: [
           IconButton(
             onPressed: () => showModalBottomSheet(
@@ -42,7 +40,6 @@ class DetailsScreen extends StatelessWidget {
           ),
         ],
       ),
-
       body: Padding(
         padding: const EdgeInsets.only(
           left: 20.0,
@@ -50,41 +47,36 @@ class DetailsScreen extends StatelessWidget {
           top: 20.0,
           bottom: 10,
         ),
-
         child: Column(
           children: [
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
-            
                 child: Wrap(
                   runSpacing: MediaQuery.of(context).size.height * 0.06,
-            
                   children: [
                     InformationCard(
                       title: "Sala ${disciplines.classroom}",
                       subTitle: "Periodo: ${disciplines.period}°",
                     ),
-            
                     Wrap(
                       alignment: WrapAlignment.start,
                       runSpacing: 9,
-            
                       children: [
-                        Text('Notas', style: context.textStyles.mainTitle,),
+                        Text(
+                          'Notas',
+                          style: context.textStyles.titleMedium,
+                        ),
                         GridGrades(disciplines: disciplines),
                       ],
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                       children: [
                         Text(
                           'Delete a disciplina',
-                          style: context.textStyles.mainTitle,
+                          style: context.textStyles.titleMedium,
                         ),
-
                         IconButton(
                           onPressed: () => showDialog(
                             context: context,
@@ -101,13 +93,14 @@ class DetailsScreen extends StatelessWidget {
                           ),
                         ),
                       ],
-                    ),         
+                    ),
                   ],
                 ),
               ),
             ),
-            
-            LocalAvarage(avarage: disciplines.avarage,),
+            LocalAvarage(
+              avarage: disciplines.avarage,
+            ),
           ],
         ),
       ),

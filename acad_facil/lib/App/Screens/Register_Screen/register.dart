@@ -1,4 +1,3 @@
-import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Screens/Register_Screen/Widgets/form_register.dart';
 import 'package:flutter/material.dart';
 
@@ -16,29 +15,41 @@ class _RegisterState extends State<Register> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
 
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Crie sua conta',
-            style: context.textStyles.authTitle,
-          ),
-
-          elevation: 0,
-          automaticallyImplyLeading: false,
-        ),
-
-        body: const Align(
-          alignment: Alignment.bottomCenter,
-
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: 45.0,
-                right: 45.0,
-                bottom: 20.0,
-              ),
-
-              child: FormRegister()
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+              bottom: 5.0,
             ),
+        
+            child: LayoutBuilder(
+              builder: (_, constraints) => SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+
+                  child: IntrinsicHeight(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child: Image.asset(
+                              'assets/images/logo.png',
+                              width: 199,
+                            ),
+                          ),
+                        ),
+
+                        const FormRegister(),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
           ),
         ),
       ),

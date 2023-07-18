@@ -24,82 +24,78 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp){
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<DisciplinesControler>(context, listen: false)
-        .loadDisciplines().then((value) {
-          setState(() {
-            _isLoading = false;
-          });
+          .loadDisciplines()
+          .then((value) {
+        setState(() {
+          _isLoading = false;
         });
+      });
 
       Provider.of<UserController>(context, listen: false)
-        .loadUser().then((value) => {
-          setState(() {
-            _isLoading2 = false;
-          },)
-        });
+          .loadUser()
+          .then((value) => {
+                setState(
+                  () {
+                    _isLoading2 = false;
+                  },
+                )
+              });
     });
   }
 
   @override
   Widget build(BuildContext context) {
- 
     final providerDiscipline = Provider.of<DisciplinesControler>(context);
     final providerUser = Provider.of<UserController>(context).user;
-    
-    return !_isLoading && !_isLoading2 ?
-    SingleChildScrollView(   
-    
-      physics: const BouncingScrollPhysics(),
 
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-
-        child: Wrap(
-          runSpacing: MediaQuery.of(context).size.height * 0.06,
-          
-          children: [
-            InformationCard(title: 'Curso' ,subTitle: providerUser.course),             
-            
-            Column(
-              
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    
+    return !_isLoading && !_isLoading2
+        ? SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Wrap(
+                runSpacing: MediaQuery.of(context).size.height * 0.06,
+                children: [
+                  InformationCard(
+                      title: 'Curso', subTitle: providerUser.course),
+                  Column(
                     children: [
-                      Text(
-                        'Disciplinas',
-                        style: context.textStyles.mainTitle,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Disciplinas',
+                              style: context.textStyles.titleMedium,
+                            ),
+                            providerDiscipline.disciplinesCount != 0
+                                ? TextButtonApp(
+                                    title: 'Ver todas',
+                                    action: () => NavigatorRoutes()
+                                        .disciplinesScreenWithoutRemoving(),
+                                  )
+                                : TextButtonApp(
+                                    title: 'Adicionar',
+                                    action: () =>
+                                        NavigatorRoutes().addDisciplines(),
+                                  ),
+                          ],
+                        ),
                       ),
-
-                      providerDiscipline.disciplinesCount != 0
-                        ? TextButtonApp(
-                            title: 'Ver todas',
-                            action: () => NavigatorRoutes().disciplinesScreenWithoutRemoving(),
-                          )
-                        : TextButtonApp(
-                            title: 'Adicionar',
-                            action: () => NavigatorRoutes().addDisciplines(),
-                          ),
+                      const GridDisciplines(),
                     ],
                   ),
-                ),
-  
-                const GridDisciplines(),
-              ],
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
-    ) 
-    : Center(
-      child: CircularProgressIndicator(
-        color: ColorsStyles.white,
-      ),
-    );
+          )
+        : Center(
+            child: CircularProgressIndicator(
+              color: ColorsStyles.white,
+            ),
+          );
   }
 }

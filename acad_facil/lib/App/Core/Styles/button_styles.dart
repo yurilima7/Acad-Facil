@@ -1,3 +1,4 @@
+import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:flutter/material.dart';
 
 class ButtonStyles {
@@ -10,11 +11,12 @@ class ButtonStyles {
     return _instance!;
   }
 
-  ButtonStyle get circleButton => ElevatedButton.styleFrom(
-    backgroundColor: const Color(0xFF024873),
-    shape: const CircleBorder(),
-    padding: const EdgeInsets.all(10),
-  );
+  ButtonStyle get buttonApp => ElevatedButton.styleFrom(
+        backgroundColor: ColorsStyles.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(26),
+        ),
+      );
 }
 
 extension ButtonStylesExt on BuildContext {

@@ -9,10 +9,10 @@ import 'package:provider/provider.dart';
 class CardAvarage extends StatelessWidget {
   final double avarage;
   final String disciplina;
-    
+
   const CardAvarage({
-    Key? key, 
-    required this.avarage, 
+    Key? key,
+    required this.avarage,
     required this.disciplina,
   }) : super(key: key);
 
@@ -22,12 +22,11 @@ class CardAvarage extends StatelessWidget {
 
     return InkWell(
       onTap: () => NavigatorRoutes().detailsScreen(discipline),
-
       child: Card(
         color: ColorsStyles.secundary,
         elevation: 5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-    
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: Padding(
           padding: const EdgeInsets.only(
             left: 5.0,
@@ -35,11 +34,12 @@ class CardAvarage extends StatelessWidget {
             bottom: 5.0,
             top: 5.0,
           ),
-    
           child: Center(
             child: ListTile(
-              title: Text(disciplina, style: context.textStyles.mainTitle),
-              trailing: StickerPercent(avarage: avarage,),
+              title: Text(disciplina, style: context.textStyles.titleMedium),
+              trailing: StickerPercent(
+                avarage: avarage,
+              ),
             ),
           ),
         ),

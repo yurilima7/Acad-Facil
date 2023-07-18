@@ -1,4 +1,3 @@
-
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/acad_facil.dart';
@@ -13,13 +12,13 @@ class Messages {
         content: Text(
           text,
           textAlign: TextAlign.center,
-          style: scaffoldMessengerKey.currentContext!.textStyles.mainTitle,
+          style: scaffoldMessengerKey.currentContext!.textStyles.titleMedium,
         ),
       ),
     );
   }
 
-  static void showSuccess(String text){
+  static void showSuccess(String text) {
     scaffoldMessengerKey.currentState!.showSnackBar(
       SnackBar(
         backgroundColor: ColorsStyles.sucess,
@@ -27,7 +26,7 @@ class Messages {
         content: Text(
           text,
           textAlign: TextAlign.center,
-          style: scaffoldMessengerKey.currentContext!.textStyles.mainTitle,
+          style: scaffoldMessengerKey.currentContext!.textStyles.titleMedium,
         ),
       ),
     );

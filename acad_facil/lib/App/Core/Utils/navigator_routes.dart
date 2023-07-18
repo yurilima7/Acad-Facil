@@ -17,8 +17,9 @@ class NavigatorRoutes {
     });
   }
 
-  void loginScreen() {
-    Messages.showSuccess('Registro realizado com sucesso!');
+  void 
+  loginScreen() {
+    // Messages.showSuccess('Registro realizado com sucesso!');
 
     login();
   }

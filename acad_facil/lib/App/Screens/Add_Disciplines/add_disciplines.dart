@@ -40,7 +40,7 @@ class _AddDisciplinesState extends State<AddDisciplines> {
         setState(() {
           isLoading = true;
         });
-        
+
         await disciplinesProvider.addDisciplines(
           Disciplines(
             id: '',
@@ -60,93 +60,77 @@ class _AddDisciplinesState extends State<AddDisciplines> {
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Inserir Disciplina'),
           elevation: 0,
           automaticallyImplyLeading: false,
         ),
-        
         body: Align(
           alignment: Alignment.bottomCenter,
-    
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-        
             child: SingleChildScrollView(
               child: Form(
                 key: formKey,
-            
                 child: Wrap(
                   runSpacing: MediaQuery.of(context).size.height * 0.02,
-    
                   children: [
                     TextFormField(
                       style: context.textStyles.secundaryTitle,
                       textInputAction: TextInputAction.next,
                       controller: nameEC,
-                      
                       decoration: InputDecoration(
                         label: Text(
                           'Disciplina',
-                          style: context.textStyles.mainTitle,
+                          style: context.textStyles.titleMedium,
                         ),
-                      
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: ColorsStyles.white,
                           ),
                         ),
-                        
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: ColorsStyles.white,
                           ),
                         ),
                       ),
-                      
                       validator: Validatorless.required('Obrigatório!'),
                     ),
-                
                     TextFormField(
                       style: context.textStyles.secundaryTitle,
                       controller: classroomEC,
                       textInputAction: TextInputAction.next,
-                      
                       decoration: const InputDecoration(
                         label: Text('Sala'),
                       ),
-                      
                       validator: Validatorless.required('Obrigatório!'),
                     ),
-                
-                    TextFormField(    
+                    TextFormField(
                       style: context.textStyles.secundaryTitle,
                       controller: periodEC,
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.done,
                       onFieldSubmitted: (_) => registerDiscipline(),
-                      
                       decoration: const InputDecoration(
-                        label: Text( 'Período'),
+                        label: Text('Período'),
                       ),
-                      
                       validator: Validatorless.required('Obrigatório!'),
                     ),
-                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            
                       children: [
                         Text(
                           'Salvar',
-                          style: context.textStyles.authTitle,
+                          style: context.textStyles.titleLarge,
                         ),
-            
                         isLoading
-                          ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                          : Button(action: registerDiscipline),
+                            ? CircularProgressIndicator(
+                                color: ColorsStyles.terciary,
+                              )
+                            : Button(
+                                title: 'Salvar', action: registerDiscipline),
                       ],
                     ),
                   ],

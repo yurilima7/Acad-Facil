@@ -20,37 +20,35 @@ class Alert extends StatelessWidget {
 
     return AlertDialog(
       backgroundColor: ColorsStyles.primary,
-      
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(20.0),
         ),
       ),
-
-      title: Text(title[position], style: context.textStyles.alertTitle,),
-
+      title: Text(
+        title[position],
+        style: context.textStyles.alertTitle,
+      ),
       content: Text(
         message,
         style: context.textStyles.secundaryTitle,
       ),
-
       actions: <Widget>[
         TextButton(
           onPressed: () => Navigator.pop(context, false),
           child: Text(
             'Cancelar',
-            style: context.textStyles.mainTitle,
+            style: context.textStyles.titleMedium,
           ),
         ),
-
         TextButton(
-          onPressed: () { 
+          onPressed: () {
             Navigator.pop(context, true);
             action();
           },
           child: Text(
             'OK',
-            style: context.textStyles.mainTitle,
+            style: context.textStyles.titleMedium,
           ),
         ),
       ],

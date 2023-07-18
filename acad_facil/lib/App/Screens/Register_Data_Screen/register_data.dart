@@ -30,7 +30,8 @@ class _RegisterDataState extends State<RegisterData> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    UserController providerUser = Provider.of<UserController>(context, listen: false);
+    UserController providerUser =
+        Provider.of<UserController>(context, listen: false);
 
     void registerData() async {
       final valid = formKey.currentState?.validate() ?? false;
@@ -57,74 +58,54 @@ class _RegisterDataState extends State<RegisterData> {
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      
       child: Scaffold(
         appBar: AppBar(
           title: Text(
             'Informe seus dados',
-            style: context.textStyles.authTitle,
+            style: context.textStyles.titleLarge,
           ),
-
           elevation: 0,
           automaticallyImplyLeading: false,
         ),
-
         body: Align(
           alignment: Alignment.bottomCenter,
-        
           child: SingleChildScrollView(
             child: Form(
               key: formKey,
-                    
               child: Padding(
                 padding: const EdgeInsets.only(
                   left: 45.0,
                   right: 45.0,
                   bottom: 20.0,
                 ),
-              
                 child: Column(
-                  children: [                
-                    TextFormField(    
+                  children: [
+                    TextFormField(
                       controller: courseEC,
                       style: context.textStyles.secundaryTitle,
-          
                       decoration: const InputDecoration(
                         label: Text('Seu curso'),
                       ),
-          
                       validator: Validatorless.required('Obrigatório!'),
                     ),
-                  
-                    TextFormField(    
+                    TextFormField(
                       controller: periodEC,
                       style: context.textStyles.secundaryTitle,
                       keyboardType: TextInputType.number,
                       onFieldSubmitted: (_) => registerData(),
-                    
                       decoration: const InputDecoration(
                         label: Text('Período Atual'),
                       ),
-          
                       validator: Validatorless.required('Obrigatório!'),
                     ),
-                  
-                    SizedBox(height: height * .05,),
-                    
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    
-                      children: [
-                        Text(
-                          'Entrar',
-                          style: context.textStyles.authTitle,
-                        ),
-                    
-                        isLoading
-                          ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                          : Button(action: registerData)
-                      ],
+                    SizedBox(
+                      height: height * .05,
                     ),
+                    isLoading
+                            ? CircularProgressIndicator(
+                                color: ColorsStyles.terciary,
+                              )
+                            : Button(title: 'Entrar', action: registerData)
                   ],
                 ),
               ),

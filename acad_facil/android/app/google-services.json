@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "120480731808-mv4s78956n9ckor4hb5u83lvrle9rdsm.apps.googleusercontent.com",
+          "client_id": "120480731808-42nro7etf4rc51i09uvmnp85g8hlpru4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.acad_facil",
-            "certificate_hash": "050efe90fbd3f21ba948a7baa183f180470298e8"
+            "certificate_hash": "470ff4349f33856e939f774a983a3ddcf8cd1c4b"
           }
         },
         {

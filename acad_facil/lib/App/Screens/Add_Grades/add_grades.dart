@@ -39,13 +39,10 @@ class _AddGradesState extends State<AddGrades> {
         setState(() {
           isLoading = true;
         });
-        
+
         await disciplinesProvider.addGrades(
-          disciplines.id,
-          disciplines.grades,
-          double.tryParse(gradeEC.text)!
-        );
-  
+            disciplines.id, disciplines.grades, double.tryParse(gradeEC.text)!);
+
         setState(() {
           isLoading = false;
         });
@@ -54,39 +51,31 @@ class _AddGradesState extends State<AddGrades> {
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Inserir Notas'),
           elevation: 0,
           automaticallyImplyLeading: false,
         ),
-    
         body: Align(
           alignment: Alignment.bottomCenter,
-    
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-        
             child: SingleChildScrollView(
               child: Form(
                 key: formKey,
-            
                 child: Wrap(
                   runSpacing: MediaQuery.of(context).size.height * 0.02,
-    
-                  children: [           
-                    TextFormField(    
+                  children: [
+                    TextFormField(
                       style: context.textStyles.secundaryTitle,
                       controller: gradeEC,
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.done,
                       onFieldSubmitted: (_) => registerGrade(),
-                      
                       decoration: const InputDecoration(
                         label: Text('Digite sua nota'),
                       ),
-                      
                       validator: Validatorless.multiple([
                         Validatorless.required('Obrigatório!'),
                         Validatorless.numbersBetweenInterval(
@@ -96,19 +85,18 @@ class _AddGradesState extends State<AddGrades> {
                         ),
                       ]),
                     ),
-                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            
                       children: [
                         Text(
                           'Salvar',
-                          style: context.textStyles.authTitle,
+                          style: context.textStyles.titleLarge,
                         ),
-            
                         isLoading
-                          ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                          : Button(action: registerGrade),
+                            ? CircularProgressIndicator(
+                                color: ColorsStyles.terciary,
+                              )
+                            : Button(title: 'Salvar', action: registerGrade),
                       ],
                     ),
                   ],

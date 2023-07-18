@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 
 class ModalOptions extends StatelessWidget {
   final Disciplines disciplines;
-  const ModalOptions({Key? key, required this.disciplines,}) : super(key: key);
+  const ModalOptions({
+    Key? key,
+    required this.disciplines,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,47 +18,39 @@ class ModalOptions extends StatelessWidget {
       height: 150,
       color: ColorsStyles.primary,
       padding: const EdgeInsets.all(20.0),
-
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-
         children: [
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
             children: [
               Text(
                 'Adicionar Nota',
-                style: context.textStyles.mainTitle,
+                style: context.textStyles.titleMedium,
               ),
-
               ElevatedButton(
                 onPressed: () => NavigatorRoutes().addGrades(disciplines),
-                style: context.buttonStyles.circleButton,
+                style: context.buttonStyles.buttonApp,
                 child: const Icon(Icons.arrow_forward),
               ),
             ],
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
             children: [
               Text(
                 'Editar Disciplina',
-                style: context.textStyles.mainTitle,
+                style: context.textStyles.titleMedium,
               ),
-
               ElevatedButton(
                 onPressed: () => NavigatorRoutes().editDiscipline(disciplines),
-                style: context.buttonStyles.circleButton,
+                style: context.buttonStyles.buttonApp,
                 child: const Icon(Icons.arrow_forward),
               ),
             ],
           ),
         ],
       ),
-    );  
+    );
   }
 }

@@ -50,74 +50,60 @@ class _FormLoginState extends State<FormLogin> {
       });
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
 
     return Form(
       key: formKey,
-      
       child: Column(
-        children: [                
-          TextFormField(    
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Entre com',
+            style: context.textStyles.titleLarge,
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          TextFormField(
             controller: emailEC,
             style: context.textStyles.secundaryTitle,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
-              
             decoration: const InputDecoration(
-              label: Text('E-mail'),
+              label: Text(
+                'E-mail',
+              ),
             ),
-              
             validator: Validatorless.multiple([
               Validatorless.required('Obrigatório!'),
               Validatorless.email('E-Mail inválido!'),
             ]),
           ),
-        
-          TextFormField(    
+          TextFormField(
             controller: passwordEC,
             style: context.textStyles.secundaryTitle,
             textInputAction: TextInputAction.done,
             obscureText: !lookPassword ? true : false,
             onFieldSubmitted: (_) => home(),
-          
             decoration: InputDecoration(
-              label: Text(
+              label: const Text(
                 'Senha',
-                style: context.textStyles.mainTitle,
               ),
-              
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorsStyles.white,
-                ),
-              ),
-              
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorsStyles.white,
-                ),
-              ),
-              
               suffixIcon: IconButton(
                 icon: Icon(
-                  !lookPassword 
-                    ? Icons.visibility 
-                    : Icons.visibility_off,
+                  !lookPassword ? Icons.visibility : Icons.visibility_off,
                 ),
-              
                 color: ColorsStyles.white,
-              
                 onPressed: () {
                   setState(() {
                     lookPassword = !lookPassword;
                   });
                 },
-              ), 
+              ),
             ),
-              
             validator: Validatorless.multiple([
               Validatorless.required('Obrigatório!'),
               Validatorless.min(
@@ -126,38 +112,30 @@ class _FormLoginState extends State<FormLogin> {
               ),
             ]),
           ),
-        
-          SizedBox(height: height * .05,),
-        
+          SizedBox(
+            height: height * .05,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          
             children: [
               const GoogleLogin(),
-          
               TextButtonApp(
                 title: 'Cadastre-se',
                 action: () => NavigatorRoutes().registerScreen(),
               ),
             ],
           ),
-              
-          SizedBox(height: height * .02,),
-          
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          
-            children: [
-              Text(
-                'Login',
-                style: context.textStyles.authTitle,
-              ),
-
-              isLoading
-                ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                : Button(action: home),
-            ],
+          SizedBox(
+            height: height * .02,
           ),
+          isLoading
+              ? CircularProgressIndicator(
+                  color: ColorsStyles.terciary,
+                )
+              : Button(
+                  action: home,
+                  title: 'Login',
+                ),
         ],
       ),
     );

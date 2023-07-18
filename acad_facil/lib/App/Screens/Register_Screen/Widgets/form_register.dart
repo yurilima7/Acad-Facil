@@ -61,14 +61,27 @@ class _FormRegisterState extends State<FormRegister> {
       key: formKey,
       
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+
         children: [
+          Text(
+            'Crie sua conta',
+            style: context.textStyles.titleLarge,
+          ),
+
+          const SizedBox(
+            height: 25,
+          ),
+
           TextFormField(
             controller: userNameEC,
             style: context.textStyles.secundaryTitle,
             textInputAction: TextInputAction.next,
             
             decoration: const InputDecoration(
-              label: Text('Nome de usuário'),
+              label: Text(
+                'Nome de usuário',
+              ),
             ),
     
             validator: Validatorless.multiple([
@@ -83,7 +96,9 @@ class _FormRegisterState extends State<FormRegister> {
             textInputAction: TextInputAction.next,
     
             decoration: const InputDecoration(
-              label: Text('E-mail'),
+              label:  Text(
+                'E-mail',
+              ),
             ),
     
             validator: Validatorless.multiple([
@@ -144,21 +159,10 @@ class _FormRegisterState extends State<FormRegister> {
           SizedBox(
             height: height * .02,
           ),
-    
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    
-            children: [
-              Text(
-                'Cadastrar',
-                style: context.textStyles.authTitle,
-              ),
 
-              isLoading
+          isLoading
                 ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                : Button(action: screenLogin)
-            ],
-          ),
+                : Button(title: 'Cadastrar', action: screenLogin),
         ],
       ),
     );

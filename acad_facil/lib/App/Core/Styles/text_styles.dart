@@ -16,81 +16,81 @@ class TextStyles {
 
   // primária
   TextStyle get primaryRegular => TextStyle(
-    fontFamily: primaryFont,
-    fontWeight: FontWeight.w400,
-  );
+        fontFamily: primaryFont,
+        fontWeight: FontWeight.w400,
+      );
 
   // secundária
   TextStyle get secondaryRegular => TextStyle(
-    fontFamily: secondaryFont,
-    fontWeight: FontWeight.w400,
-  );
+        fontFamily: secondaryFont,
+        fontWeight: FontWeight.w400,
+      );
 
   TextStyle get secondarySemiBold => TextStyle(
-    fontFamily: secondaryFont,
-    fontWeight: FontWeight.w600,
-  );
+        fontFamily: secondaryFont,
+        fontWeight: FontWeight.w600,
+      );
 
   // personalizado
-  TextStyle get mainTitle => primaryRegular.copyWith(
-    color: ColorsStyles.white,
-    fontSize: 16,
-  );
+  TextStyle get titleMedium => primaryRegular.copyWith(
+        color: ColorsStyles.white,
+        fontSize: 16,
+      );
 
   TextStyle get mainTitleBlue => primaryRegular.copyWith(
-    color: ColorsStyles.terciary,
-    fontSize: 16,
-  );
+        color: ColorsStyles.terciary,
+        fontSize: 16,
+      );
 
-  TextStyle get authTitle => primaryRegular.copyWith(
-    color: ColorsStyles.white,
-    fontSize: 25,
-  );
+  TextStyle get titleLarge => primaryRegular.copyWith(
+        color: ColorsStyles.white,
+        fontSize: 22,
+      );
 
   TextStyle get bigTitle => primaryRegular.copyWith(
-    color: ColorsStyles.white,
-    fontSize: 30,
-  );
+        color: ColorsStyles.white,
+        fontSize: 30,
+      );
 
   TextStyle get grade => primaryRegular.copyWith(
-    color: ColorsStyles.terciary,
-    fontSize: 30,
-  );
+        color: ColorsStyles.terciary,
+        fontSize: 30,
+      );
 
   TextStyle get alertTitle => primaryRegular.copyWith(
-    color: ColorsStyles.white,
-    fontSize: 20,
-  );
+        color: ColorsStyles.white,
+        fontSize: 20,
+      );
 
   TextStyle get appBarTitle => primaryRegular.copyWith(
-    color: ColorsStyles.white,
-    fontSize: 20,
-  );
+        color: ColorsStyles.white,
+        fontSize: 20,
+      );
 
-  TextStyle get mainCardTitle => primaryRegular.copyWith(
-    color: ColorsStyles.white,
-    fontSize: 12,
-  );
+  TextStyle get titleSmall => primaryRegular.copyWith(
+        color: ColorsStyles.white,
+        fontSize: 12,
+      );
 
   TextStyle get chartTitle => primaryRegular.copyWith(
-    color: ColorsStyles.terciary,
-    fontSize: 20,
-  );
+        color: ColorsStyles.terciary,
+        fontSize: 20,
+      );
 
   TextStyle get secundaryTitle => secondaryRegular.copyWith(
-    color: ColorsStyles.white,
-    fontSize: 16,
-  );
+        color: ColorsStyles.white,
+        fontSize: 16,
+      );
 
   TextStyle get secundarySubTitle => secondaryRegular.copyWith(
-    color: ColorsStyles.white,
-    fontSize: 10,
-  );
+        color: ColorsStyles.white,
+        fontSize: 10,
+      );
 
   TextStyle get secundaryOptions => secondarySemiBold.copyWith(
-    color: ColorsStyles.white,
-    fontSize: 15,
-  );
+        color: ColorsStyles.white,
+        fontSize: 15,
+      );
 }
 
 extension TextStylesExt on BuildContext {

@@ -13,7 +13,7 @@ class ThemeSettings {
     ),
 
     inputDecorationTheme: InputDecorationTheme(
-      labelStyle: TextStyles.i.mainTitle,
+      labelStyle: TextStyles.i.titleMedium,
 
       enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(

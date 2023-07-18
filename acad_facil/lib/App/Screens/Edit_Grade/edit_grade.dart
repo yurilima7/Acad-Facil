@@ -8,8 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class EditGrade extends StatefulWidget {
-
-  const EditGrade({ Key? key }) : super(key: key);
+  const EditGrade({Key? key}) : super(key: key);
 
   @override
   State<EditGrade> createState() => _EditGradeState();
@@ -47,14 +46,14 @@ class _EditGradeState extends State<EditGrade> {
         setState(() {
           isLoading = true;
         });
-        
+
         await disciplinesProvider.editGrade(
           formData['disciplineId'].toString(),
           formData['grades'] as List,
           formData['newGrade'] as double,
           formData['position'] as int,
         );
-  
+
         setState(() {
           isLoading = false;
         });
@@ -63,73 +62,62 @@ class _EditGradeState extends State<EditGrade> {
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Editar Nota'),
           elevation: 0,
           automaticallyImplyLeading: false,
         ),
-    
         body: Align(
-            alignment: Alignment.bottomCenter,
-      
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-          
-              child: SingleChildScrollView(
-                child: Form(
-                  key: formKey,
-              
-                  child: Wrap(
-                    runSpacing: MediaQuery.of(context).size.height * 0.02,
-      
-                    children: [           
-                      TextFormField(    
-                        initialValue: formData['newGrade'].toString(),
-                        style: context.textStyles.secundaryTitle,
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.done,
-    
-                        onFieldSubmitted: (_) => registerGrade(),
-    
-                        onSaved: (grade) => 
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                child: Wrap(
+                  runSpacing: MediaQuery.of(context).size.height * 0.02,
+                  children: [
+                    TextFormField(
+                      initialValue: formData['newGrade'].toString(),
+                      style: context.textStyles.secundaryTitle,
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (_) => registerGrade(),
+                      onSaved: (grade) =>
                           formData['newGrade'] = double.parse(grade ?? '0'),
-                        
-                        decoration: const InputDecoration(
-                          label: Text('Digite sua nota'),
+                      decoration: const InputDecoration(
+                        label: Text('Digite sua nota'),
+                      ),
+                      validator: Validatorless.multiple([
+                        Validatorless.required('Obrigatório!'),
+                        Validatorless.numbersBetweenInterval(
+                          0.0,
+                          10.0,
+                          'Sua nota deve ser entre 0.0 e 10',
                         ),
-                        
-                        validator: Validatorless.multiple([
-                          Validatorless.required('Obrigatório!'),
-                          Validatorless.numbersBetweenInterval(
-                            0.0,
-                            10.0,
-                            'Sua nota deve ser entre 0.0 e 10',
-                          ),
-                        ]),
-                      ),
-                      
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              
-                        children: [
-                          Text(
-                            'Salvar',
-                            style: context.textStyles.authTitle,
-                          ),
-              
-                          isLoading
-                            ? CircularProgressIndicator(color: ColorsStyles.terciary,)
-                            : Button(action: registerGrade),
-                        ],
-                      ),
-                    ],
-                  ),
+                      ]),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Salvar',
+                          style: context.textStyles.titleLarge,
+                        ),
+                        isLoading
+                            ? CircularProgressIndicator(
+                                color: ColorsStyles.terciary,
+                              )
+                            : Button(title: 'Salvar', action: registerGrade),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
+        ),
       ),
     );
   }
