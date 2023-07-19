@@ -24,8 +24,6 @@ class NavigatorRoutes {
   }
 
   void homeScreen() {
-    Messages.showSuccess('Login realizado com sucesso!');
-
     nextScreen();
   }
 
@@ -47,7 +45,7 @@ class NavigatorRoutes {
 
   void nextScreen() {
     navigatorKey.currentState!.pushNamedAndRemoveUntil(
-      AppRoutes.tabs,
+      AppRoutes.home,
       (Route<dynamic> route) => false,
     );
   }

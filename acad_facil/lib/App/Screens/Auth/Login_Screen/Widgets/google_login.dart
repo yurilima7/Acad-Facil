@@ -19,7 +19,7 @@ class GoogleLogin extends StatelessWidget {
 
         if(result) {
           nav.pushNamedAndRemoveUntil(
-            AppRoutes.tabs,
+            AppRoutes.home,
             (Route<dynamic> route) => false,
           );
         }

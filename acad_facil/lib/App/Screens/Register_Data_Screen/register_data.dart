@@ -42,7 +42,7 @@ class _RegisterDataState extends State<RegisterData> {
         });
 
         await providerUser.addData(
-          User(
+          UserModel(
             id: '',
             name: '',
             course: courseEC.text.trim(),
@@ -102,10 +102,10 @@ class _RegisterDataState extends State<RegisterData> {
                       height: height * .05,
                     ),
                     isLoading
-                            ? CircularProgressIndicator(
-                                color: ColorsStyles.terciary,
-                              )
-                            : Button(title: 'Entrar', action: registerData)
+                        ? CircularProgressIndicator(
+                            color: ColorsStyles.terciary,
+                          )
+                        : Button(title: 'Entrar', action: registerData)
                   ],
                 ),
               ),

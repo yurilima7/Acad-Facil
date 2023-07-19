@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
+class UserModel {
+  final String id;
+  final String name;
+  final String course;
+  final int period;
+  final String perfilUrl;
 
-class User with ChangeNotifier{
-  String id;
-  String name;
-  String course;
-  int period;
-
-  User({
-    this.id = '',
-    this.name = '',
-    this.course = '',
-    this.period = 1,
+  UserModel({
+    required this.id,
+    required this.name,
+    required this.course,
+    required this.period,
+    this.perfilUrl = '',
   });
 }
