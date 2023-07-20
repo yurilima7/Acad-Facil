@@ -1,6 +1,7 @@
 import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
 import 'package:acad_facil/App/Controllers/user_controller.dart';
 import 'package:acad_facil/App/Screens/Auth/auth_controller.dart';
+import 'package:acad_facil/App/Screens/Disciplines_Screen/disciplines_screen_controller.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,9 @@ class MultiProviderApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => HomeController(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => DisciplinesScreenController(),
         ),
       ],
       child: child,

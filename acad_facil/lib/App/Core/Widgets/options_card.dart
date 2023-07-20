@@ -1,4 +1,5 @@
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
+import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/home_controller.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ class OptionsCard extends StatelessWidget {
   final String subtitle;
   final VoidCallback? function;
   final int index;
-  final Disciplines discipline;
+  final List<Disciplines>? discipline;
 
   const OptionsCard({
     super.key,
@@ -18,7 +19,7 @@ class OptionsCard extends StatelessWidget {
     required this.path,
     this.subtitle = '', 
     this.function, required this.index, 
-    required this.discipline,
+    this.discipline,
   });
 
   @override
@@ -30,7 +31,19 @@ class OptionsCard extends StatelessWidget {
     return InkWell(
       // onTap: () => NavigatorRoutes().detailsScreen(discipline),
       onTap: () {
-        if (index == 4) {
+        if (index == 0) {
+          Navigator.of(context).pushNamed(
+            AppRoutes.grades,
+            arguments: discipline,
+          );
+        }
+        else if (index == 1) {
+          Navigator.of(context).pushNamed(
+            AppRoutes.disciplines,
+            arguments: discipline,
+          );
+        }
+        else if (index == 4) {
           providerHomeController.logout('Logout realizado com sucesso!');
         }
       },

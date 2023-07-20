@@ -1,46 +1,71 @@
-import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Screens/Grades_Screen/Widgets/card_avarage.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class GradesScreen extends StatelessWidget {
+class GradesScreen extends StatefulWidget {
   const GradesScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final providerDisciplines = Provider.of<DisciplinesControler>(context);
-    final List<Disciplines> disciplines = providerDisciplines.disciplines;
-    final int disciplinesLength = disciplines.length;
-    
+  State<GradesScreen> createState() => _GradesScreenState();
+}
+
+class _GradesScreenState extends State<GradesScreen> {
+  List<Disciplines>? disciplines;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    disciplines = ModalRoute.of(context)!.settings.arguments 
+                    as List<Disciplines>;
+  }
+
+  @override
+  Widget build(BuildContext context) {   
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
 
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20,),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Notas',
+            style: context.textStyles.titleLarge,
+          ),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+        ),
+        
+        body: Padding(
+          padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
 
-        child: disciplinesLength > 0 ? SingleChildScrollView(
-          child: Column(
-            children: List.generate(
-              disciplinesLength,
-              
-              (i) => ChangeNotifierProvider.value(
-                value: disciplines[i],
-                child: CardAvarage(
-                  avarage: disciplines.elementAt(i).avarage,
-                  disciplina: disciplines.elementAt(i).name,
-                ),
+          child: Visibility(
+            visible: disciplines!.isNotEmpty,
+
+            replacement: Center(
+              child: Text(
+                'Sem notas no momento!',
+                style: context.textStyles.secundaryTitle,
               ),
             ),
+
+            child: SingleChildScrollView(
+              child: Column(
+                children: List.generate(
+                  disciplines!.length,
+                  
+                  (i) => ChangeNotifierProvider.value(
+                    value: disciplines![i],
+                    child: CardAvarage(
+                      avarage: disciplines!.elementAt(i).avarage,
+                      disciplina: disciplines!.elementAt(i).name,
+                    ),
+                  ),
+                ),
+              ),
+            ) ,
           ),
-        ) 
-        : Center(
-            child: Text(
-              'Sem notas no momento!',
-              style: context.textStyles.secundaryTitle,
-            ),
-          ),
+        ),
       ),
     );
   }

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Search extends StatefulWidget {
-  final TextEditingController controller;
   final Function(String) onChanged;
 
   const Search({
     Key? key,
     required this.onChanged,
-    required this.controller,
   }) : super(key: key);
 
   @override
@@ -21,7 +19,6 @@ class _SearchState extends State<Search> {
     return TextFormField( 
       // coloração do texto digitado
       style: const TextStyle(color: Colors.white),
-      controller: widget.controller,
       onChanged: widget.onChanged,
 
       decoration: InputDecoration(

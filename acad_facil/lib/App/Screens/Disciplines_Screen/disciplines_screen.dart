@@ -1,8 +1,9 @@
-import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
+import 'package:acad_facil/App/Core/Styles/text_styles.dart';
+import 'package:acad_facil/App/Core/Widgets/discipline_card.dart';
 import 'package:acad_facil/App/Core/Widgets/floating_button.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
-import 'package:acad_facil/App/Screens/Disciplines_Screen/Widgets/grid_disciplines.dart';
 import 'package:acad_facil/App/Screens/Disciplines_Screen/Widgets/search.dart';
+import 'package:acad_facil/App/Screens/Disciplines_Screen/disciplines_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,32 +15,28 @@ class DisciplinesScreen extends StatefulWidget {
 }
 
 class _DisciplinesScreenState extends State<DisciplinesScreen> {
-  String search = '';
-  final searchEC = TextEditingController();
+  List<Disciplines>? disciplines;
 
   @override
-  void dispose() {
-    searchEC.dispose();
-    super.dispose();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    disciplines = ModalRoute.of(context)!.settings.arguments 
+                    as List<Disciplines>;
+                     Provider.of<DisciplinesScreenController>(context)
+          .add(disciplines!);
   }
 
   @override
   Widget build(BuildContext context) {
-    final providerDisciplines = Provider.of<DisciplinesControler>(context);
-    final List<Disciplines> disciplines = providerDisciplines.disciplines;
-
-    void onChanged(String text){
-      setState(() {
-        search = searchEC.text;
-      });
-    }
+    final disciplinesController 
+        = Provider.of<DisciplinesScreenController>(context);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Disciplinas'),
+          title: Text('Disciplinas', style: context.textStyles.titleLarge,),
           elevation: 0,
           automaticallyImplyLeading: false,
         ),
@@ -50,13 +47,40 @@ class _DisciplinesScreenState extends State<DisciplinesScreen> {
             children:  [
               Column(
                 children: [
-                  Search(onChanged: onChanged, controller: searchEC),       
+                  Search(
+                    onChanged: (value) => disciplinesController.filter(value),
+                  ),       
                 ],
               ),
           
               SizedBox(height: MediaQuery.of(context).size.height * 0.06,),
 
-              GridDisciplines(disciplines: disciplines, search: search,),
+              Visibility(
+                visible: disciplinesController.filtered.isNotEmpty,
+
+                replacement: Expanded(
+                  child: Center(
+                    child: Text(
+                      'Sem disciplinas no momento!',
+                      style: context.textStyles.secundaryTitle,
+                    ),
+                  ),
+                ),
+
+                child: Expanded(
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio: 3 / 2,
+                    crossAxisSpacing: 20.0,
+                    mainAxisSpacing: 10.0,
+
+                    children: List.generate(
+                      disciplinesController.filtered.length,
+                      (i) => DisciplineCard(discipline: disciplinesController.filtered[i]),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
