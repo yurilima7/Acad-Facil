@@ -1,3 +1,4 @@
+import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
@@ -25,18 +26,27 @@ class GradesForm extends StatelessWidget {
           position: i,
         ),
       ),
-
       child: Card(
         color: Theme.of(context).colorScheme.secondary,
         elevation: 5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-    
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: Center(
           child: ListTile(
-            title: Text(
-              '${discipline.grades.elementAt(i)}',
-              style: TextStyles.i.grade,
+            title: RichText(
               textAlign: TextAlign.center,
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'N${i + 1}: ',
+                    style: TextStyles.i.cardTitle.copyWith(fontSize: 26, color: ColorsStyles.white,),
+                  ),
+                  TextSpan(
+                      text: '${discipline.grades.elementAt(i)}',
+                      style: TextStyles.i.cardTitle.copyWith(fontSize: 26),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -31,7 +31,7 @@ class ModalOptions extends StatelessWidget {
               ElevatedButton(
                 onPressed: () => NavigatorRoutes().addGrades(disciplines),
                 style: context.buttonStyles.buttonApp,
-                child: const Icon(Icons.arrow_forward),
+                child: Icon(Icons.arrow_forward, color: ColorsStyles.primary),
               ),
             ],
           ),
@@ -45,7 +45,7 @@ class ModalOptions extends StatelessWidget {
               ElevatedButton(
                 onPressed: () => NavigatorRoutes().editDiscipline(disciplines),
                 style: context.buttonStyles.buttonApp,
-                child: const Icon(Icons.arrow_forward),
+                child: Icon(Icons.arrow_forward, color: ColorsStyles.primary,),
               ),
             ],
           ),

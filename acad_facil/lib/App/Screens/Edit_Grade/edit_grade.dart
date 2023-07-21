@@ -1,5 +1,4 @@
 import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
-import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Models/edit_grade_model.dart';
@@ -98,20 +97,7 @@ class _EditGradeState extends State<EditGrade> {
                         ),
                       ]),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Salvar',
-                          style: context.textStyles.titleLarge,
-                        ),
-                        isLoading
-                            ? CircularProgressIndicator(
-                                color: ColorsStyles.terciary,
-                              )
-                            : Button(title: 'Salvar', action: registerGrade),
-                      ],
-                    ),
+                    Button(title: 'Salvar', action: registerGrade),
                   ],
                 ),
               ),

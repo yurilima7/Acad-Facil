@@ -52,9 +52,9 @@ class TextStyles {
         fontSize: 30,
       );
 
-  TextStyle get grade => primaryRegular.copyWith(
+  TextStyle get cardTitle => primaryRegular.copyWith(
         color: ColorsStyles.terciary,
-        fontSize: 30,
+        fontSize: 28,
       );
 
   TextStyle get alertTitle => primaryRegular.copyWith(

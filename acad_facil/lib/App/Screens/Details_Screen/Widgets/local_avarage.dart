@@ -12,7 +12,7 @@ class LocalAvarage extends StatelessWidget {
     return Card(
       color: ColorsStyles.secundary,
       elevation: 5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26.0)),
 
       child: Padding(
         padding: const EdgeInsets.only(

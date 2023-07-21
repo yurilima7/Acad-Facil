@@ -36,7 +36,7 @@ class GridGrades extends StatelessWidget {
       )
       :
       SizedBox(
-        height: 200,
+        height: 500,
         child: Center(
           child: Text(
             'Sem notas no momento!',

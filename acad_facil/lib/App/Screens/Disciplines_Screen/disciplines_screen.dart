@@ -1,5 +1,6 @@
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
+import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/discipline_card.dart';
 import 'package:acad_facil/App/Core/Widgets/floating_button.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
@@ -118,7 +119,10 @@ class _DisciplinesScreenState extends State<DisciplinesScreen> {
           ),
         ),
 
-        floatingActionButton: const FloatingButton(),
+        floatingActionButton: FloatingButton(
+          title: 'Adicionar Disciplina',
+          function: () => NavigatorRoutes().addDisciplines(),
+        ),
       ),
     );
   }

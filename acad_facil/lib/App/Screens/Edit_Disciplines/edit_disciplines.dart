@@ -131,21 +131,7 @@ class _EditDisciplinesState extends State<EditDisciplines> {
                       ),
                       validator: Validatorless.required('Obrigatório!'),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Salvar',
-                          style: context.textStyles.titleLarge,
-                        ),
-                        isLoading
-                            ? CircularProgressIndicator(
-                                color: ColorsStyles.terciary,
-                              )
-                            : Button(
-                                title: 'Salvar', action: registerDiscipline),
-                      ],
-                    ),
+                    Button(title: 'Salvar', action: registerDiscipline),
                   ],
                 ),
               ),

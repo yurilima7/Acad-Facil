@@ -2,7 +2,7 @@ import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Widgets/alert.dart';
-import 'package:acad_facil/App/Core/Widgets/information_card.dart';
+import 'package:acad_facil/App/Core/Widgets/floating_button.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/modal_options.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/grid_grades.dart';
@@ -25,75 +25,74 @@ class DetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(disciplines.name),
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            onPressed: () => showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) {
-                return ModalOptions(disciplines: disciplines);
-              },
-            ),
-            icon: const Icon(Icons.more_vert),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    disciplines.name,
+                    style: context.textStyles.titleLarge,
+                  ),
+                  Text(
+                    'Sala: ${disciplines.classroom}',
+                    style: context.textStyles.titleMedium,
+                  ),
+                  Text(
+                    'Período: ${disciplines.period}°',
+                    style: context.textStyles.titleMedium,
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
+
+          actions: [
+            IconButton(
+              onPressed: () => showDialog(
+                context: context,
+                builder: (_) => Alert(
+                  action: deleteDiscipline,
+                  message: 'Deseja deletar esta disciplina?',
+                  position: 0,
+                ),
+              ),
+
+              icon: const Icon(Icons.delete, size: 45),
+            ),
+          ],
+
+          automaticallyImplyLeading: false,
+          toolbarHeight: 110,
+          elevation: 0,
+          backgroundColor: ColorsStyles.secundary,
       ),
       body: Padding(
         padding: const EdgeInsets.only(
-          left: 20.0,
-          right: 20.0,
-          top: 20.0,
-          bottom: 10,
+          left: 16.0,
+          right: 16.0,
+          top: 16.0,
+          bottom: 70.0,
         ),
         child: Column(
           children: [
+            const SizedBox(
+                    height: 45,
+                ),
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Wrap(
-                  runSpacing: MediaQuery.of(context).size.height * 0.06,
+                  alignment: WrapAlignment.start,
+                  runSpacing: 10,
                   children: [
-                    InformationCard(
-                      title: "Sala ${disciplines.classroom}",
-                      subTitle: "Periodo: ${disciplines.period}°",
+                    Text(
+                      'Notas',
+                      style: context.textStyles.titleMedium,
                     ),
-                    Wrap(
-                      alignment: WrapAlignment.start,
-                      runSpacing: 9,
-                      children: [
-                        Text(
-                          'Notas',
-                          style: context.textStyles.titleMedium,
-                        ),
-                        GridGrades(disciplines: disciplines),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Delete a disciplina',
-                          style: context.textStyles.titleMedium,
-                        ),
-                        IconButton(
-                          onPressed: () => showDialog(
-                            context: context,
-                            builder: (_) => Alert(
-                              action: deleteDiscipline,
-                              message: 'Deseja deletar esta disciplina?',
-                              position: 0,
-                            ),
-                          ),
-                          icon: Icon(
-                            Icons.delete,
-                            size: 28,
-                            color: ColorsStyles.white,
-                          ),
-                        ),
-                      ],
-                    ),
+                    GridGrades(disciplines: disciplines),
                   ],
                 ),
               ),
@@ -102,6 +101,16 @@ class DetailsScreen extends StatelessWidget {
               avarage: disciplines.avarage,
             ),
           ],
+        ),
+      ),
+      
+      floatingActionButton: FloatingButton(
+        title: 'Opções',
+        function: () => showModalBottomSheet(
+          context: context,
+          builder: (BuildContext _) {
+            return ModalOptions(disciplines: disciplines);
+          },
         ),
       ),
     );
