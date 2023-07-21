@@ -1,3 +1,4 @@
+import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Widgets/discipline_card.dart';
 import 'package:acad_facil/App/Core/Widgets/floating_button.dart';
@@ -15,15 +16,13 @@ class DisciplinesScreen extends StatefulWidget {
 }
 
 class _DisciplinesScreenState extends State<DisciplinesScreen> {
-  List<Disciplines>? disciplines;
-
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    disciplines = ModalRoute.of(context)!.settings.arguments 
-                    as List<Disciplines>;
-                     Provider.of<DisciplinesScreenController>(context)
-          .add(disciplines!);
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final disciplines = ModalRoute.of(context)!.settings.arguments as List<Disciplines>;
+      Provider.of<DisciplinesScreenController>(context, listen: false).add(disciplines, 9);
+    });
   }
 
   @override
@@ -39,17 +38,51 @@ class _DisciplinesScreenState extends State<DisciplinesScreen> {
           title: Text('Disciplinas', style: context.textStyles.titleLarge,),
           elevation: 0,
           automaticallyImplyLeading: false,
+          actions: [
+
+            PopupMenuButton<int>(
+              color: ColorsStyles.secundary,
+
+              icon: Icon(
+                Icons.filter_list,
+                color: ColorsStyles.white,
+              ),
+
+              onSelected: (period) => disciplinesController.updatePeriod(period),
+
+              itemBuilder: (context) {
+                return [
+                  PopupMenuItem<int>(
+                    value: 0, // 0 para mostrar todas as disciplinas
+                    child: Text(
+                      'Todas as disciplinas',
+                      style: context.textStyles.titleMedium,
+                    ),
+                  ),
+
+                  for (int period in disciplinesController.periodsWithoutZero)
+                    PopupMenuItem<int>(
+                      value: period,
+                      child: Text(
+                        'Período $period',
+                        style: context.textStyles.titleMedium,
+                      ),
+                    ),
+                ];
+              },
+            ),
+          ],
         ),
     
         body: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
           child: Column(
             children:  [
               Column(
                 children: [
                   Search(
-                    onChanged: (value) => disciplinesController.filter(value),
-                  ),       
+                    onChanged: (search) => disciplinesController.filter(search),
+                  ),
                 ],
               ),
           

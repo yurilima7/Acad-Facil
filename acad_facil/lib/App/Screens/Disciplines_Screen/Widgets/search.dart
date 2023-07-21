@@ -24,7 +24,7 @@ class _SearchState extends State<Search> {
       decoration: InputDecoration(
         border: OutlineInputBorder(
           // definindo o tamanho das bordas
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(26.0),
         ),
 
         labelText: 'Pesquise uma Disciplina', // texto a ser exibido na label
@@ -39,17 +39,16 @@ class _SearchState extends State<Search> {
           ), // define a cor da borda quando não selecionado o input
 
           borderRadius: BorderRadius.circular(
-            20.0,
+            26.0,
           ), // define as bordas, para manter o padrão
         ),
 
         focusedBorder:OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.white),
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(26.0),
         ),
 
-        prefixIcon: const Icon(Icons.search, color: Colors.white,),
-         
+        prefixIcon: const Icon(Icons.search, color: Colors.white,),      
       ),
       
     );

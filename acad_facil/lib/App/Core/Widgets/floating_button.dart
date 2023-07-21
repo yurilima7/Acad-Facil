@@ -1,4 +1,6 @@
+import 'package:acad_facil/App/Core/Styles/button_styles.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
+import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:flutter/material.dart';
 
@@ -7,10 +9,15 @@ class FloatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
+    return ElevatedButton(
       onPressed: () => NavigatorRoutes().addDisciplines(),
-      backgroundColor: ColorsStyles.white,
-      child: Icon(Icons.add, color: ColorsStyles.secundary, size: 32),
+      style: context.buttonStyles.buttonApp,
+      child: Text(
+        'Adicionar Disciplina',
+        style: context.textStyles.titleMedium.copyWith(
+          color: ColorsStyles.primary,
+        ),
+      ),
     );
   }
 }
