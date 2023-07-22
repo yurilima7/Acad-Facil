@@ -59,9 +59,8 @@ class _UserStateScreenState extends State<UserStateScreen> {
               height: 50,
             ),
 
-            SpinKitCircle(
-              color: ColorsStyles.terciary,
-              size: 50.0,
+            SpinKitThreeInOut(
+              color: ColorsStyles.white,
             ),
           ],
         ),

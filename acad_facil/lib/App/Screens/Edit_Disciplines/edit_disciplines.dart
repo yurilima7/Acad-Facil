@@ -1,8 +1,8 @@
-import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
-import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
+import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
+import 'package:acad_facil/App/Screens/Edit_Disciplines/edit_disciplines_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
@@ -17,7 +17,6 @@ class EditDisciplines extends StatefulWidget {
 class _EditDisciplinesState extends State<EditDisciplines> {
   final formKey = GlobalKey<FormState>();
   final formData = <String, Object>{};
-  bool isLoading = false;
 
   @override
   void didChangeDependencies() {
@@ -37,32 +36,31 @@ class _EditDisciplinesState extends State<EditDisciplines> {
 
   @override
   Widget build(BuildContext context) {
-    final disciplinesProvider = Provider.of<DisciplinesControler>(context);
+    final disciplinesProvider = Provider.of<EditDisciplinesController>(context);
+    final nav = Navigator.of(context);
 
     void registerDiscipline() async {
       final valid = formKey.currentState?.validate() ?? false;
 
       if (valid) {
-        setState(() {
-          isLoading = true;
-        });
-
         formKey.currentState?.save();
 
-        await disciplinesProvider.editDiscipline(
-          Disciplines(
-            id: formData['id'].toString(),
-            name: formData['name'].toString(),
-            classroom: formData['classroom'].toString(),
-            grades: formData['grades'] as List,
-            period: formData['period'] as int,
-            avarage: formData['avarage'] as double,
-          ),
+        final updateDisciplines = Disciplines(
+          id: formData['id'].toString(),
+          name: formData['name'].toString(),
+          classroom: formData['classroom'].toString(),
+          grades: formData['grades'] as List,
+          period: formData['period'] as int,
+          avarage: formData['avarage'] as double,
         );
 
-        setState(() {
-          isLoading = false;
-        });
+        final updateDisciplineResult = await disciplinesProvider.editDiscipline(
+          updateDisciplines
+        );
+
+        if (updateDisciplineResult) {
+          nav.pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+        }
       }
     }
 
@@ -74,63 +72,70 @@ class _EditDisciplinesState extends State<EditDisciplines> {
           elevation: 0,
           automaticallyImplyLeading: false,
         ),
+
         body: Align(
           alignment: Alignment.bottomCenter,
+
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(16.0),
+
             child: SingleChildScrollView(
               child: Form(
                 key: formKey,
+
                 child: Wrap(
-                  runSpacing: MediaQuery.of(context).size.height * 0.02,
+                  runSpacing: 20,
+
                   children: [
                     TextFormField(
                       initialValue: formData['name'].toString(),
                       style: context.textStyles.secundaryTitle,
                       textInputAction: TextInputAction.next,
                       onSaved: (name) => formData['name'] = name ?? '',
+
                       decoration: InputDecoration(
                         label: Text(
                           'Disciplina',
                           style: context.textStyles.titleMedium,
                         ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorsStyles.white,
-                          ),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorsStyles.white,
-                          ),
-                        ),
                       ),
+                      
                       validator: Validatorless.required('Obrigatório!'),
                     ),
+
                     TextFormField(
                       initialValue: formData['classroom'].toString(),
                       style: context.textStyles.secundaryTitle,
                       textInputAction: TextInputAction.next,
+
                       onSaved: (classroom) =>
                           formData['classroom'] = classroom ?? '',
+
                       decoration: const InputDecoration(
                         label: Text('Sala'),
                       ),
+
                       validator: Validatorless.required('Obrigatório!'),
                     ),
+
                     TextFormField(
                       initialValue: formData['period'].toString(),
                       style: context.textStyles.secundaryTitle,
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.done,
+
                       onFieldSubmitted: (_) => registerDiscipline(),
+
                       onSaved: (period) =>
                           formData['period'] = int.parse(period ?? ''),
+                          
                       decoration: const InputDecoration(
                         label: Text('Período'),
                       ),
+
                       validator: Validatorless.required('Obrigatório!'),
                     ),
+
                     Button(title: 'Salvar', action: registerDiscipline),
                   ],
                 ),

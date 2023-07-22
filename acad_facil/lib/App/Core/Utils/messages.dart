@@ -18,6 +18,20 @@ class Messages {
     );
   }
 
+  static void showInfo(String text) {
+    scaffoldMessengerKey.currentState!.showSnackBar(
+      SnackBar(
+        backgroundColor: ColorsStyles.info,
+        duration: const Duration(seconds: 2),
+        content: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: scaffoldMessengerKey.currentContext!.textStyles.titleMedium,
+        ),
+      ),
+    );
+  }
+
   static void showSuccess(String text) {
     scaffoldMessengerKey.currentState!.showSnackBar(
       SnackBar(

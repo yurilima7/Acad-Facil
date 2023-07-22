@@ -1,32 +1,45 @@
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
-import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
+import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/sticker_percent.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CardAvarage extends StatelessWidget {
   final double avarage;
   final String disciplina;
+  final List<Disciplines> disciplines;
+  final Disciplines discipline;
+  final int period;
 
   const CardAvarage({
-    Key? key,
+    super.key,
     required this.avarage,
     required this.disciplina,
-  }) : super(key: key);
+    required this.disciplines,
+    required this.discipline,
+    required this.period,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final discipline = Provider.of<Disciplines>(context, listen: false);
-
     return InkWell(
-      onTap: () => NavigatorRoutes().detailsScreen(discipline),
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          AppRoutes.details,
+          arguments: {
+            "discipline": discipline,
+            "listDisciplines": disciplines,
+            "period": period,
+          },
+        );
+      },
+
       child: Card(
         color: ColorsStyles.secundary,
         elevation: 5,
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(26.0)),
         child: Padding(
           padding: const EdgeInsets.only(
             left: 5.0,

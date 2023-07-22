@@ -11,6 +11,7 @@ class OptionsCard extends StatelessWidget {
   final String subtitle;
   final VoidCallback? function;
   final int index;
+  final int periodUser;
   final List<Disciplines>? discipline;
 
   const OptionsCard({
@@ -19,7 +20,7 @@ class OptionsCard extends StatelessWidget {
     required this.path,
     this.subtitle = '', 
     this.function, required this.index, 
-    this.discipline,
+    this.discipline, required this.periodUser,
   });
 
   @override
@@ -29,18 +30,23 @@ class OptionsCard extends StatelessWidget {
     final providerHomeController = Provider.of<HomeController>(context);
 
     return InkWell(
-      // onTap: () => NavigatorRoutes().detailsScreen(discipline),
       onTap: () {
         if (index == 0) {
           Navigator.of(context).pushNamed(
             AppRoutes.grades,
-            arguments: discipline,
+            arguments: {
+              "disciplines": discipline,
+              "period": 9,
+            },
           );
         }
         else if (index == 1) {
           Navigator.of(context).pushNamed(
             AppRoutes.disciplines,
-            arguments: discipline,
+            arguments: {
+              "disciplines": discipline,
+              "period": 9,
+            },
           );
         }
         else if (index == 4) {

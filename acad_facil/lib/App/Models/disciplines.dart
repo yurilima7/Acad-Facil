@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-class Disciplines with ChangeNotifier{
+class Disciplines with ChangeNotifier {
   String id;
   String name;
   String classroom;
@@ -16,4 +16,13 @@ class Disciplines with ChangeNotifier{
     required this.period,
     required this.avarage,
   });
+
+  void newGrade(double grade) {
+    grades.add(grade);
+  }
+
+  double get avarageGrades {
+    avarage = grades.reduce((sum, element) => sum + element) / grades.length;
+    return grades.reduce((sum, element) => sum + element) / grades.length;
+  }
 }

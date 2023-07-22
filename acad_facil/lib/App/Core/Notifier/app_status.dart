@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 class AppStatus extends ChangeNotifier {
   bool _isLoading = false;
   String? _error;
+  String? _info;
   bool _success = false;
 
   bool get loading => _isLoading;
   String? get error => _error;
+  String? get info => _info;
   bool get hasError => _error != null;
   bool get isSuccess => _success;
 
@@ -26,6 +28,10 @@ class AppStatus extends ChangeNotifier {
     Messages.showError(error!);
   }
 
+  void showMessageInfo() {
+    Messages.showInfo(info!);
+  }
+
   void showMessageSuccess(String message) {
     Messages.showSuccess(message);
   }
@@ -34,6 +40,13 @@ class AppStatus extends ChangeNotifier {
     _success = true;
     if (_success) {
       showMessageSuccess(message);
+    }
+  }
+
+  void setInfo(String? info) {
+    _info = info;
+    if (_info != null) {
+      
     }
   }
 

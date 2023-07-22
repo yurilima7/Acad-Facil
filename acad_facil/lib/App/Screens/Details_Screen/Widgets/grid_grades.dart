@@ -4,7 +4,7 @@ import 'package:acad_facil/App/Screens/Details_Screen/Widgets/grades_form.dart';
 import 'package:flutter/material.dart';
 
 class GridGrades extends StatelessWidget {
-  final Disciplines disciplines;
+  final Disciplines? disciplines;
 
   const GridGrades({
     super.key,
@@ -13,7 +13,7 @@ class GridGrades extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final disciplinesCount = disciplines.grades.length;
+    final disciplinesCount = disciplines?.grades.length ?? 0;
     return SizedBox(
       
       child: disciplinesCount > 0 ? GridView.builder(
@@ -31,7 +31,7 @@ class GridGrades extends StatelessWidget {
         itemCount: disciplinesCount <= 5? disciplinesCount : 5,
           itemBuilder: (context, i) => GradesForm(
             i: i,
-            discipline: disciplines,
+            discipline: disciplines!,
           ),
       )
       :

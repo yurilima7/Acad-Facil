@@ -13,12 +13,14 @@ class GradesScreen extends StatefulWidget {
 
 class _GradesScreenState extends State<GradesScreen> {
   List<Disciplines>? disciplines;
+  int? period;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    disciplines = ModalRoute.of(context)!.settings.arguments 
-                    as List<Disciplines>;
+    final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    disciplines = arguments['disciplines'] as List<Disciplines>;
+    period = arguments['period'] as int;
   }
 
   @override
@@ -40,7 +42,7 @@ class _GradesScreenState extends State<GradesScreen> {
           padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
 
           child: Visibility(
-            visible: disciplines!.isNotEmpty,
+            visible: disciplines != null,
 
             replacement: Center(
               child: Text(
@@ -59,6 +61,9 @@ class _GradesScreenState extends State<GradesScreen> {
                     child: CardAvarage(
                       avarage: disciplines!.elementAt(i).avarage,
                       disciplina: disciplines!.elementAt(i).name,
+                      discipline: disciplines!.elementAt(i),
+                      disciplines: disciplines!,
+                      period: period ?? 0,
                     ),
                   ),
                 ),

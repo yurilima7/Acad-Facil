@@ -116,12 +116,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           i > 1 ? '' : 'Disciplinas ${disciplines.length}',
                       index: i,
                       discipline: disciplines,
+                      periodUser: providerUser?.period ?? 0,
                     ) : OptionsCard(
                       path: homeController.assets[i],
                       title: homeController.titles[i],
                       subtitle:
                           i > 1 ? '' : 'Disciplinas ${disciplines.length}',
                       index: i,
+                      periodUser: providerUser?.period ?? 0,
                     ),
                   ),
                 ),

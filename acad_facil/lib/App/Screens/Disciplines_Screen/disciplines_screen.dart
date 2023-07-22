@@ -22,8 +22,11 @@ class _DisciplinesScreenState extends State<DisciplinesScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final disciplines = ModalRoute.of(context)!.settings.arguments as List<Disciplines>;
-      Provider.of<DisciplinesScreenController>(context, listen: false).add(disciplines, 9);
+      final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      final disciplines = arguments['disciplines'] as List<Disciplines>;
+      final period = arguments['period'] as int;
+
+      Provider.of<DisciplinesScreenController>(context, listen: false).add(disciplines, period);
     });
   }
 
@@ -126,6 +129,7 @@ class _DisciplinesScreenState extends State<DisciplinesScreen> {
                               arguments: {
                                 "discipline": disciplinesController.filtered[i],
                                 "listDisciplines": disciplinesController.filtered,
+                                "period": disciplinesController.period,
                               },
                             );
                           },

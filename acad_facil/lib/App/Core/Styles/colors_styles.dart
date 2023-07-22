@@ -7,4 +7,5 @@ class ColorsStyles {
   static Color white = Colors.white;
   static Color errors = Colors.redAccent;
   static Color sucess = Colors.greenAccent;
+  static Color info = Colors.yellowAccent;
 }
