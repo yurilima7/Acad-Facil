@@ -7,9 +7,9 @@ class GridGrades extends StatelessWidget {
   final Disciplines disciplines;
 
   const GridGrades({
-    Key? key,
+    super.key,
     required this.disciplines,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class GridGrades extends StatelessWidget {
       )
       :
       SizedBox(
-        height: 500,
+        height: 250,
         child: Center(
           child: Text(
             'Sem notas no momento!',

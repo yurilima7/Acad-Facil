@@ -6,24 +6,47 @@ import 'package:flutter/material.dart';
 class Button extends StatelessWidget {
   final String title;
   final VoidCallback? action;
+  final bool? description;
+  final bool? error;
 
   const Button({
-    Key? key,
+    super.key,
     required this.action,
     required this.title,
-  }) : super(key: key);
+    this.description = false, 
+    this.error = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: ElevatedButton(
-        onPressed: action,
-        style: context.buttonStyles.buttonApp,
-        child: Text(
-          title,
-          style: context.textStyles.titleLarge.copyWith(
-            color: ColorsStyles.primary,
+      child: Visibility(
+        visible: !description!,
+
+        replacement: ElevatedButton(
+          onPressed: action,
+          style: context.buttonStyles.buttonApp.copyWith(
+            backgroundColor: MaterialStatePropertyAll(
+              error! ? ColorsStyles.errors : ColorsStyles.secundary,
+            ),
+          ),
+          child: Text(
+            title,
+            style: context.textStyles.titleLarge.copyWith(
+              color: ColorsStyles.white,
+            ),
+          ),
+        ),
+
+        child: ElevatedButton(
+          onPressed: action,
+          style: context.buttonStyles.buttonApp,
+          child: Text(
+            title,
+            style: context.textStyles.titleLarge.copyWith(
+              color: ColorsStyles.primary,
+            ),
           ),
         ),
       ),

@@ -1,20 +1,23 @@
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
-import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
 
 class DisciplineCard extends StatelessWidget {
   final Disciplines discipline;
+  final List<Disciplines> disciplines;
+  final VoidCallback? function;
 
   const DisciplineCard({
-    Key? key,
-    required this.discipline,
-  }) : super(key: key);
+    super.key,
+    required this.discipline, 
+    required this.disciplines, this.function,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => NavigatorRoutes().detailsScreen(discipline),
+      onTap: function,
+
       child: Card(
         color: Theme.of(context).colorScheme.secondary,
         elevation: 5,

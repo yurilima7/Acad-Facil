@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class LocalAvarage extends StatelessWidget {
   final double avarage;
-  const LocalAvarage({Key? key, required this.avarage}) : super(key: key);
+  const LocalAvarage({super.key, required this.avarage});
 
   @override
   Widget build(BuildContext context) {

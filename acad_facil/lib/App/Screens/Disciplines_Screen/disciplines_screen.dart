@@ -1,5 +1,6 @@
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
+import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/discipline_card.dart';
 import 'package:acad_facil/App/Core/Widgets/floating_button.dart';
@@ -31,97 +32,116 @@ class _DisciplinesScreenState extends State<DisciplinesScreen> {
     final disciplinesController 
         = Provider.of<DisciplinesScreenController>(context);
 
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Disciplinas', style: context.textStyles.titleLarge,),
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          actions: [
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+        return Future.value(false);
+      },
 
-            PopupMenuButton<int>(
-              color: ColorsStyles.secundary,
-
-              icon: Icon(
-                Icons.filter_list,
-                color: ColorsStyles.white,
-              ),
-
-              onSelected: (period) => disciplinesController.updatePeriod(period),
-
-              itemBuilder: (context) {
-                return [
-                  PopupMenuItem<int>(
-                    value: 0, // 0 para mostrar todas as disciplinas
-                    child: Text(
-                      'Todas as disciplinas',
-                      style: context.textStyles.titleMedium,
-                    ),
-                  ),
-
-                  for (int period in disciplinesController.periodsWithoutZero)
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Disciplinas', style: context.textStyles.titleLarge,),
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            actions: [
+    
+              PopupMenuButton<int>(
+                color: ColorsStyles.secundary,
+    
+                icon: Icon(
+                  Icons.filter_list,
+                  color: ColorsStyles.white,
+                ),
+    
+                onSelected: (period) => disciplinesController.updatePeriod(period),
+    
+                itemBuilder: (context) {
+                  return [
                     PopupMenuItem<int>(
-                      value: period,
+                      value: 0, // 0 para mostrar todas as disciplinas
                       child: Text(
-                        'Período $period',
+                        'Todas as disciplinas',
                         style: context.textStyles.titleMedium,
                       ),
                     ),
-                ];
-              },
-            ),
-          ],
-        ),
     
-        body: Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
-          child: Column(
-            children:  [
-              Column(
-                children: [
-                  Search(
-                    onChanged: (search) => disciplinesController.filter(search),
-                  ),
-                ],
-              ),
-          
-              SizedBox(height: MediaQuery.of(context).size.height * 0.06,),
-
-              Visibility(
-                visible: disciplinesController.filtered.isNotEmpty,
-
-                replacement: Expanded(
-                  child: Center(
-                    child: Text(
-                      'Sem disciplinas no momento!',
-                      style: context.textStyles.secundaryTitle,
-                    ),
-                  ),
-                ),
-
-                child: Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    childAspectRatio: 3 / 2,
-                    crossAxisSpacing: 20.0,
-                    mainAxisSpacing: 10.0,
-
-                    children: List.generate(
-                      disciplinesController.filtered.length,
-                      (i) => DisciplineCard(discipline: disciplinesController.filtered[i]),
-                    ),
-                  ),
-                ),
+                    for (int period in disciplinesController.periodsWithoutZero)
+                      PopupMenuItem<int>(
+                        value: period,
+                        child: Text(
+                          'Período $period',
+                          style: context.textStyles.titleMedium,
+                        ),
+                      ),
+                  ];
+                },
               ),
             ],
           ),
-        ),
-
-        floatingActionButton: FloatingButton(
-          title: 'Adicionar Disciplina',
-          function: () => NavigatorRoutes().addDisciplines(),
+      
+          body: Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
+            child: Column(
+              children:  [
+                Column(
+                  children: [
+                    Search(
+                      onChanged: (search) => disciplinesController.filter(search),
+                    ),
+                  ],
+                ),
+            
+                SizedBox(height: MediaQuery.of(context).size.height * 0.06,),
+    
+                Visibility(
+                  visible: disciplinesController.filtered.isNotEmpty,
+    
+                  replacement: Expanded(
+                    child: Center(
+                      child: Text(
+                        'Sem disciplinas no momento!',
+                        style: context.textStyles.secundaryTitle,
+                      ),
+                    ),
+                  ),
+    
+                  child: Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      childAspectRatio: 3 / 2,
+                      crossAxisSpacing: 20.0,
+                      mainAxisSpacing: 10.0,
+    
+                      children: List.generate(
+                        disciplinesController.filtered.length,
+                        (i) => DisciplineCard(
+                          discipline: disciplinesController.filtered[i],
+                          disciplines: disciplinesController.filtered,
+                          function: () {
+                            Navigator.of(context).pushNamed(
+                              AppRoutes.details,
+                              arguments: {
+                                "discipline": disciplinesController.filtered[i],
+                                "listDisciplines": disciplinesController.filtered,
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+    
+          floatingActionButton: FloatingButton(
+            title: 'Adicionar Disciplina',
+            function: () => NavigatorRoutes().addDisciplines(),
+          ),
         ),
       ),
     );

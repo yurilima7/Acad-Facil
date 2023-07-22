@@ -10,10 +10,10 @@ class GradesForm extends StatelessWidget {
   final Disciplines discipline;
 
   const GradesForm({
-    Key? key,
+    super.key,
     required this.i,
     required this.discipline,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

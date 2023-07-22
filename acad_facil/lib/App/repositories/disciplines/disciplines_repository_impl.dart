@@ -43,4 +43,15 @@ class DisciplinesRepositoryImpl implements DisciplinesRepository{
     return disciplines;
   }
   
+  @override
+  Future<void> deleteDiscipline(String id) async {
+    try {
+      await colecDiscipline.doc(id).delete();
+    } on FirebaseException catch (e, s) {
+      log(e.toString());
+      log(s.toString());
+      throw AppException(message: 'Falha ao deletar disciplina, tente novamente!');
+    }
+  }
+  
 }
