@@ -49,22 +49,12 @@ class TextStyles {
 
   TextStyle get bigTitle => primaryRegular.copyWith(
         color: ColorsStyles.white,
-        fontSize: 30,
+        fontSize: 32,
       );
 
   TextStyle get cardTitle => primaryRegular.copyWith(
         color: ColorsStyles.terciary,
-        fontSize: 28,
-      );
-
-  TextStyle get alertTitle => primaryRegular.copyWith(
-        color: ColorsStyles.white,
-        fontSize: 20,
-      );
-
-  TextStyle get appBarTitle => primaryRegular.copyWith(
-        color: ColorsStyles.white,
-        fontSize: 20,
+        fontSize: 26,
       );
 
   TextStyle get titleSmall => primaryRegular.copyWith(
@@ -85,11 +75,6 @@ class TextStyles {
   TextStyle get secundarySubTitle => secondaryRegular.copyWith(
         color: ColorsStyles.white,
         fontSize: 10,
-      );
-
-  TextStyle get secundaryOptions => secondarySemiBold.copyWith(
-        color: ColorsStyles.white,
-        fontSize: 15,
       );
 }
 

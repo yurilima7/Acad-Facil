@@ -41,11 +41,11 @@ class GradesForm extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: 'N${i + 1}: ',
-                    style: TextStyles.i.cardTitle.copyWith(fontSize: 26, color: ColorsStyles.white,),
+                    style: TextStyles.i.cardTitle.copyWith(color: ColorsStyles.white,),
                   ),
                   TextSpan(
                       text: '${discipline.grades.elementAt(i)}',
-                      style: TextStyles.i.cardTitle.copyWith(fontSize: 26),
+                      style: TextStyles.i.cardTitle,
                   ),
                 ],
               ),

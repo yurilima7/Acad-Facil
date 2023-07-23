@@ -1,5 +1,5 @@
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
-import 'package:acad_facil/App/Core/Widgets/options_card.dart';
+import 'package:acad_facil/App/Screens/Home_Screen/Widgets/options_card.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/home_controller.dart';
 import 'package:flutter/material.dart';

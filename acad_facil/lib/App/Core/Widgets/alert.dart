@@ -27,7 +27,7 @@ class Alert extends StatelessWidget {
       ),
       title: Text(
         title[position],
-        style: context.textStyles.alertTitle,
+        style: context.textStyles.titleLarge,
       ),
       content: Text(
         message,

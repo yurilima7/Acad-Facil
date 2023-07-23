@@ -1,8 +1,8 @@
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
-import 'package:acad_facil/App/Core/Widgets/discipline_card.dart';
-import 'package:acad_facil/App/Core/Widgets/floating_button.dart';
+import 'package:acad_facil/App/Screens/Disciplines_Screen/Widgets/discipline_card.dart';
+import 'package:acad_facil/App/Screens/Disciplines_Screen/Widgets/floating_button.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Screens/Disciplines_Screen/Widgets/search.dart';
 import 'package:acad_facil/App/Screens/Disciplines_Screen/disciplines_screen_controller.dart';
@@ -94,8 +94,6 @@ class _DisciplinesScreenState extends State<DisciplinesScreen> {
                     ),
                   ],
                 ),
-            
-                SizedBox(height: MediaQuery.of(context).size.height * 0.06,),
     
                 Visibility(
                   visible: disciplinesController.filtered.isNotEmpty,
@@ -110,27 +108,30 @@ class _DisciplinesScreenState extends State<DisciplinesScreen> {
                   ),
     
                   child: Expanded(
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      childAspectRatio: 3 / 2,
-                      crossAxisSpacing: 20.0,
-                      mainAxisSpacing: 10.0,
-    
-                      children: List.generate(
-                        disciplinesController.filtered.length,
-                        (i) => DisciplineCard(
-                          discipline: disciplinesController.filtered[i],
-                          disciplines: disciplinesController.filtered,
-                          function: () {
-                            Navigator.of(context).pushNamed(
-                              AppRoutes.details,
-                              arguments: {
-                                "discipline": disciplinesController.filtered[i],
-                                "listDisciplines": disciplinesController.filtered,
-                                "period": disciplinesController.period,
-                              },
-                            );
-                          },
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: GridView.count(
+                        crossAxisCount: 2,
+                        childAspectRatio: 3 / 2,
+                        crossAxisSpacing: 20.0,
+                        mainAxisSpacing: 10.0,
+                        
+                        children: List.generate(
+                          disciplinesController.filtered.length,
+                          (i) => DisciplineCard(
+                            discipline: disciplinesController.filtered[i],
+                            disciplines: disciplinesController.filtered,
+                            function: () {
+                              Navigator.of(context).pushNamed(
+                                AppRoutes.details,
+                                arguments: {
+                                  "discipline": disciplinesController.filtered[i],
+                                  "listDisciplines": disciplinesController.filtered,
+                                  "period": disciplinesController.period,
+                                },
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ),
