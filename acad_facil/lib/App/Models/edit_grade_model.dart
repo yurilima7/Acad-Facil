@@ -22,6 +22,10 @@ class EditGradeModel with ChangeNotifier {
   }
 
   double get avarageGrades {
-    return grades.reduce((sum, element) => sum + element) / grades.length;
+    if (grades.isNotEmpty) {
+      return grades.reduce((sum, element) => sum + element) / grades.length;
+    }
+
+    return 0.0;
   }
 }

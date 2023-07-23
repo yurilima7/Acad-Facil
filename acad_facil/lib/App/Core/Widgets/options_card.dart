@@ -29,13 +29,20 @@ class OptionsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-
+    final nav = Navigator.of(context);
     final providerHomeController = Provider.of<HomeController>(context);
+
+    Future<void> logout() async {
+      await providerHomeController.logout();
+      if (providerHomeController.isSuccess) {
+        nav.pushNamedAndRemoveUntil(AppRoutes.loginScreen, (route) => false);
+      }
+    }
 
     return InkWell(
       onTap: () {
         if (index == 0) {
-          Navigator.of(context).pushNamed(
+          nav.pushNamed(
             AppRoutes.grades,
             arguments: {
               "disciplines": discipline ?? [],
@@ -43,7 +50,7 @@ class OptionsCard extends StatelessWidget {
             },
           );
         } else if (index == 1) {
-          Navigator.of(context).pushNamed(
+          nav.pushNamed(
             AppRoutes.disciplines,
             arguments: {
               "disciplines": discipline ?? [],
@@ -51,11 +58,12 @@ class OptionsCard extends StatelessWidget {
             },
           );
         } else if (index == 2) {
-          Navigator.of(context).pushNamed(AppRoutes.settings, arguments: user);
+          nav.pushNamed(AppRoutes.settings, arguments: user);
         } else if (index == 3) {
-          providerHomeController.logout('Logout realizado com sucesso!');
+          logout();
         }
       },
+      
       child: Card(
         color: Theme.of(context).colorScheme.secondary,
         elevation: 5,

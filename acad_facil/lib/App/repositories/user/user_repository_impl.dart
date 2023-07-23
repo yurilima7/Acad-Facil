@@ -1,23 +1,24 @@
 import 'dart:developer';
 
-import 'package:acad_facil/App/Core/Data/constants.dart';
+import 'package:acad_facil/App/Core/Data/constants_firebase.dart';
 import 'package:acad_facil/App/Core/Exceptions/app_exception.dart';
 import 'package:acad_facil/App/Models/user.dart';
-import 'package:acad_facil/App/repositories/user/user_repository.dart';
+import 'package:acad_facil/App/Repositories/user/user_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final DocumentReference<Map<String, dynamic>> _docUser =
-      Constants.idUserCollection;
+      ConstantsFirebase.userDoc;
   final CollectionReference<Map<String, dynamic>> _colecDiscipline =
-      Constants.disciplinesReference;
-  final _user = Constants.user;
+      ConstantsFirebase.disciplinesReference;
+  final _user = ConstantsFirebase.user;
 
+  /// Adiciona dados de um usuário
   @override
   Future<void> addData(UserModel user) async {
     try {
       await _docUser.set({
-        'name': Constants.auth.currentUser!.displayName,
+        'name': ConstantsFirebase.auth.currentUser!.displayName,
         'course': user.course,
         'period': user.period,
       });
@@ -33,6 +34,8 @@ class UserRepositoryImpl extends UserRepository {
   @override
   Future<void> deleteUser() async {
     try {
+      await _user?.delete();
+      
       await _colecDiscipline.get().then((snapshot) {
         for (var doc in snapshot.docs) {
           doc.reference.delete();
@@ -40,12 +43,11 @@ class UserRepositoryImpl extends UserRepository {
       });
 
       await _docUser.delete();
-      await _user?.delete();
     } on FirebaseException catch (e, s) {
       log(e.toString());
       log(s.toString());
 
-      throw AppException(message: 'Falha ao deletar os dados do usuário!');
+      throw AppException(message: 'Falha ao encerrar a conta do usuário!');
     }
   }
 
@@ -59,7 +61,7 @@ class UserRepositoryImpl extends UserRepository {
           name: doc.data()!['name'],
           course: doc.data()!['course'],
           period: doc.data()!['period'],
-          perfilUrl: Constants.user?.photoURL ?? 'https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE60QogebgAWTalE1myseY1Hbb5qPM.jpg',
+          perfilUrl: _user?.photoURL ?? 'https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE60QogebgAWTalE1myseY1Hbb5qPM.jpg',
         );
       });
     } on FirebaseException catch (e, s) {

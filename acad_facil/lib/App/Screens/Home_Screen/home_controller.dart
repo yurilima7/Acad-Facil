@@ -3,13 +3,11 @@ import 'package:acad_facil/App/Core/Exceptions/app_exception.dart';
 import 'package:acad_facil/App/Core/Exceptions/auth_exception.dart';
 import 'package:acad_facil/App/Core/Notifier/app_status.dart';
 import 'package:acad_facil/App/Core/Utils/assets.dart';
-import 'package:acad_facil/App/Core/Utils/messages.dart';
-import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Models/user.dart';
-import 'package:acad_facil/App/repositories/auth/auth_repository_impl.dart';
-import 'package:acad_facil/App/repositories/disciplines/disciplines_repository_impl.dart';
-import 'package:acad_facil/App/repositories/user/user_repository_impl.dart';
+import 'package:acad_facil/App/Repositories/auth/auth_repository_impl.dart';
+import 'package:acad_facil/App/Repositories/disciplines/disciplines_repository_impl.dart';
+import 'package:acad_facil/App/Repositories/user/user_repository_impl.dart';
 
 class HomeController extends AppStatus {
   UserModel? _user;
@@ -19,11 +17,11 @@ class HomeController extends AppStatus {
   List<Disciplines>? get disciplines => [...?_disciplines];
 
   final List<String> assets = [
-      Assets.notas,
-      Assets.university,
-      Assets.user,
-      Assets.exit,
-    ];
+    Assets.notas,
+    Assets.university,
+    Assets.user,
+    Assets.exit,
+  ];
 
   final List<String> titles = [
     'Suas Notas',
@@ -31,11 +29,6 @@ class HomeController extends AppStatus {
     'Perfil',
     'Sair',
   ];
-
-  void successAction() {
-    Messages.showSuccess('Dados inseridos com sucesso!');
-    NavigatorRoutes().nextScreen();
-  }
 
   Future<void> loadDataUser() async {
     try {
@@ -57,14 +50,19 @@ class HomeController extends AppStatus {
     }
   }
 
-  Future<void> logout(String msg) async {
+  Future<void> logout() async {
     try {
+      showLoadingAndResetState();
+      notifyListeners();
+
       await AuthRepositoryImpl().logoutApp();
-      NavigatorRoutes().logoutApp(msg);
+
+      success('Deslogado com sucesso!');
     } on AuthException catch (e) {
       setError(e.message);
       log(e.message);
     } finally {
+      hideLoading();
       notifyListeners();
     }
   }

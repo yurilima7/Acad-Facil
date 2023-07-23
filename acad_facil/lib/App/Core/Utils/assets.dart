@@ -4,4 +4,6 @@ class Assets {
   static String exit = 'assets/icons/exit.png';
   static String user = 'assets/icons/user.png';
   static String university = 'assets/icons/university.png';
+  static String google = 'assets/images/google.svg';
+  static String logo = 'assets/images/logo.png';
 }

@@ -6,8 +6,8 @@ class AuthModel with ChangeNotifier {
   final String userName;
 
   AuthModel({
-    this.email = '',
-    this.password = '',
-    this.userName = '',
-  });
+    required this.email,
+    required this.password,
+    required this.userName,
+  }); 
 }

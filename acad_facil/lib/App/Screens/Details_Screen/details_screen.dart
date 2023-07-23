@@ -40,20 +40,23 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final disciplinesProvider = Provider.of<DetailsScreenController>(context);
-    final discipline = disciplinesProvider.discipline;
-    final listDisciplines = disciplinesProvider.listDisciplines;
+    final detailsScreenController = Provider.of<DetailsScreenController>(context);
+    final discipline = detailsScreenController.discipline;
+    final listDisciplines = detailsScreenController.listDisciplines;
 
     final nav = Navigator.of(context);
 
     Future<void> deleteDiscipline() async {
-      var (list, result) = await disciplinesProvider.removeDiscipline(
+      var list = await detailsScreenController.removeDiscipline(
           listDisciplines, discipline!);
 
-      if (result) {
+      if (detailsScreenController.isSuccess) {
         nav.popAndPushNamed(
           AppRoutes.disciplines,
-          arguments: list,
+          arguments: {
+            'disciplines': list,
+            'period': detailsScreenController.period,
+          },
         );
       }
     }
@@ -142,12 +145,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 arguments: {
                                   "discipline": discipline,
                                   "listDisciplines": listDisciplines,
-                                  "period": disciplinesProvider.period,
+                                  "period": detailsScreenController.period,
                                 },
                               );
       
                               if (resultAddGrade != null && resultAddGrade is Map<String, dynamic>) {
-                                disciplinesProvider.addDataDiscipline(
+                                detailsScreenController.addDataDiscipline(
                                   resultAddGrade['listDisciplines'] as List<Disciplines>,
                                   resultAddGrade['discipline'] as Disciplines,
                                   resultAddGrade['period'] as int,
@@ -172,7 +175,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             action: () => showDialog(
                               context: context,
                               builder: (_) => Alert(
-                                action: deleteDiscipline,
+                                function: deleteDiscipline,
                                 message: 'Deseja deletar esta disciplina?',
                                 position: 0,
                               ),

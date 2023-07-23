@@ -1,12 +1,12 @@
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
-import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:acad_facil/App/Screens/Auth/auth_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class FormRegister extends StatefulWidget {
@@ -35,12 +35,13 @@ class _FormRegisterState extends State<FormRegister> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     final nav = Navigator.of(context);
+    final authController = Provider.of<AuthController>(context);
     
     void screenLogin() async {
       final valid = formKey.currentState?.validate() ?? false;
 
       if (valid) {
-        final result = await AuthController().registerUser(
+        await authController.registerUser(
           AuthModel(
             userName: userNameEC.text.trim(),
             email: emailEC.text.trim(),
@@ -48,7 +49,7 @@ class _FormRegisterState extends State<FormRegister> {
           ),
         );
 
-        if(result) {
+        if(authController.isSuccess) {
           nav.pushNamedAndRemoveUntil(
             AppRoutes.loginScreen,
             (Route<dynamic> route) => false,
@@ -151,7 +152,7 @@ class _FormRegisterState extends State<FormRegister> {
             children: [
               TextButtonApp(
                 title: 'Faça login',
-                action: () => NavigatorRoutes().login(),
+                function: () => Navigator.of(context).pop(),
               ),
             ],
           ),

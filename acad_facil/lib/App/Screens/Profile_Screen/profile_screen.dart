@@ -48,93 +48,96 @@ class _ProfileScreenState extends State<ProfileScreen> {
           period: formData['period'] as int,
         );
 
-        final updateDisciplineResult = await profileDataProvider.updateUserData(
+        await profileDataProvider.updateUserData(
           updateUser
         );
 
-        if (updateDisciplineResult) {
+        if (profileDataProvider.isSuccess) {
           nav.pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
         }
       }
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Perfil', style: context.textStyles.titleLarge,),
-        elevation: 0,
-        automaticallyImplyLeading: false,
-      ),
-
-      body: Align(
-          alignment: Alignment.bottomCenter,
-
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-
-            child: SingleChildScrollView(
-              child: Form(
-                key: formKey,
-
-                child: Wrap(
-                  runSpacing: 20,
-
-                  children: [
-                    TextFormField(
-                      initialValue: formData['name'].toString(),
-                      style: context.textStyles.secundaryTitle,
-                      textInputAction: TextInputAction.next,
-                      onSaved: (name) => formData['name'] = name ?? '',
-
-                      decoration: InputDecoration(
-                        label: Text(
-                          'Nome de usuário',
-                          style: context.textStyles.titleMedium,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(formData['name'].toString(), style: context.textStyles.titleLarge,),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+        ),
+    
+        body: Align(
+            alignment: Alignment.bottomCenter,
+    
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+    
+              child: SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+    
+                  child: Wrap(
+                    runSpacing: 20,
+    
+                    children: [
+                      TextFormField(
+                        initialValue: formData['name'].toString(),
+                        style: context.textStyles.secundaryTitle,
+                        textInputAction: TextInputAction.next,
+                        onSaved: (name) => formData['name'] = name ?? '',
+    
+                        decoration: InputDecoration(
+                          label: Text(
+                            'Nome de usuário',
+                            style: context.textStyles.titleMedium,
+                          ),
                         ),
+                        
+                        validator: Validatorless.required('Obrigatório!'),
                       ),
-                      
-                      validator: Validatorless.required('Obrigatório!'),
-                    ),
-
-                    TextFormField(
-                      initialValue: formData['course'].toString(),
-                      style: context.textStyles.secundaryTitle,
-                      textInputAction: TextInputAction.next,
-
-                      onSaved: (classroom) =>
-                          formData['course'] = classroom ?? '',
-
-                      decoration: const InputDecoration(
-                        label: Text('Curso'),
+    
+                      TextFormField(
+                        initialValue: formData['course'].toString(),
+                        style: context.textStyles.secundaryTitle,
+                        textInputAction: TextInputAction.next,
+    
+                        onSaved: (classroom) =>
+                            formData['course'] = classroom ?? '',
+    
+                        decoration: const InputDecoration(
+                          label: Text('Curso'),
+                        ),
+    
+                        validator: Validatorless.required('Obrigatório!'),
                       ),
-
-                      validator: Validatorless.required('Obrigatório!'),
-                    ),
-
-                    TextFormField(
-                      initialValue: formData['period'].toString(),
-                      style: context.textStyles.secundaryTitle,
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.done,
-
-                      onFieldSubmitted: (_) => updateUserValues(),
-
-                      onSaved: (period) =>
-                          formData['period'] = int.parse(period ?? ''),
-                          
-                      decoration: const InputDecoration(
-                        label: Text('Período'),
+    
+                      TextFormField(
+                        initialValue: formData['period'].toString(),
+                        style: context.textStyles.secundaryTitle,
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.done,
+    
+                        onFieldSubmitted: (_) => updateUserValues(),
+    
+                        onSaved: (period) =>
+                            formData['period'] = int.parse(period ?? ''),
+                            
+                        decoration: const InputDecoration(
+                          label: Text('Período'),
+                        ),
+    
+                        validator: Validatorless.required('Obrigatório!'),
                       ),
-
-                      validator: Validatorless.required('Obrigatório!'),
-                    ),
-
-                    Button(title: 'Salvar', action: updateUserValues),
-                  ],
+    
+                      Button(title: 'Salvar', action: updateUserValues),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
+      ),
     );
   }
 }

@@ -5,15 +5,15 @@ import 'package:acad_facil/App/Core/Notifier/app_status.dart';
 import 'package:acad_facil/App/Models/user.dart';
 import 'package:acad_facil/App/Repositories/user/user_repository_impl.dart';
 
-class ProfileScreenController extends AppStatus {
-  Future<void> updateUserData(UserModel user) async {
+class RegisterDataController extends AppStatus {
+  Future<void> registerData(UserModel user) async {
     try {
       showLoadingAndResetState();
       notifyListeners();
 
-      await UserRepositoryImpl().updateUser(user);
-      
-      success('Dados de usuário atualizado com sucesso!');
+      UserRepositoryImpl().addData(user);
+
+      success('Dados inseridos com sucesso!');
     } on AppException catch (e) {
       setError(e.message);
       log(e.message);

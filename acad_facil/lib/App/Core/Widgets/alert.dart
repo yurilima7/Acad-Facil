@@ -3,16 +3,16 @@ import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class Alert extends StatelessWidget {
-  final Function() action;
+  final VoidCallback? function;
   final String message;
   final int position;
 
   const Alert({
-    Key? key,
-    required this.action,
+    super.key,
+    this.function,
     required this.message,
     required this.position,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class Alert extends StatelessWidget {
         TextButton(
           onPressed: () {
             Navigator.pop(context, true);
-            action();
+            function!();
           },
           child: Text(
             'OK',

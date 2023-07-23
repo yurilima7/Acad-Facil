@@ -1,3 +1,4 @@
+import 'package:acad_facil/App/Core/Utils/assets.dart';
 import 'package:acad_facil/App/Screens/Auth/Login_Screen/Widgets/form_login.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +39,7 @@ class _LoginState extends State<Login> {
                         Expanded(
                           child: Center(
                             child: Image.asset(
-                              'assets/images/logo.png',
+                              Assets.logo,
                               width: 199,
                             ),
                           ),

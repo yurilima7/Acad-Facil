@@ -1,5 +1,4 @@
-import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
-import 'package:acad_facil/App/Controllers/user_controller.dart';
+import 'package:acad_facil/App/Screens/Add_Disciplines/add_disciplines_controller.dart';
 import 'package:acad_facil/App/Screens/Add_Grades/add_grades_controller.dart';
 import 'package:acad_facil/App/Screens/Auth/auth_controller.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/details_screen_controller.dart';
@@ -8,6 +7,8 @@ import 'package:acad_facil/App/Screens/Edit_Disciplines/edit_disciplines_control
 import 'package:acad_facil/App/Screens/Edit_Grade/edit_grade_controller.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/home_controller.dart';
 import 'package:acad_facil/App/Screens/Profile_Screen/profile_screen_controller.dart';
+import 'package:acad_facil/App/Screens/Register_Data_Screen/register_data_controller.dart';
+import 'package:acad_facil/App/Screens/Settings_Screen/settings_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,12 +21,6 @@ class MultiProviderApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => DisciplinesControler(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => UserController(),
-        ),
         ChangeNotifierProvider(
           create: (_) => AuthController(),
         ),
@@ -49,6 +44,15 @@ class MultiProviderApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => ProfileScreenController(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SettingsScreenController(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => RegisterDataController(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AddDisciplinesController(),
         ),
       ],
       child: child,

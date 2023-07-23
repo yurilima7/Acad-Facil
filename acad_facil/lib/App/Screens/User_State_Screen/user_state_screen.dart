@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:acad_facil/App/Core/Data/constants.dart';
+import 'package:acad_facil/App/Core/Data/constants_firebase.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
-import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
+import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -28,14 +28,20 @@ class _UserStateScreenState extends State<UserStateScreen> {
     super.dispose();
   }
 
-  verify() async{
-    streamSubscription = Constants.auth
+  Future<void> verify() async{
+    streamSubscription = ConstantsFirebase.auth
     .authStateChanges()
     .listen((User? user) {
       if (user == null) {
-        NavigatorRoutes().login();
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          AppRoutes.loginScreen,
+          (Route<dynamic> route) => false,
+        );
       } else {
-        NavigatorRoutes().nextScreen();
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          AppRoutes.home,
+          (Route<dynamic> route) => false,
+        );
       }
     });
   }
@@ -50,15 +56,6 @@ class _UserStateScreenState extends State<UserStateScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
 
           children: [
-            Image(
-              image: const AssetImage('assets/images/logo.png'),
-              width: MediaQuery.of(context).size.width * .5,
-            ),
-
-            const SizedBox(
-              height: 50,
-            ),
-
             SpinKitThreeInOut(
               color: ColorsStyles.white,
             ),

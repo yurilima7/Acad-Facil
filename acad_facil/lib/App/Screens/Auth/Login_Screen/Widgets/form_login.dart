@@ -1,12 +1,14 @@
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
-import 'package:acad_facil/App/Core/Utils/navigator_routes.dart';
+import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Data/verify_user.dart';
 import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
 import 'package:acad_facil/App/Screens/Auth/Login_Screen/Widgets/google_login.dart';
 import 'package:acad_facil/App/Screens/Auth/auth_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class FormLogin extends StatefulWidget {
@@ -32,20 +34,30 @@ class _FormLoginState extends State<FormLogin> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    final nav = Navigator.of(context);
+    final authController = Provider.of<AuthController>(context);
 
-    void home() async {
+    Future<void> home() async {
       final valid = formKey.currentState?.validate() ?? false;
 
       if (valid) {
-        final result = await AuthController().signInEmail(
+        await authController.signInEmail(
           AuthModel(
+            userName: '',
             email: emailEC.text.trim(),
             password: passwordEC.text.trim(),
           ),
         );
 
-        if (result) {
-          NavigatorRoutes().verify();
+
+        if (authController.isSuccess) {
+          final verifyResult = await VerifyUser().verify();
+
+          if (verifyResult == 1) {
+            nav.pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+          } else if (verifyResult == 0) {
+            nav.pushNamedAndRemoveUntil(AppRoutes.registerDataScreen, (route) => false);
+          }
         }
       }
     }
@@ -54,7 +66,7 @@ class _FormLoginState extends State<FormLogin> {
       key: formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-
+        
         children: [
           Text(
             'Entre com',
@@ -82,12 +94,12 @@ class _FormLoginState extends State<FormLogin> {
               Validatorless.email('E-Mail inválido!'),
             ]),
           ),
-          
+
           TextFormField(
             controller: passwordEC,
             style: context.textStyles.secundaryTitle,
             textInputAction: TextInputAction.done,
-            
+
             obscureText: !lookPassword ? true : false,
 
             onFieldSubmitted: (_) => home(),
@@ -101,7 +113,9 @@ class _FormLoginState extends State<FormLogin> {
                 icon: Icon(
                   !lookPassword ? Icons.visibility : Icons.visibility_off,
                 ),
+
                 color: ColorsStyles.white,
+
                 onPressed: () {
                   setState(() {
                     lookPassword = !lookPassword;
@@ -125,11 +139,14 @@ class _FormLoginState extends State<FormLogin> {
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
             children: [
               const GoogleLogin(),
+
               TextButtonApp(
                 title: 'Cadastre-se',
-                action: () => NavigatorRoutes().registerScreen(),
+                function: () =>
+                    Navigator.of(context).pushNamed(AppRoutes.registerScreen),
               ),
             ],
           ),

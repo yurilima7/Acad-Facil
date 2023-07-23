@@ -54,11 +54,11 @@ class _EditDisciplinesState extends State<EditDisciplines> {
           avarage: formData['avarage'] as double,
         );
 
-        final updateDisciplineResult = await disciplinesProvider.editDiscipline(
+        await disciplinesProvider.editDiscipline(
           updateDisciplines
         );
 
-        if (updateDisciplineResult) {
+        if (disciplinesProvider.isSuccess) {
           nav.pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
         }
       }

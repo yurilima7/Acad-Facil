@@ -4,7 +4,6 @@ class AppRoutes {
   static const grades = 'lib/App/Screens/Grades_Screen/grades_screen.dart';
   static const settings = 'lib/App/Screens/Settings_Screen/settings_screen.dart';
   static const profileSettings = 'lib/App/Screens/Profile_Screen/profile_screen.dart';
-  static const tabs = 'lib/App/Screens/tabs_screen.dart';
   static const disciplines = 'lib/App/Screens/Disciplines_Screen/disciplines_screen.dart';
   static const details = 'lib/App/Screens/Details_Screen/details_screen.dart';
   static const loginScreen = 'lib/App/Screens/Login_Screen/login.dart';

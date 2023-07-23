@@ -14,7 +14,7 @@ class AppStatus extends ChangeNotifier {
   bool get hasError => _error != null;
   bool get isSuccess => _success;
 
-  void showLoading() {
+  void _showLoading() {
     _isLoading = true;
     Loader.showLoader();
   }
@@ -24,45 +24,45 @@ class AppStatus extends ChangeNotifier {
     Loader.hideLoader();
   }
 
-  void showMessageError() {
+  void _showMessageError() {
     Messages.showError(error!);
   }
 
-  void showMessageInfo() {
+  void _showMessageInfo() {
     Messages.showInfo(info!);
   }
 
-  void showMessageSuccess(String message) {
+  void _showMessageSuccess(String message) {
     Messages.showSuccess(message);
   }
 
   void success(String message) {
     _success = true;
     if (_success) {
-      showMessageSuccess(message);
+      _showMessageSuccess(message);
     }
   }
 
   void setInfo(String? info) {
     _info = info;
     if (_info != null) {
-      
+      _showMessageInfo();
     }
   }
 
   void setError(String? error) {
     _error = error;
     if (_error != null) {
-      showMessageError();
+      _showMessageError();
     }
   }
 
   void showLoadingAndResetState() {
-    showLoading();
-    resetState();
+    _showLoading();
+    _resetState();
   }
 
-  void resetState() {
+  void _resetState() {
     setError(null);
     _success = false;
   }

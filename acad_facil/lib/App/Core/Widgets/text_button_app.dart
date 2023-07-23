@@ -3,19 +3,20 @@ import 'package:acad_facil/App/Core/Widgets/alert.dart';
 import 'package:flutter/material.dart';
 
 class TextButtonApp extends StatelessWidget {
-  final String title, message;
-  final Function() action;
+  final String title;
+  final String message;
+  final VoidCallback? function;
   final int position;
   final bool alert;
 
   const TextButtonApp({
-    Key? key,
+    super.key,
     required this.title,
-    required this.action,
+    this.function,
     this.position = 0,
     this.alert = false,
     this.message = '',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +25,12 @@ class TextButtonApp extends StatelessWidget {
         ? () => showDialog(
           context: context,
             builder: (_) => Alert(
-              action: action,
+              function: function,
               message: message,
               position: position,
             ),
           )
-        : () => action(),
+        : function,
         
       child: Text(
         title,

@@ -34,7 +34,7 @@ class _EditGradeState extends State<EditGrade> {
 
   @override
   Widget build(BuildContext context) {
-    final disciplinesProvider = Provider.of<EditGradeController>(context);
+    final gradUpdateController = Provider.of<EditGradeController>(context);
     final nav = Navigator.of(context);
 
     void registerGrade() async {
@@ -50,11 +50,11 @@ class _EditGradeState extends State<EditGrade> {
           position: formData['position'] as int,
         );
 
-        final updateGradeResult = await disciplinesProvider.editGrade(
+        await gradUpdateController.editGrade(
           editModel,
         );
 
-        if (updateGradeResult) {
+        if (gradUpdateController.isSuccess) {
           nav.pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
         }
       }
@@ -71,7 +71,7 @@ class _EditGradeState extends State<EditGrade> {
           actions: [
             IconButton(
               onPressed: () async {
-                final deleteResult = await disciplinesProvider.removeGrade(
+                await gradUpdateController.removeGrade(
                   EditGradeModel(
                     disciplineId: formData['disciplineId'].toString(),
                     grades: formData['grades'] as List,
@@ -80,7 +80,7 @@ class _EditGradeState extends State<EditGrade> {
                   ),
                 );
 
-                if (deleteResult) {
+                if (gradUpdateController.isSuccess) {
                   nav.pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
                 }
               }, 

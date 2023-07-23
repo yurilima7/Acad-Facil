@@ -1,9 +1,8 @@
-import 'package:acad_facil/App/Controllers/disciplines_controller.dart';
-import 'package:acad_facil/App/Controllers/user_controller.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/user.dart';
+import 'package:acad_facil/App/Screens/Settings_Screen/settings_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,21 +26,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-     UserController providerUser = Provider.of<UserController>(context, listen: false);
-     DisciplinesControler providerDiscipline
-      = Provider.of<DisciplinesControler>(context, listen: false);
-    
-    void logout() {
-      Navigator.of(context).pushNamed(AppRoutes.profileSettings, arguments: user);
-    }
-
-    void delete() async {
-      await providerUser.deleteUser();
-    }
-
-    void deleteData() async {
-      await providerDiscipline.deleteData();
-    }
+    final settingsScreenController 
+      = Provider.of<SettingsScreenController>(context);
+    final nav = Navigator.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -59,14 +46,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             TextButtonApp(
               title: 'Deletar todas as disciplinas',
-              action: deleteData,
+              function: () async {
+                await settingsScreenController.removeAllDisciplines();
+                
+                if (settingsScreenController.isSuccess) {
+                  nav.pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+                }
+              },
               message: 'Deseja deletar todas as disciplinas?',
               alert: true,
             ),
     
             TextButtonApp(
               title: 'Encerrar conta',
-              action: delete,
+              function: () async {
+                await settingsScreenController.deleteUser();
+
+                if (settingsScreenController.isSuccess) {
+                  nav.pushNamedAndRemoveUntil(AppRoutes.loginScreen, (route) => false);
+                }
+              },
               position: 1,
               message: 'Deseja realmente encerrar a conta?',
               alert: true,
@@ -74,7 +73,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     
             TextButtonApp(
               title: 'Alterar informações de perfil',
-              action: logout,
+              function: () => nav.pushNamed(AppRoutes.profileSettings, arguments: user),
               position: 2,
             ),
           ],
