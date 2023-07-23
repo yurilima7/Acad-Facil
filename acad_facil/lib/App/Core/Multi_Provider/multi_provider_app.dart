@@ -7,6 +7,7 @@ import 'package:acad_facil/App/Screens/Disciplines_Screen/disciplines_screen_con
 import 'package:acad_facil/App/Screens/Edit_Disciplines/edit_disciplines_controller.dart';
 import 'package:acad_facil/App/Screens/Edit_Grade/edit_grade_controller.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/home_controller.dart';
+import 'package:acad_facil/App/Screens/Profile_Screen/profile_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -45,6 +46,9 @@ class MultiProviderApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => EditGradeController(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProfileScreenController(),
         ),
       ],
       child: child,

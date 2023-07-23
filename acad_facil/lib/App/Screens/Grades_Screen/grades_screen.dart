@@ -42,7 +42,7 @@ class _GradesScreenState extends State<GradesScreen> {
           padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
 
           child: Visibility(
-            visible: disciplines != null,
+            visible: disciplines!.isNotEmpty,
 
             replacement: Center(
               child: Text(

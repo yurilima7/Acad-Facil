@@ -21,7 +21,6 @@ class HomeController extends AppStatus {
   final List<String> assets = [
       Assets.notas,
       Assets.university,
-      Assets.settings,
       Assets.user,
       Assets.exit,
     ];
@@ -29,7 +28,6 @@ class HomeController extends AppStatus {
   final List<String> titles = [
     'Suas Notas',
     'Disciplinas',
-    'Opções',
     'Perfil',
     'Sair',
   ];

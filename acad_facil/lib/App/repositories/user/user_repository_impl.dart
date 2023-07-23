@@ -7,18 +7,16 @@ import 'package:acad_facil/App/repositories/user/user_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserRepositoryImpl extends UserRepository {
-  final DocumentReference<Map<String, dynamic>> docUser =
+  final DocumentReference<Map<String, dynamic>> _docUser =
       Constants.idUserCollection;
-  final CollectionReference<Map<String, dynamic>> colecDiscipline =
+  final CollectionReference<Map<String, dynamic>> _colecDiscipline =
       Constants.disciplinesReference;
-  final CollectionReference<Map<String, dynamic>> colecUser =
-      Constants.userRefence;
-  final user = Constants.user;
+  final _user = Constants.user;
 
   @override
   Future<void> addData(UserModel user) async {
     try {
-      await docUser.set({
+      await _docUser.set({
         'name': Constants.auth.currentUser!.displayName,
         'course': user.course,
         'period': user.period,
@@ -35,14 +33,14 @@ class UserRepositoryImpl extends UserRepository {
   @override
   Future<void> deleteUser() async {
     try {
-      await colecDiscipline.get().then((snapshot) {
+      await _colecDiscipline.get().then((snapshot) {
         for (var doc in snapshot.docs) {
           doc.reference.delete();
         }
       });
 
-      await colecUser.doc(Constants.userId).delete();
-      await user?.delete();
+      await _docUser.delete();
+      await _user?.delete();
     } on FirebaseException catch (e, s) {
       log(e.toString());
       log(s.toString());
@@ -55,7 +53,7 @@ class UserRepositoryImpl extends UserRepository {
   Future<UserModel?> loadUser() async {
     UserModel? userModel;
     try {
-      await docUser.get().then((doc) {
+      await _docUser.get().then((doc) {
         userModel = UserModel(
           id: doc.id,
           name: doc.data()!['name'],
@@ -72,5 +70,22 @@ class UserRepositoryImpl extends UserRepository {
     }
     
     return userModel;
+  }
+  
+  @override
+  Future<void> updateUser(UserModel user) async {
+    try {
+      await _docUser
+        .update({
+          'name': user.name,
+          'course': user.course,
+          'period': user.period,
+        });
+    } on FirebaseException catch (e, s) {
+      log(e.toString());
+      log(s.toString());
+      
+      throw AppException(message: 'Falha no update de usuário, tente novamente!');
+    }
   }
 }

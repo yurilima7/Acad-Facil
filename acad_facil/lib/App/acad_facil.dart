@@ -9,6 +9,7 @@ import 'package:acad_facil/App/Screens/Edit_Grade/edit_grade.dart';
 import 'package:acad_facil/App/Screens/Grades_Screen/grades_screen.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/home_screen.dart';
 import 'package:acad_facil/App/Screens/Auth/Login_Screen/login.dart';
+import 'package:acad_facil/App/Screens/Profile_Screen/profile_screen.dart';
 import 'package:acad_facil/App/Screens/Register_Data_Screen/register_data.dart';
 import 'package:acad_facil/App/Screens/Auth/Register_Screen/register.dart';
 import 'package:acad_facil/App/Screens/Settings_Screen/settings_screen.dart';
@@ -37,6 +38,7 @@ class AcadFacil extends StatelessWidget {
           AppRoutes.tabs: (context) => const TabsScreen(),
           AppRoutes.home: (context) => const HomeScreen(),
           AppRoutes.settings: (context) => const SettingsScreen(),
+          AppRoutes.profileSettings: (context) => const ProfileScreen(),
           AppRoutes.grades: (context) => const GradesScreen(),
           AppRoutes.disciplines: (context) => const DisciplinesScreen(),
           AppRoutes.details: (context) => const DetailsScreen(),

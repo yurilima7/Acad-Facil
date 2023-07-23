@@ -108,22 +108,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     
-                    itemCount: 5,
-                    itemBuilder: (context, i) => disciplines.isNotEmpty ? OptionsCard(
+                    itemCount: 4,
+                    itemBuilder: (context, i) => disciplines.isNotEmpty && providerUser != null ? OptionsCard(
                       path: homeController.assets[i],
                       title: homeController.titles[i],
                       subtitle:
                           i > 1 ? '' : 'Disciplinas ${disciplines.length}',
                       index: i,
                       discipline: disciplines,
-                      periodUser: providerUser?.period ?? 0,
+                      user: providerUser,
                     ) : OptionsCard(
                       path: homeController.assets[i],
                       title: homeController.titles[i],
                       subtitle:
                           i > 1 ? '' : 'Disciplinas ${disciplines.length}',
                       index: i,
-                      periodUser: providerUser?.period ?? 0,
+                      user: providerUser,
                     ),
                   ),
                 ),
