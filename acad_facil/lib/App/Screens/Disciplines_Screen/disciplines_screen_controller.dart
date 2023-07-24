@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class DisciplinesScreenController extends ChangeNotifier {
   List<Disciplines> filtered = [];
   List<Disciplines> _disciplines = [];
-  final List<int> _periods = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+  final List<int> _periods = [0,1,2,3,4,5,6,7,8,9,10];
   int _periodNow = 0;
   int periodSelected = 0;
 
