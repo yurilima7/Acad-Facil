@@ -26,7 +26,7 @@ class Messages {
         content: Text(
           text,
           textAlign: TextAlign.center,
-          style: scaffoldMessengerKey.currentContext!.textStyles.titleMedium,
+          style: scaffoldMessengerKey.currentContext!.textStyles.titleMedium.copyWith(color: ColorsStyles.primary),
         ),
       ),
     );

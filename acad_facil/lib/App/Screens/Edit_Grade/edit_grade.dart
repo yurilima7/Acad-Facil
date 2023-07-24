@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class EditGrade extends StatefulWidget {
-  const EditGrade({Key? key}) : super(key: key);
+  const EditGrade({super.key});
 
   @override
   State<EditGrade> createState() => _EditGradeState();

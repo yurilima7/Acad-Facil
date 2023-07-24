@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class AddGrades extends StatefulWidget {
-  const AddGrades({Key? key}) : super(key: key);
+  const AddGrades({super.key});
 
   @override
   State<AddGrades> createState() => _AddGradesState();
@@ -43,10 +43,10 @@ class _AddGradesState extends State<AddGrades> {
       final valid = formKey.currentState?.validate() ?? false;
 
       if (valid) {
-        final resultAddGrade = await disciplinesProvider.addNewGrade(
+        await disciplinesProvider.addNewGrade(
             discipline, double.tryParse(gradeEC.text)!);
 
-        if (resultAddGrade) {
+        if (disciplinesProvider.isSuccess) {
           nav.pop({
             'discipline': discipline,
             'listDisciplines': listDisciplines,

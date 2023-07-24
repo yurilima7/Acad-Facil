@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class FormRegister extends StatefulWidget {
-  const FormRegister({Key? key}) : super(key: key);
+  const FormRegister({super.key});
 
   @override
   State<FormRegister> createState() => _FormRegisterState();
@@ -33,7 +33,6 @@ class _FormRegisterState extends State<FormRegister> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     final nav = Navigator.of(context);
     final authController = Provider.of<AuthController>(context);
     
@@ -143,8 +142,8 @@ class _FormRegisterState extends State<FormRegister> {
             ]),
           ),
     
-          SizedBox(
-            height: height * .05,
+          const SizedBox(
+            height: 25,
           ),
     
           Row(
@@ -157,8 +156,8 @@ class _FormRegisterState extends State<FormRegister> {
             ],
           ),
     
-          SizedBox(
-            height: height * .02,
+          const SizedBox(
+            height: 25,
           ),
 
           Button(title: 'Cadastrar', action: screenLogin),

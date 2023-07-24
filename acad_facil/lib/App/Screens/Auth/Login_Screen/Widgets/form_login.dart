@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class FormLogin extends StatefulWidget {
-  const FormLogin({Key? key}) : super(key: key);
+  const FormLogin({super.key});
 
   @override
   State<FormLogin> createState() => _FormLoginState();
@@ -33,7 +33,6 @@ class _FormLoginState extends State<FormLogin> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     final nav = Navigator.of(context);
     final authController = Provider.of<AuthController>(context);
 
@@ -133,8 +132,8 @@ class _FormLoginState extends State<FormLogin> {
             ]),
           ),
 
-          SizedBox(
-            height: height * .05,
+          const SizedBox(
+            height: 25,
           ),
 
           Row(
@@ -151,8 +150,8 @@ class _FormLoginState extends State<FormLogin> {
             ],
           ),
 
-          SizedBox(
-            height: height * .02,
+          const SizedBox(
+            height: 25,
           ),
 
           Button(

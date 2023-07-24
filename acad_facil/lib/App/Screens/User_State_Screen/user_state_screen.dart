@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class UserStateScreen extends StatefulWidget {
-  const UserStateScreen({Key? key}) : super(key: key);
+  const UserStateScreen({super.key});
 
   @override
   State<UserStateScreen> createState() => _UserStateScreenState();

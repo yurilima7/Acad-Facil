@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class RegisterData extends StatefulWidget {
-  const RegisterData({Key? key}) : super(key: key);
+  const RegisterData({super.key});
 
   @override
   State<RegisterData> createState() => _RegisterDataState();

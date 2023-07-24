@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class AddDisciplines extends StatefulWidget {
-  const AddDisciplines({Key? key}) : super(key: key);
+  const AddDisciplines({super.key});
 
   @override
   State<AddDisciplines> createState() => _AddDisciplinesState();
@@ -68,7 +68,7 @@ class _AddDisciplinesState extends State<AddDisciplines> {
           alignment: Alignment.bottomCenter,
 
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(16.0),
 
             child: SingleChildScrollView(
               child: Form(

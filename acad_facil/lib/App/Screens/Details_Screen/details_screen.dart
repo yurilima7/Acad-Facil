@@ -63,27 +63,23 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
 
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-
-              children: [
-                Text(
-                  discipline?.name ?? '',
-                  style: context.textStyles.titleLarge,
-                ),
-                Text(
-                  'Sala: ${discipline?.classroom}',
-                  style: context.textStyles.titleMedium,
-                ),
-                Text(
-                  'Período: ${discipline?.period}°',
-                  style: context.textStyles.titleMedium,
-                ),
-              ],
+            Text(
+              discipline?.name ?? '',
+              style: context.textStyles.titleLarge,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            ),
+            Text(
+              'Sala: ${discipline?.classroom}',
+              style: context.textStyles.titleMedium,
+            ),
+            Text(
+              'Período: ${discipline?.period}°',
+              style: context.textStyles.titleMedium,
             ),
           ],
         ),

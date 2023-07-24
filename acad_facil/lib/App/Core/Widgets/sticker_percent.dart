@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class StickerPercent extends StatelessWidget {
   final double avarage;
-  const StickerPercent({Key? key, required this.avarage}) : super(key: key);
+  const StickerPercent({super.key, required this.avarage});
 
   @override
   Widget build(BuildContext context) {   

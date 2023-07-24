@@ -3,7 +3,7 @@ import 'package:acad_facil/App/Screens/Auth/Register_Screen/Widgets/form_registe
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+  const Register({super.key});
 
   @override
   State<Register> createState() => _RegisterState();

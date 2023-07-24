@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class EditDisciplines extends StatefulWidget {
-  const EditDisciplines({Key? key}) : super(key: key);
+  const EditDisciplines({super.key});
 
   @override
   State<EditDisciplines> createState() => _EditDisciplinesState();

@@ -4,9 +4,9 @@ class Search extends StatefulWidget {
   final Function(String) onChanged;
 
   const Search({
-    Key? key,
+    super.key,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<Search> createState() => _SearchState();

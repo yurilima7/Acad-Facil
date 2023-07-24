@@ -48,7 +48,7 @@ class Alert extends StatelessWidget {
           },
           child: Text(
             'OK',
-            style: context.textStyles.titleMedium,
+            style: context.textStyles.titleLarge.copyWith(color: ColorsStyles.errors),
           ),
         ),
       ],

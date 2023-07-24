@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DisciplinesScreen extends StatefulWidget {
-  const DisciplinesScreen({Key? key}) : super(key: key);
+  const DisciplinesScreen({super.key});
 
   @override
   State<DisciplinesScreen> createState() => _DisciplinesScreenState();
@@ -47,10 +47,11 @@ class _DisciplinesScreenState extends State<DisciplinesScreen> {
             title: Text('Disciplinas', style: context.textStyles.titleLarge,),
             elevation: 0,
             automaticallyImplyLeading: false,
-            actions: [
-    
+            actions: [    
               PopupMenuButton<int>(
                 color: ColorsStyles.secundary,
+
+                initialValue: disciplinesController.periodSelected,
     
                 icon: Icon(
                   Icons.filter_list,

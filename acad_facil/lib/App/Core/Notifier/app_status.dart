@@ -1,10 +1,11 @@
-import 'package:acad_facil/App/Core/Utils/loader.dart';
-import 'package:acad_facil/App/Core/Utils/messages.dart';
+import 'package:acad_facil/App/Core/Notifier/loader.dart';
+import 'package:acad_facil/App/Core/Notifier/messages.dart';
 import 'package:flutter/material.dart';
 
 class AppStatus extends ChangeNotifier {
   bool _isLoading = false;
   String? _error;
+  bool _isError = false;
   String? _info;
   bool _success = false;
 
@@ -13,6 +14,7 @@ class AppStatus extends ChangeNotifier {
   String? get info => _info;
   bool get hasError => _error != null;
   bool get isSuccess => _success;
+  bool get isError => _isError;
 
   void _showLoading() {
     _isLoading = true;
@@ -52,6 +54,7 @@ class AppStatus extends ChangeNotifier {
 
   void setError(String? error) {
     _error = error;
+    _isError = true;
     if (_error != null) {
       _showMessageError();
     }
@@ -65,5 +68,6 @@ class AppStatus extends ChangeNotifier {
   void _resetState() {
     setError(null);
     _success = false;
+    _isError = false;
   }
 }

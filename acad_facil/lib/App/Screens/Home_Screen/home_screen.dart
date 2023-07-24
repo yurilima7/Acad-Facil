@@ -1,4 +1,5 @@
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
+import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/Widgets/options_card.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/home_controller.dart';
@@ -30,10 +31,39 @@ class _HomeScreenState extends State<HomeScreen> {
     final disciplines = homeController.disciplines ?? [];
 
     return Visibility(
-      visible: !homeController.loading,
+      visible: !homeController.loading && !homeController.isError,
 
-      replacement: const Scaffold(
-        body: SizedBox.shrink(),
+      replacement: Visibility(
+        visible: !homeController.isError,
+
+        replacement: Scaffold(
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Ocorreu um erro, verifique sua conexão com a internet e tente novamente!',
+                  style: context.textStyles.secundaryTitle,
+                ),
+
+                const SizedBox(
+                   height: 20,
+                ),
+
+                Button(
+                  action: () => homeController.loadDataUser(),
+                  title: 'Recarregar',
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        child: const Scaffold(
+          body: SizedBox.shrink(),
+        ),
       ),
 
       child: Scaffold(
@@ -48,10 +78,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     'Olá ${providerUser?.name}',
                     style: context.textStyles.titleLarge,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                   ),
                   Text(
                     'Curso: ${providerUser?.course}',
                     style: context.textStyles.titleMedium,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                   ),
                   Text(
                     'Período: ${providerUser?.period}°',
@@ -131,7 +165,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        //  : const SizedBox.shrink(),
       ),
     );
   }

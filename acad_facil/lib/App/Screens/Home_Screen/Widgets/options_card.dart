@@ -1,5 +1,6 @@
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Widgets/alert.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Models/user.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/home_controller.dart';
@@ -60,7 +61,14 @@ class OptionsCard extends StatelessWidget {
         } else if (index == 2) {
           nav.pushNamed(AppRoutes.settings, arguments: user);
         } else if (index == 3) {
-          logout();
+         showDialog(
+          context: context,
+            builder: (_) => Alert(
+              function: logout,
+              message: 'Deseja realmente sair do Acad Fácil?',
+              position: 2,
+            ),
+          );
         }
       },
       
@@ -79,6 +87,7 @@ class OptionsCard extends StatelessWidget {
               title,
               style: context.textStyles.titleMedium,
               overflow: TextOverflow.ellipsis,
+              maxLines: 2,
             ),
             subtitle: Text(
               subtitle,

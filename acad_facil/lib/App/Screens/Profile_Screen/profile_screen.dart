@@ -124,7 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             formData['period'] = int.parse(period ?? ''),
                             
                         decoration: const InputDecoration(
-                          label: Text('Período'),
+                          label: Text('Período Atual'),
                         ),
     
                         validator: Validatorless.required('Obrigatório!'),

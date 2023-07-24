@@ -6,8 +6,7 @@ import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Repositories/disciplines/disciplines_repository_impl.dart';
 
 class AddGradesController extends AppStatus {
-  Future<bool> addNewGrade(Disciplines discipline, double newGrade) async {
-    bool result = false;
+  Future<void> addNewGrade(Disciplines discipline, double newGrade) async {
     if (discipline.grades.length == 5) {
       setInfo('Máximo de 5 notas já alcançado!');
     } else {
@@ -22,7 +21,6 @@ class AddGradesController extends AppStatus {
             .addGrades(discipline.id, discipline.grades, avarage);
 
         success('Nota adicionada com sucesso!');
-        result = true;
       } on AppException catch (e) {
         setError(e.message);
         log(e.message);
@@ -31,7 +29,5 @@ class AddGradesController extends AppStatus {
         notifyListeners();
       }
     }
-
-    return result;
   }
 }

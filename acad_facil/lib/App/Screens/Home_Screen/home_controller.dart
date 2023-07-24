@@ -39,7 +39,7 @@ class HomeController extends AppStatus {
       _disciplines = await DisciplinesRepositoryImpl().loadDisciplines();
 
       if (_disciplines == null || _user == null) {
-        return;
+        setError('Erro ao buscar os dados do usuário!');
       }
     } on AppException catch (e) {
       setError(e.message);

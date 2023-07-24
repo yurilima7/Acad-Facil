@@ -3,7 +3,7 @@ import 'package:acad_facil/App/Screens/Auth/Login_Screen/Widgets/form_login.dart
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  const Login({super.key});
 
   @override
   State<Login> createState() => _LoginState();

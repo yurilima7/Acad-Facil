@@ -7,19 +7,23 @@ import 'package:acad_facil/App/Repositories/user/user_repository_impl.dart';
 
 class RegisterDataController extends AppStatus {
   Future<void> registerData(UserModel user) async {
-    try {
-      showLoadingAndResetState();
-      notifyListeners();
+    if (user.period <= 10) {
+      try {
+        showLoadingAndResetState();
+        notifyListeners();
 
-      UserRepositoryImpl().addData(user);
+        UserRepositoryImpl().addData(user);
 
-      success('Dados inseridos com sucesso!');
-    } on AppException catch (e) {
-      setError(e.message);
-      log(e.message);
-    } finally {
-      hideLoading();
-      notifyListeners();
+        success('Dados inseridos com sucesso!');
+      } on AppException catch (e) {
+        setError(e.message);
+        log(e.message);
+      } finally {
+        hideLoading();
+        notifyListeners();
+      }
+    } else {
+      setInfo('O máximo de períodos aceitavel é de 10!');
     }
   }
 }
