@@ -1,5 +1,6 @@
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Widgets/app_bar_main.dart';
 import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Screens/Add_Disciplines/add_disciplines_controller.dart';
@@ -58,11 +59,7 @@ class _AddDisciplinesState extends State<AddDisciplines> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
 
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Inserir Disciplina'),
-          elevation: 0,
-          automaticallyImplyLeading: false,
-        ),
+        appBar: AppBarMain(titleStr: 'Inserir Disciplina'),
 
         body: Align(
           alignment: Alignment.bottomCenter,

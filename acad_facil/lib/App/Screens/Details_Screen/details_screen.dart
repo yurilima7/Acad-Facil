@@ -1,7 +1,7 @@
-import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/alert.dart';
+import 'package:acad_facil/App/Core/Widgets/app_bar_main.dart';
 import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/Widgets/grid_grades.dart';
@@ -62,32 +62,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-
-          children: [
-            Text(
-              discipline?.name ?? '',
-              style: context.textStyles.titleLarge,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-            ),
-            Text(
-              'Sala: ${discipline?.classroom}',
-              style: context.textStyles.titleMedium,
-            ),
-            Text(
-              'Período: ${discipline?.period}°',
-              style: context.textStyles.titleMedium,
-            ),
-          ],
-        ),
-
-        automaticallyImplyLeading: false,
-        toolbarHeight: 110,
-        elevation: 0,
-        backgroundColor: ColorsStyles.secundary,
+      appBar: AppBarMain(
+        titleStr: discipline?.name ?? '',
+        subTitleCenter: 'Sala: ${discipline?.classroom}',
+        subTitleBottom: 'Período: ${discipline?.period}°',
+        description: true,
       ),
 
       body: Visibility(

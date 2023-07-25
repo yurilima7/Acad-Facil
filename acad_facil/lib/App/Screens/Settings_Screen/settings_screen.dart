@@ -1,5 +1,5 @@
-import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Widgets/app_bar_main.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/user.dart';
 import 'package:acad_facil/App/Screens/Settings_Screen/settings_screen_controller.dart';
@@ -31,10 +31,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final nav = Navigator.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Configurações', style: context.textStyles.titleLarge,),
-        elevation: 0,
-        automaticallyImplyLeading: false,
+      appBar: AppBarMain(
+        titleStr: 'Configurações',
       ),
 
       body: Padding(

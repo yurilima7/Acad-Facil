@@ -1,4 +1,4 @@
-import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
+import 'package:acad_facil/App/Core/Widgets/app_bar_main.dart';
 import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/Widgets/options_card.dart';
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
@@ -67,43 +67,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
       child: Scaffold(
-        appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Olá ${providerUser?.name}',
-                    style: context.textStyles.titleLarge,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                  ),
-                  Text(
-                    'Curso: ${providerUser?.course}',
-                    style: context.textStyles.titleMedium,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                  ),
-                  Text(
-                    'Período: ${providerUser?.period}°',
-                    style: context.textStyles.titleMedium,
-                  ),
-                ],
-              ),
-    
-              CircleAvatar(
-                backgroundImage: NetworkImage(providerUser?.perfilUrl ?? ''),
-                radius: 32,
-              )
-            ],
-          ),
-    
-          toolbarHeight: 110,
-          elevation: 0,
-          backgroundColor: ColorsStyles.secundary,
+        appBar: AppBarMain(
+          titleStr: 'Olá ${providerUser?.name}',
+          subTitleCenter: 'Curso: ${providerUser?.course}',
+          subTitleBottom: 'Período: ${providerUser?.period}°',
+          image: providerUser?.perfilUrl ?? '',
+          description: true,
         ),
     
         body: SingleChildScrollView(

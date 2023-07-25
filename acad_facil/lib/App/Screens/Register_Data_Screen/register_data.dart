@@ -1,5 +1,6 @@
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Widgets/app_bar_main.dart';
 import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Models/user.dart';
 import 'package:acad_facil/App/Screens/Register_Data_Screen/register_data_controller.dart';
@@ -59,14 +60,8 @@ class _RegisterDataState extends State<RegisterData> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
 
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Informe seus dados',
-            style: context.textStyles.titleLarge,
-          ),
-
-          elevation: 0,
-          automaticallyImplyLeading: false,
+        appBar: AppBarMain(
+          titleStr:'Informe seus dados',
         ),
 
         body: Align(

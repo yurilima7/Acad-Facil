@@ -1,4 +1,5 @@
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
+import 'package:acad_facil/App/Core/Widgets/app_bar_main.dart';
 import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Screens/Add_Grades/add_grades_controller.dart';
@@ -59,11 +60,7 @@ class _AddGradesState extends State<AddGrades> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Inserir Notas'),
-          elevation: 0,
-          automaticallyImplyLeading: false,
-        ),
+        appBar: AppBarMain(titleStr: 'Inserir Notas',),
 
         body: Align(
           alignment: Alignment.bottomCenter,

@@ -1,4 +1,6 @@
 import 'package:acad_facil/App/Core/Multi_Provider/multi_provider_app.dart';
+import 'package:acad_facil/App/Core/Notifier/loader.dart';
+import 'package:acad_facil/App/Core/Notifier/messages.dart';
 import 'package:acad_facil/App/Core/Theme/theme_setttings.dart';
 import 'package:acad_facil/App/Screens/Add_Disciplines/add_disciplines.dart';
 import 'package:acad_facil/App/Screens/Add_Grades/add_grades.dart';
@@ -17,18 +19,21 @@ import 'package:acad_facil/App/Screens/User_State_Screen/user_state_screen.dart'
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
-GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
-    GlobalKey<ScaffoldMessengerState>();
-
 class AcadFacil extends StatelessWidget {
-  const AcadFacil({super.key});
+  final _navigatorKey = GlobalKey<NavigatorState>();
+  final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+
+  AcadFacil({super.key}) {
+    Loader.i.navigatorKey = _navigatorKey;
+    Messages.i.scaffoldMessagerKey = _scaffoldMessengerKey;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProviderApp(
       child: MaterialApp(
-        navigatorKey: navigatorKey,
-        scaffoldMessengerKey: scaffoldMessengerKey,
+        navigatorKey: _navigatorKey,
+        scaffoldMessengerKey: _scaffoldMessengerKey,
         theme: ThemeSettings.theme,
         debugShowCheckedModeBanner: false,
         routes: {

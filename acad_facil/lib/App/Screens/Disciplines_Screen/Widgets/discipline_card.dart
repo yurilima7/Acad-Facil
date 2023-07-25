@@ -22,7 +22,7 @@ class DisciplineCard extends StatelessWidget {
         color: Theme.of(context).colorScheme.secondary,
         elevation: 5,
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +30,7 @@ class DisciplineCard extends StatelessWidget {
             ListTile(
               title: Text(
                 discipline.name,
-                style: context.textStyles.titleSmall,
+                style: context.textStyles.titleSmall.copyWith(fontSize: 14),
               ),
               subtitle: Text(
                 'Sala: ${discipline.classroom}',

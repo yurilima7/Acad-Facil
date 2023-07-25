@@ -18,24 +18,24 @@ class AppStatus extends ChangeNotifier {
 
   void _showLoading() {
     _isLoading = true;
-    Loader.showLoader();
+    Loader.i.showLoader();
   }
 
   void hideLoading() {
     _isLoading = false;
-    Loader.hideLoader();
+    Loader.i.hideLoader();
   }
 
   void _showMessageError() {
-    Messages.showError(error!);
+    Messages.i.showError(error!);
   }
 
   void _showMessageInfo() {
-    Messages.showInfo(info!);
+    Messages.i.showInfo(info!);
   }
 
   void _showMessageSuccess(String message) {
-    Messages.showSuccess(message);
+    Messages.i.showSuccess(message);
   }
 
   void success(String message) {

@@ -1,5 +1,6 @@
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Widgets/app_bar_main.dart';
 import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Screens/Edit_Disciplines/edit_disciplines_controller.dart';
@@ -67,10 +68,8 @@ class _EditDisciplinesState extends State<EditDisciplines> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Editar Disciplina'),
-          elevation: 0,
-          automaticallyImplyLeading: false,
+        appBar: AppBarMain(
+          titleStr: 'Editar Disciplina',
         ),
 
         body: Align(
