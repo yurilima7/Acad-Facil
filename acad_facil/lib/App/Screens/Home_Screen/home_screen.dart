@@ -34,9 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
       visible: !homeController.loading && !homeController.isError,
 
       replacement: Visibility(
-        visible: !homeController.isError,
+        visible: homeController.isError,
 
-        replacement: Scaffold(
+        child: Scaffold(
           body: Padding(
             padding: const EdgeInsets.all(16.0),
             
@@ -59,10 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-        ),
-
-        child: const Scaffold(
-          body: SizedBox.shrink(),
         ),
       ),
 
