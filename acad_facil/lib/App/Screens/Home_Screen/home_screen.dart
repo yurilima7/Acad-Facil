@@ -30,14 +30,22 @@ class _HomeScreenState extends State<HomeScreen> {
     final providerUser = homeController.user;
     final disciplines = homeController.disciplines ?? [];
 
-    return Visibility(
-      visible: !homeController.loading && !homeController.isError,
+    return Scaffold(
+      appBar: !homeController.loading && !homeController.isError ? AppBarMain(
+        titleStr: 'Olá ${providerUser?.name}',
+        subTitleCenter: 'Curso: ${providerUser?.course}',
+        subTitleBottom: 'Período: ${providerUser?.period}°',
+        image: providerUser?.perfilUrl ?? '',
+        description: true,
+      ) : AppBar(elevation: 0,),
 
-      replacement: Visibility(
-        visible: homeController.isError,
+      body: Visibility(
+        visible: !homeController.loading,
 
-        child: Scaffold(
-          body: Padding(
+        child: Visibility(
+          visible: !homeController.isError,
+
+          replacement: Padding(
             padding: const EdgeInsets.all(16.0),
             
             child: Column(
@@ -59,74 +67,65 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-        ),
-      ),
 
-      child: Scaffold(
-        appBar: AppBarMain(
-          titleStr: 'Olá ${providerUser?.name}',
-          subTitleCenter: 'Curso: ${providerUser?.course}',
-          subTitleBottom: 'Período: ${providerUser?.period}°',
-          image: providerUser?.perfilUrl ?? '',
-          description: true,
-        ),
-    
-        body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-    
-            child: Column(
-              children: [
-                const SizedBox(
-                    height: 45,
-                ),
-    
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Menu de Navegação',
-                        style: context.textStyles.titleMedium,
-                      ),
-                    ],
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            
+              child: Column(
+                children: [
+                  const SizedBox(
+                      height: 45,
                   ),
-                ),
-                
-                SizedBox(      
-                  child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 4 / 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 20,
+            
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Menu de Navegação',
+                          style: context.textStyles.titleMedium,
+                        ),
+                      ],
                     ),
+                  ),
                   
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
+                  SizedBox(      
+                    child: GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 4 / 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 20,
+                      ),
                     
-                    itemCount: 4,
-                    itemBuilder: (context, i) => disciplines.isNotEmpty && providerUser != null ? OptionsCard(
-                      path: homeController.assets[i],
-                      title: homeController.titles[i],
-                      subtitle:
-                          i > 1 ? '' : 'Disciplinas ${disciplines.length}',
-                      index: i,
-                      discipline: disciplines,
-                      user: providerUser,
-                    ) : OptionsCard(
-                      path: homeController.assets[i],
-                      title: homeController.titles[i],
-                      subtitle:
-                          i > 1 ? '' : 'Disciplinas ${disciplines.length}',
-                      index: i,
-                      user: providerUser,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      
+                      itemCount: 4,
+                      itemBuilder: (context, i) => disciplines.isNotEmpty && providerUser != null ? OptionsCard(
+                        path: homeController.assets[i],
+                        title: homeController.titles[i],
+                        subtitle:
+                            i > 1 ? '' : 'Disciplinas ${disciplines.length}',
+                        index: i,
+                        discipline: disciplines,
+                        user: providerUser,
+                      ) : OptionsCard(
+                        path: homeController.assets[i],
+                        title: homeController.titles[i],
+                        subtitle:
+                            i > 1 ? '' : 'Disciplinas ${disciplines.length}',
+                        index: i,
+                        user: providerUser,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
