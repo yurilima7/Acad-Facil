@@ -5,7 +5,7 @@ import 'package:acad_facil/App/Core/Notifier/app_status.dart';
 import 'package:acad_facil/App/Repositories/user/user_repository_impl.dart';
 import 'package:acad_facil/App/Repositories/disciplines/disciplines_repository_impl.dart';
 
-class SettingsScreenController extends AppStatus {
+class ProfileSettingsScreenController extends AppStatus {
   Future<void> deleteUser() async {
     try {
       showLoadingAndResetState();

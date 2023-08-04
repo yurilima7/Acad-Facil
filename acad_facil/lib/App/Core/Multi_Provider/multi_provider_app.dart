@@ -8,7 +8,7 @@ import 'package:acad_facil/App/Screens/Edit_Grade/edit_grade_controller.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/home_controller.dart';
 import 'package:acad_facil/App/Screens/Profile_Screen/profile_screen_controller.dart';
 import 'package:acad_facil/App/Screens/Register_Data_Screen/register_data_controller.dart';
-import 'package:acad_facil/App/Screens/Settings_Screen/settings_screen_controller.dart';
+import 'package:acad_facil/App/Screens/Profile_Settings_Screen/profile_settings_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +46,7 @@ class MultiProviderApp extends StatelessWidget {
           create: (_) => ProfileScreenController(),
         ),
         ChangeNotifierProvider(
-          create: (_) => SettingsScreenController(),
+          create: (_) => ProfileSettingsScreenController(),
         ),
         ChangeNotifierProvider(
           create: (_) => RegisterDataController(),

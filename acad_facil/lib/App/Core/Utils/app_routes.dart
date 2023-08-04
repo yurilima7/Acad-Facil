@@ -2,7 +2,7 @@ class AppRoutes {
   static const userStateScreen = '/';
   static const home = '/lib/App/Screens/Home_Screen/home_screen.dart';
   static const grades = 'lib/App/Screens/Grades_Screen/grades_screen.dart';
-  static const settings = 'lib/App/Screens/Settings_Screen/settings_screen.dart';
+  static const profileSettingsScreen = 'lib/App/Screens/Profile_Settings_Screen/profile_settings_screen.dart';
   static const profileSettings = 'lib/App/Screens/Profile_Screen/profile_screen.dart';
   static const disciplines = 'lib/App/Screens/Disciplines_Screen/disciplines_screen.dart';
   static const details = 'lib/App/Screens/Details_Screen/details_screen.dart';

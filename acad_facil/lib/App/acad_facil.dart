@@ -14,7 +14,7 @@ import 'package:acad_facil/App/Screens/Auth/Login_Screen/login.dart';
 import 'package:acad_facil/App/Screens/Profile_Screen/profile_screen.dart';
 import 'package:acad_facil/App/Screens/Register_Data_Screen/register_data.dart';
 import 'package:acad_facil/App/Screens/Auth/Register_Screen/register.dart';
-import 'package:acad_facil/App/Screens/Settings_Screen/settings_screen.dart';
+import 'package:acad_facil/App/Screens/Profile_Settings_Screen/profile_settings_screen.dart';
 import 'package:acad_facil/App/Screens/User_State_Screen/user_state_screen.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +40,7 @@ class AcadFacil extends StatelessWidget {
           AppRoutes.userStateScreen: (context) => const UserStateScreen(),
           AppRoutes.loginScreen: (context) => const Login(),
           AppRoutes.home: (context) => const HomeScreen(),
-          AppRoutes.settings: (context) => const SettingsScreen(),
+          AppRoutes.profileSettingsScreen: (context) => const ProfileSettingsScreen(),
           AppRoutes.profileSettings: (context) => const ProfileScreen(),
           AppRoutes.grades: (context) => const GradesScreen(),
           AppRoutes.disciplines: (context) => const DisciplinesScreen(),

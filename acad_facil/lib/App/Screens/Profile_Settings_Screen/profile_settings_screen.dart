@@ -2,18 +2,18 @@ import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/app_bar_main.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/user.dart';
-import 'package:acad_facil/App/Screens/Settings_Screen/settings_screen_controller.dart';
+import 'package:acad_facil/App/Screens/Profile_Settings_Screen/profile_settings_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
+class ProfileSettingsScreen extends StatefulWidget {
+  const ProfileSettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  State<ProfileSettingsScreen> createState() => _ProfileSettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   UserModel? user;
 
   @override
@@ -27,12 +27,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final settingsScreenController 
-      = Provider.of<SettingsScreenController>(context);
+      = Provider.of<ProfileSettingsScreenController>(context);
     final nav = Navigator.of(context);
 
     return Scaffold(
       appBar: AppBarMain(
-        titleStr: 'Configurações',
+        titleStr: 'Configurações de Perfil',
       ),
 
       body: Padding(

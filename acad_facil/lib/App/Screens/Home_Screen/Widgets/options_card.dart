@@ -59,7 +59,7 @@ class OptionsCard extends StatelessWidget {
             },
           );
         } else if (index == 2) {
-          nav.pushNamed(AppRoutes.settings, arguments: user);
+          nav.pushNamed(AppRoutes.profileSettingsScreen, arguments: user);
         } else if (index == 3) {
          showDialog(
           context: context,
