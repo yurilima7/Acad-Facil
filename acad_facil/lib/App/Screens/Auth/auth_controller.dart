@@ -1,7 +1,7 @@
 import 'package:acad_facil/App/Core/Exceptions/auth_exception.dart';
 import 'package:acad_facil/App/Core/Notifier/app_status.dart';
 import 'package:acad_facil/App/Models/auth_model.dart';
-import 'package:acad_facil/App/Repositories/auth/auth_repository_impl.dart';
+import 'package:acad_facil/App/Repositoriess/auth/auth_repository_impl.dart';
 
 class AuthController extends AppStatus {
   Future<void> signInEmail(AuthModel model) async {
