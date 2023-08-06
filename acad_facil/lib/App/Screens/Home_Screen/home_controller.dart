@@ -5,9 +5,9 @@ import 'package:acad_facil/App/Core/Notifier/app_status.dart';
 import 'package:acad_facil/App/Core/Utils/assets.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:acad_facil/App/Models/user.dart';
-import 'package:acad_facil/App/Repositoriess/auth/auth_repository_impl.dart';
-import 'package:acad_facil/App/Repositoriess/disciplines/disciplines_repository_impl.dart';
-import 'package:acad_facil/App/Repositoriess/user/user_repository_impl.dart';
+import 'package:acad_facil/App/Repositories/auth/auth_repository_impl.dart';
+import 'package:acad_facil/App/Repositories/disciplines/disciplines_repository_impl.dart';
+import 'package:acad_facil/App/Repositories/user/user_repository_impl.dart';
 
 class HomeController extends AppStatus {
   UserModel? _user;

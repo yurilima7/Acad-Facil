@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:acad_facil/App/Core/Data/constants_firebase.dart';
 import 'package:acad_facil/App/Core/Exceptions/app_exception.dart';
 import 'package:acad_facil/App/Models/user.dart';
-import 'package:acad_facil/App/Repositoriess/user/user_repository.dart';
+import 'package:acad_facil/App/Repositories/user/user_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserRepositoryImpl extends UserRepository {

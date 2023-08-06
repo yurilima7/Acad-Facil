@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:acad_facil/App/Core/Data/constants_firebase.dart';
 import 'package:acad_facil/App/Core/Exceptions/auth_exception.dart';
-import 'package:acad_facil/App/Repositoriess/auth/auth_repository.dart';
+import 'package:acad_facil/App/Repositories/auth/auth_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
