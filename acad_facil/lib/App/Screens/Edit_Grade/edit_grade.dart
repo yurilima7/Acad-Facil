@@ -1,5 +1,6 @@
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
+import 'package:acad_facil/App/Core/Widgets/alert.dart';
 import 'package:acad_facil/App/Core/Widgets/button.dart';
 import 'package:acad_facil/App/Models/edit_grade_model.dart';
 import 'package:acad_facil/App/Screens/Edit_Grade/edit_grade_controller.dart';
@@ -37,7 +38,7 @@ class _EditGradeState extends State<EditGrade> {
     final gradUpdateController = Provider.of<EditGradeController>(context);
     final nav = Navigator.of(context);
 
-    void registerGrade() async {
+    Future<void> registerGrade() async {
       final valid = formKey.currentState?.validate() ?? false;
 
       if (valid) {
@@ -71,18 +72,27 @@ class _EditGradeState extends State<EditGrade> {
           actions: [
             IconButton(
               onPressed: () async {
-                await gradUpdateController.removeGrade(
-                  EditGradeModel(
-                    disciplineId: formData['disciplineId'].toString(),
-                    grades: formData['grades'] as List,
-                    newGrade: formData['newGrade'] as double,
-                    position: formData['position'] as int,
+                showDialog(
+                  context: context,
+                  builder: (_) => Alert(
+                    function: () async {
+                      await gradUpdateController.removeGrade(
+                        EditGradeModel(
+                          disciplineId: formData['disciplineId'].toString(),
+                          grades: formData['grades'] as List,
+                          newGrade: formData['newGrade'] as double,
+                          position: formData['position'] as int,
+                        ),
+                      );
+
+                      if (gradUpdateController.isSuccess) {
+                        nav.pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+                      }
+                    },
+                    message: 'Deseja realmente deletar esta nota?',
+                    position: 0,
                   ),
                 );
-
-                if (gradUpdateController.isSuccess) {
-                  nav.pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
-                }
               }, 
               
               icon: const Icon(Icons.delete, size: 32,),

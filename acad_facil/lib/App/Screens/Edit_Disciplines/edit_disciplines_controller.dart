@@ -7,19 +7,23 @@ import 'package:acad_facil/App/Repositories/disciplines/disciplines_repository_i
 
 class EditDisciplinesController extends AppStatus {
   Future<void> editDiscipline(Disciplines discipline) async {
-    try {
-      showLoadingAndResetState();
-      notifyListeners();
+    if (discipline.period <= 10) {
+      try {
+        showLoadingAndResetState();
+        notifyListeners();
 
-      await DisciplinesRepositoryImpl().updateDiscipline(discipline);
+        await DisciplinesRepositoryImpl().updateDiscipline(discipline);
 
-      success('Update de disciplina realizado com sucesso!');
-    } on AppException catch (e) {
-      setError(e.message);
-      log(e.message);
-    } finally {
-      hideLoading();
-      notifyListeners();
+        success('Update de disciplina realizado com sucesso!');
+      } on AppException catch (e) {
+        setError(e.message);
+        log(e.message);
+      } finally {
+        hideLoading();
+        notifyListeners();
+      }
+    } else {
+      setInfo('O máximo de período aceitavel para edição é de 10!');
     }
   }
 }
