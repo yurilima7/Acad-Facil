@@ -116,7 +116,7 @@ class AuthRepositoryImpl implements AuthRepository {
       await _firebaseFirestore.terminate();
       await _firebaseFirestore.clearPersistence();
       await _firebaseGoogle.signOut();
-      await _firebaseAuth.signOut();
+      _firebaseAuth.signOut();
     } on FirebaseAuthException catch (e, s) {
       log('Falha no logout!');
       log(s.toString());

@@ -1,3 +1,4 @@
+import 'package:acad_facil/App/Core/Data/verify_user.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Utils/assets.dart';
 import 'package:acad_facil/App/Screens/Auth/auth_controller.dart';
@@ -18,10 +19,13 @@ class GoogleLogin extends StatelessWidget {
         await authController.signInGoogle();
 
         if(authController.isSuccess) {
-          nav.pushNamedAndRemoveUntil(
-            AppRoutes.home,
-            (Route<dynamic> route) => false,
-          );
+          final verifyResult = await VerifyUser().verify();
+
+          if (verifyResult == 1) {
+            nav.pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+          } else if (verifyResult == 0) {
+            nav.pushNamedAndRemoveUntil(AppRoutes.registerDataScreen, (route) => false);
+          }
         }
       },
 

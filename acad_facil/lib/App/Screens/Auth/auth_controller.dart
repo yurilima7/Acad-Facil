@@ -50,6 +50,7 @@ class AuthController extends AppStatus {
       success('Login realizado com sucesso!');
     } on AuthException catch (e) {
       setError(e.message);
+      AuthRepositoryImpl().logoutApp();
     } finally {
       hideLoading();
       notifyListeners();
