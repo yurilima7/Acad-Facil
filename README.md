@@ -1,7 +1,7 @@
 # Acad Fácil
 
 ## :memo: Descrição do Projeto
-<p>O projeto Acad Facil tem como finalidade a realização do gerenciamento e acompanhamento de notas de um estudante durante seu curso.</p>
+<p>O objetivo central do projeto Acad Fácil é viabilizar o gerenciamento e acompanhamento das notas de um estudante ao longo de seu curso.</p>
 
 ## :books: Funcionalidades
 * Sistema de Cadastro/Login com Google, e opção de E-Mail e Senha
@@ -24,7 +24,7 @@
 
 ## :computer: Bibliotecas e Ferramentas
 * Google Sign In e Firebase Auth para autenticação
-* Provider para gerênciamento de estado
+* Provider para gerenciamento de estado
 * Validatorless para realizar as validações de formulário
 * Flutter SpinKit para loaders de carregamento
 * Flutter Splash Native para a splash personalizada na abertura da tela
@@ -35,7 +35,7 @@
 Para executar corretamente esta aplicação você precisará:
 * Git e Node JS instalados
 * Flutter já configurado
-* Criar um projeto Firebase e configura-lo ao flutter
+* Criar e configurar um projeto no Firebase para integração com o Flutter.
 
 ## :memo: Licença
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes
