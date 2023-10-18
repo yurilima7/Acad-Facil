@@ -45,9 +45,15 @@ class AuthController extends AppStatus {
       showLoadingAndResetState();
       notifyListeners();
 
-      await AuthRepositoryImpl().google();
+      final user = await AuthRepositoryImpl().google();
 
-      success('Login realizado com sucesso!');
+      if (user == null) {
+        AuthRepositoryImpl().logoutApp();
+        setError('Erro ao realizar login com o Google');
+      } else {
+        success('Login realizado com sucesso!');
+      }
+
     } on AuthException catch (e) {
       setError(e.message);
       AuthRepositoryImpl().logoutApp();

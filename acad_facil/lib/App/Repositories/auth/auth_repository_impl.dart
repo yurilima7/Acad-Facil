@@ -14,7 +14,7 @@ class AuthRepositoryImpl implements AuthRepository {
   final FirebaseFirestore _firebaseFirestore = ConstantsFirebase.db;
 
   @override
-  Future<void> google() async {
+  Future<User?> google() async {
     List<String>? loginMethods;
     try {
       final googleUser = await _firebaseGoogle.signIn();
@@ -30,7 +30,9 @@ class AuthRepositoryImpl implements AuthRepository {
           final firebaseCredential = GoogleAuthProvider.credential(
               accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
 
-          await _firebaseAuth.signInWithCredential(firebaseCredential);
+          final userCredential = await _firebaseAuth.signInWithCredential(firebaseCredential);
+
+          return userCredential.user;
         }
       }
     } on FirebaseAuthException catch (e, s) {
@@ -45,6 +47,8 @@ class AuthRepositoryImpl implements AuthRepository {
         throw AuthException(message: 'Erro ao realizar login');
       }
     }
+
+    return null;
   }
 
   @override
