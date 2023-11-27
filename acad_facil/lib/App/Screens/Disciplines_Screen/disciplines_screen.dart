@@ -80,14 +80,27 @@ class _DisciplinesScreenState extends State<DisciplinesScreen> {
     
         body: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
+
           child: Column(
             children:  [
-              Column(
-                children: [
-                  Search(
-                    onChanged: (search) => disciplinesController.filter(search),
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  children: [
+                    Search(
+                      onChanged: (search) => disciplinesController.filter(search),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    Text(
+                      'Disciplinas',
+                      style: context.textStyles.secundaryTitle,
+                    ),
+                  ],
+                ),
               ),
     
               Visibility(
@@ -103,30 +116,27 @@ class _DisciplinesScreenState extends State<DisciplinesScreen> {
                 ),
     
                 child: Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      childAspectRatio: 3 / 2,
-                      crossAxisSpacing: 20.0,
-                      mainAxisSpacing: 10.0,
-                      
-                      children: List.generate(
-                        disciplinesController.filtered.length,
-                        (i) => DisciplineCard(
-                          discipline: disciplinesController.filtered[i],
-                          disciplines: disciplinesController.filtered,
-                          function: () {
-                            Navigator.of(context).pushNamed(
-                              AppRoutes.details,
-                              arguments: {
-                                "discipline": disciplinesController.filtered[i],
-                                "listDisciplines": disciplinesController.filtered,
-                                "period": disciplinesController.period,
-                              },
-                            );
-                          },
-                        ),
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio: 3 / 2,
+                    crossAxisSpacing: 20.0,
+                    mainAxisSpacing: 10.0,
+                    
+                    children: List.generate(
+                      disciplinesController.filtered.length,
+                      (i) => DisciplineCard(
+                        discipline: disciplinesController.filtered[i],
+                        disciplines: disciplinesController.filtered,
+                        function: () {
+                          Navigator.of(context).pushNamed(
+                            AppRoutes.details,
+                            arguments: {
+                              "discipline": disciplinesController.filtered[i],
+                              "listDisciplines": disciplinesController.filtered,
+                              "period": disciplinesController.period,
+                            },
+                          );
+                        },
                       ),
                     ),
                   ),

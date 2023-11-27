@@ -92,36 +92,27 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-                  
-                  SizedBox(      
-                    child: GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 4 / 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 20,
-                      ),
-                    
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      
-                      itemCount: 4,
-                      itemBuilder: (context, i) => disciplines.isNotEmpty && providerUser != null ? OptionsCard(
-                        path: homeController.assets[i],
-                        title: homeController.titles[i],
-                        subtitle:
-                            i > 1 ? '' : 'Disciplinas ${disciplines.length}',
-                        index: i,
-                        discipline: disciplines,
-                        user: providerUser,
-                      ) : OptionsCard(
-                        path: homeController.assets[i],
-                        title: homeController.titles[i],
-                        subtitle:
-                            i > 1 ? '' : 'Disciplinas ${disciplines.length}',
-                        index: i,
-                        user: providerUser,
-                      ),
+
+                  ListView.builder(          
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,           
+                    itemCount: 4,
+
+                    itemBuilder: (context, i) => disciplines.isNotEmpty && providerUser != null ? OptionsCard(
+                      path: homeController.assets[i],
+                      title: homeController.titles[i],
+                      subtitle:
+                          i > 1 ? '' : 'Disciplinas ${disciplines.length}',
+                      index: i,
+                      discipline: disciplines,
+                      user: providerUser,
+                    ) : OptionsCard(
+                      path: homeController.assets[i],
+                      title: homeController.titles[i],
+                      subtitle:
+                          i > 1 ? '' : 'Disciplinas ${disciplines.length}',
+                      index: i,
+                      user: providerUser,
                     ),
                   ),
                 ],
