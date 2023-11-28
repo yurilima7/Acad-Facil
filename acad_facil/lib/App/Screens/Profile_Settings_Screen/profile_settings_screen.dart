@@ -1,5 +1,6 @@
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:acad_facil/App/Core/Widgets/app_bar_main.dart';
+import 'package:acad_facil/App/Core/Widgets/tab_nav.dart';
 import 'package:acad_facil/App/Core/Widgets/text_button_app.dart';
 import 'package:acad_facil/App/Models/user.dart';
 import 'package:acad_facil/App/Screens/Profile_Settings_Screen/profile_settings_screen_controller.dart';
@@ -74,9 +75,28 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               function: () => nav.pushNamed(AppRoutes.profileSettings, arguments: user),
               position: 2,
             ),
+    
+            TextButtonApp(
+              title: 'Sair da conta',
+              function: () async {
+                await settingsScreenController.logout();
+
+                if (settingsScreenController.isSuccess) {
+                  nav.pushNamedAndRemoveUntil(
+                    AppRoutes.loginScreen,
+                    (route) => false,
+                  );
+                }
+              },
+              message: 'Deseja realmente sair do Acad Fácil?',
+              position: 2,
+              alert: true,
+            ),
           ],
         ),
       ),
+
+      bottomNavigationBar: const TabNav(currentScreen: 2),
     );
   }
 }

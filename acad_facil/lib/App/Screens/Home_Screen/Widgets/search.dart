@@ -48,7 +48,9 @@ class _SearchState extends State<Search> {
           borderRadius: BorderRadius.circular(26.0),
         ),
 
-        prefixIcon: const Icon(Icons.search, color: Colors.white,),      
+        prefixIcon: const Icon(Icons.search, color: Colors.white,),  
+
+        filled: true,    
       ),
       
     );

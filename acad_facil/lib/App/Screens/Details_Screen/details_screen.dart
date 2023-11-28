@@ -47,16 +47,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
     final nav = Navigator.of(context);
 
     Future<void> deleteDiscipline() async {
-      var list = await detailsScreenController.removeDiscipline(
+      await detailsScreenController.removeDiscipline(
           listDisciplines, discipline!);
 
       if (detailsScreenController.isSuccess) {
-        nav.popAndPushNamed(
-          AppRoutes.disciplines,
-          arguments: {
-            'disciplines': list,
-            'period': detailsScreenController.period,
-          },
+        nav.pushNamedAndRemoveUntil(
+          AppRoutes.home,
+          (route) => false,
         );
       }
     }

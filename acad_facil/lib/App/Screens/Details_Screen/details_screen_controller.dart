@@ -11,7 +11,7 @@ class DetailsScreenController extends AppStatus {
   int? period;
 
   /// FUNÇÃO QUE REMOVE UMA DISCIPLINA DO BANCO DE DADOS
-  Future<List<Disciplines>> removeDiscipline(
+  Future<void> removeDiscipline(
       List<Disciplines> listDisciplines, Disciplines discipline) async {
 
     try {
@@ -20,10 +20,6 @@ class DetailsScreenController extends AppStatus {
 
       await DisciplinesRepositoryImpl().deleteDiscipline(discipline.id);
 
-      int index = listDisciplines.indexWhere((d) => d.id == discipline.id);
-      final delDiscipline = listDisciplines[index];
-
-      listDisciplines.remove(delDiscipline);
       success('Disciplina deletada com sucesso!');
     } on AppException catch (e) {
       setError(e.message);
@@ -32,8 +28,6 @@ class DetailsScreenController extends AppStatus {
       hideLoading();
       notifyListeners();
     }
-
-    return listDisciplines;
   }
 
   /// FUNÇÃO RESPONSÁVEL POR INICIAR OS DADOS RECEBIDOS NA TELA

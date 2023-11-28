@@ -1,5 +1,6 @@
 import 'package:acad_facil/App/Core/Styles/text_styles.dart';
 import 'package:acad_facil/App/Core/Widgets/app_bar_main.dart';
+import 'package:acad_facil/App/Core/Widgets/tab_nav.dart';
 import 'package:acad_facil/App/Screens/Grades_Screen/Widgets/card_avarage.dart';
 import 'package:acad_facil/App/Models/disciplines.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +66,8 @@ class _GradesScreenState extends State<GradesScreen> {
             ) ,
           ),
         ),
+
+        bottomNavigationBar: const TabNav(currentScreen: 1),
       ),
     );
   }

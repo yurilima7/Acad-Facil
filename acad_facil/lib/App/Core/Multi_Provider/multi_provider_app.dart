@@ -2,7 +2,6 @@ import 'package:acad_facil/App/Screens/Add_Disciplines/add_disciplines_controlle
 import 'package:acad_facil/App/Screens/Add_Grades/add_grades_controller.dart';
 import 'package:acad_facil/App/Screens/Auth/auth_controller.dart';
 import 'package:acad_facil/App/Screens/Details_Screen/details_screen_controller.dart';
-import 'package:acad_facil/App/Screens/Disciplines_Screen/disciplines_screen_controller.dart';
 import 'package:acad_facil/App/Screens/Edit_Disciplines/edit_disciplines_controller.dart';
 import 'package:acad_facil/App/Screens/Edit_Grade/edit_grade_controller.dart';
 import 'package:acad_facil/App/Screens/Home_Screen/home_controller.dart';
@@ -26,9 +25,6 @@ class MultiProviderApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => HomeController(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => DisciplinesScreenController(),
         ),
         ChangeNotifierProvider(
           create: (_) => DetailsScreenController(),
