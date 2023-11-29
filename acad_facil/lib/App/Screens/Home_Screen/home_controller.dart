@@ -53,8 +53,8 @@ class HomeController extends AppStatus {
 
   /// FUNÇÃO DE FILTRO DA SEARCH
   void filter(String value) {
-    filtered = _disciplines
-        !.where((d) => d.name.toLowerCase().contains(value.toLowerCase()))
+    filtered = _disciplines!
+        .where((d) => d.name.toLowerCase().contains(value.toLowerCase()))
         .toList();
     notifyListeners();
   }
@@ -71,7 +71,6 @@ class HomeController extends AppStatus {
         setError('Erro ao buscar os dados do usuário!');
       } else {
         filtered = _disciplines!.where((d) => d.period == user!.period).toList();
-        // filtered = _disciplines!;
         _periodNow = user!.period;
         periodSelected = user!.period;
         notifyListeners();

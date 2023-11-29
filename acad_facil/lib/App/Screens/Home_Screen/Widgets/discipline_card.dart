@@ -17,6 +17,7 @@ class DisciplineCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: function,
+      borderRadius: BorderRadius.circular(12.0),
 
       child: Card(
         color: Theme.of(context).colorScheme.secondary,

@@ -35,7 +35,7 @@ class _TabNavState extends State<TabNav> {
           (route) => false,
         );
         break;
-      
+
       case 1:
         nav.pushNamed(
           _screens.elementAt(screen),
@@ -63,47 +63,28 @@ class _TabNavState extends State<TabNav> {
       onTap: _nextScreen,
       fixedColor: ColorsStyles.terciary,
       unselectedItemColor: Colors.white,
-
       items: [
-        BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              Assets.home,
-              colorFilter: ColorFilter.mode(
-                widget.currentScreen == 0 ? ColorsStyles.terciary : Colors.white,
-                BlendMode.srcATop,
-              ),
-              height: 24,
-              width: 24,
-            ),
-          label: "Home",
-        ),
-
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(
-              Assets.grades,
-              colorFilter: ColorFilter.mode(
-                widget.currentScreen == 1 ? ColorsStyles.terciary : Colors.white,
-                BlendMode.srcATop,
-              ),
-              height: 24,
-              width: 24,
-            ),
-          label: "Notas",
-        ),
-
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(
-              Assets.userIcon,
-              colorFilter: ColorFilter.mode(
-                widget.currentScreen == 2 ? ColorsStyles.terciary : Colors.white,
-                BlendMode.srcATop,
-              ),
-              height: 24,
-              width: 24,
-            ),
-          label: "Perfil",
-        ),
-      ]
+        _buildNavigationBarItem(0, Assets.home, "Home"),
+        _buildNavigationBarItem(1, Assets.grades, "Notas"),
+        _buildNavigationBarItem(2, Assets.userIcon, "Perfil"),
+      ],
     );
+  }
+
+  BottomNavigationBarItem _buildNavigationBarItem(
+      int index, String asset, String label) {
+    return BottomNavigationBarItem(
+        icon: SvgPicture.asset(
+          asset,
+          colorFilter: ColorFilter.mode(
+            widget.currentScreen == index
+                ? ColorsStyles.terciary
+                : Colors.white,
+            BlendMode.srcATop,
+          ),
+          height: 24,
+          width: 24,
+        ),
+        label: label);
   }
 }

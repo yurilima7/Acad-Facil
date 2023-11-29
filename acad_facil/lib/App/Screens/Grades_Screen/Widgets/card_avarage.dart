@@ -35,6 +35,8 @@ class CardAvarage extends StatelessWidget {
         );
       },
 
+      borderRadius: BorderRadius.circular(26.0),
+
       child: Card(
         color: ColorsStyles.secundary,
         elevation: 5,

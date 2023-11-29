@@ -28,6 +28,8 @@ class GradesForm extends StatelessWidget {
         ),
       ),
 
+      borderRadius: BorderRadius.circular(20.0),
+
       child: Card(
         color: Theme.of(context).colorScheme.secondary,
         elevation: 5,
