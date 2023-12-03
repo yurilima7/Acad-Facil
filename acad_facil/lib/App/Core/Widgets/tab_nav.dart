@@ -58,11 +58,12 @@ class _TabNavState extends State<TabNav> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: ColorsStyles.primary,
+      backgroundColor: ColorsStyles.secundary,
       currentIndex: widget.currentScreen,
       onTap: _nextScreen,
       fixedColor: ColorsStyles.terciary,
       unselectedItemColor: Colors.white,
+      
       items: [
         _buildNavigationBarItem(0, Assets.home, "Home"),
         _buildNavigationBarItem(1, Assets.grades, "Notas"),
@@ -71,20 +72,23 @@ class _TabNavState extends State<TabNav> {
     );
   }
 
-  BottomNavigationBarItem _buildNavigationBarItem(
-      int index, String asset, String label) {
+  BottomNavigationBarItem _buildNavigationBarItem(int index, String asset, String label) {
     return BottomNavigationBarItem(
         icon: SvgPicture.asset(
           asset,
+
           colorFilter: ColorFilter.mode(
             widget.currentScreen == index
                 ? ColorsStyles.terciary
                 : Colors.white,
             BlendMode.srcATop,
           ),
+
           height: 24,
           width: 24,
         ),
-        label: label);
+
+        label: label,
+    );
   }
 }
