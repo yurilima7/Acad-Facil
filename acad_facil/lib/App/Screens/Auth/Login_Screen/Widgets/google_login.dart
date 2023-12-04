@@ -29,9 +29,12 @@ class GoogleLogin extends StatelessWidget {
         }
       },
 
-      icon: SvgPicture.asset(
-        Assets.google,
-        height: 35,
+      icon: CircleAvatar(
+        backgroundColor: Colors.white,
+        child: SvgPicture.asset(
+          Assets.google,
+          height: 35,
+        ),
       ),
     );
   }
