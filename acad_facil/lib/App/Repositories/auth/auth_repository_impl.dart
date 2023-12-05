@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:acad_facil/App/Core/Data/constants_firebase.dart';
+import 'package:acad_facil/App/Core/Data/custom_firebase.dart';
 import 'package:acad_facil/App/Core/Exceptions/auth_exception.dart';
 import 'package:acad_facil/App/Repositories/auth/auth_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,9 +9,9 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final FirebaseAuth _firebaseAuth = ConstantsFirebase.auth;
-  final GoogleSignIn _firebaseGoogle = ConstantsFirebase.googleSignIn;
-  final FirebaseFirestore _firebaseFirestore = ConstantsFirebase.db;
+  final FirebaseAuth _firebaseAuth = CustomFirebase().auth;
+  final GoogleSignIn _firebaseGoogle = CustomFirebase().googleSignIn;
+  final FirebaseFirestore _firebaseFirestore = CustomFirebase().db;
 
   @override
   Future<User?> google() async {

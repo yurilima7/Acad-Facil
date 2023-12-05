@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:acad_facil/App/Core/Data/constants_firebase.dart';
+import 'package:acad_facil/App/Core/Data/custom_firebase.dart';
 import 'package:acad_facil/App/Core/Styles/colors_styles.dart';
 import 'package:acad_facil/App/Core/Utils/app_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,7 +29,7 @@ class _UserStateScreenState extends State<UserStateScreen> {
   }
 
   Future<void> verify() async{
-    streamSubscription = ConstantsFirebase.auth
+    streamSubscription = CustomFirebase().auth
     .authStateChanges()
     .listen((User? user) {
       if (user == null) {

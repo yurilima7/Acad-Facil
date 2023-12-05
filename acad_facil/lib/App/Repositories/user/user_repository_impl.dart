@@ -1,22 +1,22 @@
 import 'dart:developer';
 
-import 'package:acad_facil/App/Core/Data/constants_firebase.dart';
+import 'package:acad_facil/App/Core/Data/custom_firebase.dart';
 import 'package:acad_facil/App/Core/Exceptions/app_exception.dart';
 import 'package:acad_facil/App/Models/user.dart';
 import 'package:acad_facil/App/Repositories/user/user_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserRepositoryImpl extends UserRepository {
-  final DocumentReference<Map<String, dynamic>> _docUser = ConstantsFirebase.userDoc;
-  final CollectionReference<Map<String, dynamic>> _colecDiscipline = ConstantsFirebase.disciplinesReference;
-  final _user = ConstantsFirebase.user;
+  final DocumentReference<Map<String, dynamic>> _docUser = CustomFirebase().userDoc;
+  final CollectionReference<Map<String, dynamic>> _colecDiscipline = CustomFirebase().disciplinesReference;
+  final _user = CustomFirebase().user;
 
   /// Adiciona dados de um usuário
   @override
   Future<void> addData(UserModel user) async {
     try {
       await _docUser.set({
-        'name': ConstantsFirebase.auth.currentUser!.displayName,
+        'name': CustomFirebase().auth.currentUser!.displayName,
         'course': user.course,
         'period': user.period,
       });
