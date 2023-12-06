@@ -30,27 +30,33 @@ class _TabNavState extends State<TabNav> {
 
     switch (screen) {
       case 0:
-        nav.pushNamedAndRemoveUntil(
-          _screens.elementAt(screen),
-          (route) => false,
-        );
+        if (screen != widget.currentScreen) {
+          nav.pushNamedAndRemoveUntil(
+            _screens.elementAt(screen),
+            (route) => false,
+          );
+        }
         break;
 
       case 1:
-        nav.pushNamed(
-          _screens.elementAt(screen),
-          arguments: {
-            "disciplines": disciplines,
-            "period": providerUser?.period ?? 0,
-          },
-        );
+        if (screen != widget.currentScreen) {
+          nav.pushNamed(
+            _screens.elementAt(screen),
+            arguments: {
+              "disciplines": disciplines,
+              "period": providerUser?.period ?? 0,
+            },
+          );
+        }
         break;
 
       case 2:
-        nav.pushNamed(
-          _screens.elementAt(screen),
-          arguments: providerUser,
-        );
+        if(screen != widget.currentScreen) {
+          nav.pushNamed(
+            _screens.elementAt(screen),
+            arguments: providerUser,
+          );
+        }
         break;
     }
   }
