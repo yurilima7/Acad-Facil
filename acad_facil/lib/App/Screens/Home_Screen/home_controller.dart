@@ -67,8 +67,13 @@ class HomeController extends AppStatus {
       showLoadingAndResetState();
       notifyListeners();
 
-      _user = await UserRepositoryImpl().loadUser();
-      _disciplines = await DisciplinesRepositoryImpl().loadDisciplines();
+      final allDataUser = await Future.wait([
+        UserRepositoryImpl().loadUser(),
+        DisciplinesRepositoryImpl().loadDisciplines(),
+      ]);
+
+      _user = allDataUser[0] as UserModel?;
+      _disciplines = allDataUser[1] as List<Disciplines>?;
 
       if (_disciplines == null || _user == null) {
         setError('Erro ao buscar os dados do usuário!');
